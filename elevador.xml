@@ -4,7 +4,8 @@
 	<declaration>// Place global declarations here.
 chan chamaElevador, esperaElevador, usuarioEntrou, chegou, usuarioSaiu, escolheDestino, acaoDestino, acaoOrigem, fecharPorta, abrirPorta;
 int numPessoasDentro = 0;
-int noAndar = -1;
+int noAndar =  0;
+int test=1;
 int destino, origem = -1;
 bool portaAberta = false;
 int movimento = 0;</declaration>
@@ -38,12 +39,16 @@ int movimento = 0;</declaration>
 		<transition>
 			<source ref="id1"/>
 			<target ref="id5"/>
+			<label kind="select" x="-892" y="-586">z : int[0,3]</label>
 			<label kind="synchronisation" x="-884" y="-552">escolheDestino!</label>
+			<label kind="assignment" x="-892" y="-535">destino = z</label>
 		</transition>
 		<transition>
 			<source ref="id4"/>
 			<target ref="id3"/>
-			<label kind="synchronisation" x="-705" y="-663">chamaElevador!</label>
+			<label kind="select" x="-714" y="-701">y : int[0,3]</label>
+			<label kind="synchronisation" x="-705" y="-667">chamaElevador!</label>
+			<label kind="assignment" x="-714" y="-650">origem = y</label>
 		</transition>
 		<transition>
 			<source ref="id0"/>
@@ -131,7 +136,7 @@ int movimento = 0;</declaration>
 		<transition>
 			<source ref="id10"/>
 			<target ref="id15"/>
-			<label kind="guard" x="-263" y="-76">noAndar == origem</label>
+			<label kind="guard" x="-255" y="-51">noAndar == origem</label>
 		</transition>
 		<transition>
 			<source ref="id13"/>
@@ -169,13 +174,14 @@ int movimento = 0;</declaration>
 		<transition>
 			<source ref="id18"/>
 			<target ref="id17"/>
-			<label kind="assignment" x="-220" y="-8">noAndar = rand()</label>
+			<label kind="select" x="-220" y="-59">x : int[0,3]</label>
+			<label kind="assignment" x="-382" y="-8">noAndar = x</label>
 			<nail x="-238" y="-17"/>
 		</transition>
 		<transition>
 			<source ref="id17"/>
 			<target ref="id18"/>
-			<label kind="guard" x="-194" y="-144">movimento == 1</label>
+			<label kind="guard" x="-178" y="-161">movimento == 1</label>
 			<nail x="-102" y="-102"/>
 		</transition>
 	</template>
@@ -186,7 +192,7 @@ int movimento = 0;</declaration>
 		<location id="id20" x="-42" y="-51">
 		</location>
 		<location id="id21" x="68" y="-161">
-			<name x="58" y="-195">Elevador_indo_a_origem</name>
+			<name x="59" y="-195">Elevador_indo_a_origem</name>
 		</location>
 		<location id="id22" x="-42" y="-272">
 		</location>
@@ -223,9 +229,9 @@ zeee = Usuario();
 clp = Controlador();
 habitaculo = Elevador();
 portas = Porta();
+sensor_de_andar=  SensorAndar();
 // List one or more processes to be composed into a system.
-system /*ze, zee,*/ zeee, clp, habitaculo, portas;
-    </system>
+system /*ze, zee,*/ zeee, clp, habitaculo, portas, sensor_de_andar;</system>
 	<queries>
 		<query>
 			<formula></formula>
