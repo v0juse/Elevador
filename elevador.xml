@@ -8,7 +8,11 @@ int noAndar =  0;
 int test=1;
 int destino, origem = -1;
 bool portaAberta = false;
-int movimento = 0;</declaration>
+int movimento = 0;
+int objetoBloqueante = 0;
+int direcao = 0;
+const int numAndares = 6;
+int filaChamadas[7];</declaration>
 	<template>
 		<name x="5" y="5">Usuario</name>
 		<declaration>// Place local declarations here.</declaration>
@@ -16,50 +20,53 @@ int movimento = 0;</declaration>
 			<name x="-960" y="-714">Saindo</name>
 		</location>
 		<location id="id1" x="-892" y="-476">
-			<name x="-1037" y="-493">EscolhendoDestino</name>
+			<name x="-1037" y="-493">Escolhendo_Destino</name>
 		</location>
 		<location id="id2" x="-714" y="-476">
-			<name x="-740" y="-459">Entrando</name>
+			<name x="-697" y="-484">Espera_Porta_Abrir</name>
 		</location>
 		<location id="id3" x="-714" y="-595">
-			<name x="-697" y="-603">EsperandoElevador</name>
+			<name x="-858" y="-612">Esperando_Elevador</name>
 		</location>
 		<location id="id4" x="-714" y="-705">
 			<name x="-724" y="-739">Fora</name>
 		</location>
 		<location id="id5" x="-892" y="-595">
-			<name x="-1037" y="-603">EsperandoDestino</name>
+			<name x="-1037" y="-603">Esperando_Destino</name>
 		</location>
 		<init ref="id4"/>
 		<transition>
 			<source ref="id5"/>
 			<target ref="id0"/>
-			<label kind="synchronisation" x="-884" y="-663">chegou?</label>
+			<label kind="synchronisation" x="-960" y="-663">chegou?</label>
 		</transition>
 		<transition>
 			<source ref="id1"/>
 			<target ref="id5"/>
-			<label kind="select" x="-892" y="-586">z : int[0,3]</label>
-			<label kind="synchronisation" x="-884" y="-552">escolheDestino!</label>
-			<label kind="assignment" x="-892" y="-535">destino = z</label>
+			<label kind="select" x="-1028" y="-569">z : int[0,numAndares]</label>
+			<label kind="synchronisation" x="-1011" y="-552">escolheDestino!</label>
+			<label kind="assignment" x="-1002" y="-535">destino = z</label>
 		</transition>
 		<transition>
 			<source ref="id4"/>
 			<target ref="id3"/>
-			<label kind="select" x="-714" y="-701">y : int[0,3]</label>
-			<label kind="synchronisation" x="-705" y="-667">chamaElevador!</label>
-			<label kind="assignment" x="-714" y="-650">origem = y</label>
+			<label kind="select" x="-705" y="-680">y:int[0,numAndares], y2:int[0,1]</label>
+			<label kind="guard" x="-705" y="-697">!((origem==0 &amp;&amp; direcao==0) || (origem==6 &amp;&amp; direcao==1))</label>
+			<label kind="synchronisation" x="-705" y="-659">chamaElevador!</label>
+			<label kind="assignment" x="-705" y="-638">origem=y, direcao=y2</label>
 		</transition>
 		<transition>
 			<source ref="id0"/>
 			<target ref="id4"/>
 			<label kind="synchronisation" x="-840" y="-705">usuarioSaiu!</label>
+			<label kind="assignment" x="-867" y="-688">numPessoasDentro--</label>
 		</transition>
 		<transition>
 			<source ref="id2"/>
 			<target ref="id1"/>
 			<label kind="guard" x="-867" y="-501">portaAberta == true</label>
 			<label kind="synchronisation" x="-858" y="-459">usuarioEntrou!</label>
+			<label kind="assignment" x="-875" y="-442">numPessoasDentro++</label>
 		</transition>
 		<transition>
 			<source ref="id3"/>
@@ -96,37 +103,42 @@ int movimento = 0;</declaration>
 			<name x="-323" y="-272">Destino_alcancado</name>
 		</location>
 		<location id="id9" x="-425" y="-119">
-			<name x="-586" y="-136">Aguardando_Destino</name>
+			<name x="-569" y="-144">Aguardando_Destino</name>
 		</location>
 		<location id="id10" x="-263" y="-119">
-			<name x="-365" y="-161">Elevador_indo_a_origem</name>
+			<name x="-340" y="-161">Elevador_indo_a_origem</name>
 		</location>
 		<location id="id11" x="-93" y="-119">
 			<name x="-68" y="-136">Elevador_Requisitado</name>
 		</location>
 		<location id="id12" x="-93" y="-229">
-			<name x="-103" y="-263">Inicial</name>
+			<name x="-110" y="-272">Inicial</name>
 		</location>
 		<location id="id13" x="-425" y="-229">
-			<name x="-518" y="-263">Elevador_indo_ao_destino</name>
+			<name x="-518" y="-272">Elevador_indo_ao_destino</name>
 		</location>
 		<location id="id14" x="-425" y="0">
+			<name x="-459" y="25">Porta_aberta</name>
 		</location>
 		<location id="id15" x="-263" y="0">
 			<name x="-305" y="25">Elevador_na_origem</name>
 		</location>
-		<location id="id16" x="-620" y="-68">
+		<location id="id16" x="-535" y="-68">
+			<name x="-654" y="-76">Usuario_dentro</name>
 		</location>
 		<init ref="id12"/>
 		<transition>
 			<source ref="id16"/>
 			<target ref="id9"/>
-			<label kind="synchronisation" x="-602" y="-110">fecharPorta!</label>
+			<label kind="guard" x="-680" y="-119">objetoBloqueante == 0</label>
+			<label kind="synchronisation" x="-620" y="-102">fecharPorta!</label>
+			<nail x="-535" y="-119"/>
 		</transition>
 		<transition>
 			<source ref="id14"/>
 			<target ref="id16"/>
-			<label kind="synchronisation" x="-603" y="-25">usuarioEntrou?</label>
+			<label kind="synchronisation" x="-527" y="-25">usuarioEntrou?</label>
+			<nail x="-535" y="0"/>
 		</transition>
 		<transition>
 			<source ref="id15"/>
@@ -141,12 +153,12 @@ int movimento = 0;</declaration>
 		<transition>
 			<source ref="id13"/>
 			<target ref="id8"/>
-			<label kind="synchronisation" x="-398" y="-250">acaoDestino!</label>
+			<label kind="synchronisation" x="-391" y="-255">acaoDestino!</label>
 		</transition>
 		<transition>
 			<source ref="id9"/>
 			<target ref="id13"/>
-			<label kind="synchronisation" x="-535" y="-178">escolheDestino?</label>
+			<label kind="synchronisation" x="-544" y="-195">escolheDestino?</label>
 		</transition>
 		<transition>
 			<source ref="id8"/>
@@ -167,71 +179,92 @@ int movimento = 0;</declaration>
 	<template>
 		<name>SensorAndar</name>
 		<location id="id17" x="-212" y="-119">
+			<name x="-272" y="-153">Andar_valido</name>
 		</location>
-		<location id="id18" x="-127" y="0">
+		<location id="id18" x="-102" y="-25">
+			<name x="-85" y="-42">Entre_andares</name>
 		</location>
 		<init ref="id17"/>
 		<transition>
 			<source ref="id18"/>
 			<target ref="id17"/>
-			<label kind="select" x="-220" y="-59">x : int[0,3]</label>
-			<label kind="assignment" x="-382" y="-8">noAndar = x</label>
-			<nail x="-238" y="-17"/>
+			<label kind="select" x="-348" y="-85">x : int[0,numAndares]</label>
+			<label kind="guard" x="-314" y="-101">movimento == 1</label>
+			<label kind="assignment" x="-297" y="-68">noAndar = x</label>
+			<nail x="-212" y="-25"/>
 		</transition>
 		<transition>
 			<source ref="id17"/>
 			<target ref="id18"/>
-			<label kind="guard" x="-178" y="-161">movimento == 1</label>
-			<nail x="-102" y="-102"/>
+			<label kind="guard" x="-170" y="-153">movimento == 1</label>
+			<nail x="-102" y="-119"/>
+		</transition>
+	</template>
+	<template>
+		<name>SensorEstadoPorta</name>
+		<location id="id19" x="-59" y="-85">
+		</location>
+		<init ref="id19"/>
+		<transition>
+			<source ref="id19"/>
+			<target ref="id19"/>
+			<label kind="select" x="-119" y="-195">z : int[0,1]</label>
+			<label kind="guard" x="-144" y="-178">portaAberta == true</label>
+			<label kind="assignment" x="-144" y="-161">objetoBloqueante = z</label>
+			<nail x="-110" y="-85"/>
+			<nail x="-110" y="-136"/>
+			<nail x="-59" y="-136"/>
 		</transition>
 	</template>
 	<template>
 		<name>Elevador</name>
-		<location id="id19" x="-153" y="-153">
+		<location id="id20" x="-153" y="-153">
 		</location>
-		<location id="id20" x="-42" y="-51">
+		<location id="id21" x="-42" y="-51">
 		</location>
-		<location id="id21" x="68" y="-161">
+		<location id="id22" x="68" y="-161">
 			<name x="59" y="-195">Elevador_indo_a_origem</name>
 		</location>
-		<location id="id22" x="-42" y="-272">
+		<location id="id23" x="-42" y="-272">
 		</location>
-		<init ref="id22"/>
+		<init ref="id23"/>
 		<transition>
-			<source ref="id19"/>
-			<target ref="id22"/>
+			<source ref="id20"/>
+			<target ref="id23"/>
 			<label kind="synchronisation" x="-153" y="-238">chegou!</label>
 			<label kind="assignment" x="-178" y="-255">movimento = 0</label>
 		</transition>
 		<transition>
-			<source ref="id20"/>
-			<target ref="id19"/>
+			<source ref="id21"/>
+			<target ref="id20"/>
 			<label kind="synchronisation" x="-178" y="-102">acaoDestino?</label>
 			<label kind="assignment" x="-178" y="-85">movimento =1</label>
 		</transition>
 		<transition>
-			<source ref="id21"/>
-			<target ref="id20"/>
+			<source ref="id22"/>
+			<target ref="id21"/>
+			<label kind="guard" x="0" y="-76">noAndar == origem</label>
 			<label kind="synchronisation" x="8" y="-110">esperaElevador!</label>
 			<label kind="assignment" x="8" y="-93">movimento = 0</label>
 		</transition>
 		<transition>
-			<source ref="id22"/>
-			<target ref="id21"/>
+			<source ref="id23"/>
+			<target ref="id22"/>
 			<label kind="synchronisation" x="8" y="-255">acaoOrigem?</label>
 			<label kind="assignment" x="0" y="-272">movimento = 1</label>
 		</transition>
 	</template>
 	<system>// Place template instantiations here.
 //ze = Usuario();
-//zee = Usuario();
+zee = Usuario();
 zeee = Usuario();
 clp = Controlador();
 habitaculo = Elevador();
 portas = Porta();
-sensor_de_andar=  SensorAndar();
+sensor_de_andar = SensorAndar();
+sensor_de_estado_de_porta = SensorEstadoPorta();
 // List one or more processes to be composed into a system.
-system /*ze, zee,*/ zeee, clp, habitaculo, portas, sensor_de_andar;</system>
+system /*ze, zee,*/zee, zeee, clp, habitaculo, portas, sensor_de_andar, sensor_de_estado_de_porta;</system>
 	<queries>
 		<query>
 			<formula></formula>
