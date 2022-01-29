@@ -179,7 +179,8 @@ bool cond_destino_requisitado()
 {
     return estado_andar[andarDestinoUsuario] == 3;
 }</declaration>
-		<location id="id7" x="-272" y="-153">
+		<location id="id7" x="-340" y="-59">
+			<name x="-493" y="-85">Esperando_Destino</name>
 		</location>
 		<location id="id8" x="-340" y="-187">
 			<name x="-493" y="-212">Dentro_do_Elevador</name>
@@ -188,7 +189,7 @@ bool cond_destino_requisitado()
 			<name x="-501" y="-280">Esperando_Elevador</name>
 		</location>
 		<location id="id10" x="-340" y="-374">
-			<name x="-450" y="-391">Fora_Elevador</name>
+			<name x="-467" y="-391">Fora_do_Elevador</name>
 		</location>
 		<location id="id11" x="-340" y="-442">
 			<name x="-484" y="-467">Escolhendo_Destino</name>
@@ -198,9 +199,26 @@ bool cond_destino_requisitado()
 		</location>
 		<init ref="id12"/>
 		<transition>
+			<source ref="id7"/>
+			<target ref="id11"/>
+			<label kind="synchronisation" x="-34" y="-459">portaAbertaAndar[andarDestinoUsuario]?</label>
+			<label kind="assignment" x="-34" y="-476">andarAtualUsuario = andarDestinoUsuario</label>
+			<nail x="136" y="-68"/>
+			<nail x="272" y="-263"/>
+			<nail x="110" y="-425"/>
+		</transition>
+		<transition>
 			<source ref="id8"/>
 			<target ref="id7"/>
-			<nail x="-314" y="-161"/>
+			<label kind="guard" x="-289" y="-153">!cond_destino_requisitado()</label>
+			<label kind="synchronisation" x="-306" y="-119">pedidoDestino[andarDestinoUsuario]!</label>
+			<nail x="-306" y="-144"/>
+		</transition>
+		<transition>
+			<source ref="id8"/>
+			<target ref="id7"/>
+			<label kind="guard" x="-552" y="-144">cond_destino_requisitado()</label>
+			<nail x="-374" y="-144"/>
 		</transition>
 		<transition>
 			<source ref="id9"/>
@@ -215,27 +233,27 @@ bool cond_destino_requisitado()
 		<transition>
 			<source ref="id10"/>
 			<target ref="id9"/>
-			<label kind="guard" x="-297" y="-340">!cond_elevador_requisitado() &amp;&amp;andarAtualUsuario &lt;= andarDestinoUsuario</label>
-			<label kind="synchronisation" x="-204" y="-314">pedidoSubida[andarAtualUsuario]!</label>
+			<label kind="guard" x="-297" y="-357">!cond_elevador_requisitado() &amp;&amp; andarAtualUsuario &lt;= andarDestinoUsuario &amp;&amp; andarAtualUsuario != numAndares-1</label>
+			<label kind="synchronisation" x="-144" y="-323">pedidoSubida[andarAtualUsuario]!</label>
 			<nail x="-297" y="-331"/>
 		</transition>
 		<transition>
 			<source ref="id10"/>
 			<target ref="id9"/>
-			<label kind="guard" x="-892" y="-340">!cond_elevador_requisitado() &amp;&amp; andarAtualUsuario &gt; andarDestinoUsuario</label>
+			<label kind="guard" x="-1037" y="-348">!cond_elevador_requisitado() &amp;&amp; andarAtualUsuario &gt;= andarDestinoUsuario &amp;&amp; andarAtualUsuario != 0</label>
 			<label kind="synchronisation" x="-756" y="-314">pedidoDescida[andarAtualUsuario]!</label>
 			<nail x="-383" y="-331"/>
 		</transition>
 		<transition>
 			<source ref="id11"/>
 			<target ref="id10"/>
-			<label kind="select" x="-510" y="-433">rnd : int[0,numAndares]</label>
+			<label kind="select" x="-510" y="-433">rnd : int[0,numAndares - 1]</label>
 			<label kind="assignment" x="-527" y="-416">andarDestinoUsuario = rnd</label>
 		</transition>
 		<transition>
 			<source ref="id12"/>
 			<target ref="id11"/>
-			<label kind="select" x="-501" y="-552">rnd : int[0,numAndares]</label>
+			<label kind="select" x="-501" y="-552">rnd : int[0,numAndares -1 ]</label>
 			<label kind="assignment" x="-501" y="-527">andarAtualUsuario = rnd</label>
 		</transition>
 	</template>
