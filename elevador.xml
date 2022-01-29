@@ -8,7 +8,7 @@ const int numAndares = 6;
 chan chamaElevador, esperaElevador, usuarioEntrou, chegou, usuarioSaiu, escolheDestino, acaoDestino, acaoOrigem, fecharPorta, abrirPorta;
 int numPessoasDentro = 0;
 int noAndar =  0;
-int test=1;
+//int test=1;
 int destino, origem = -1;
 bool portaAberta = false;
 int movimento = 0;
@@ -20,6 +20,8 @@ int direcao2 = 0;
 //Requisicoes dos andares
 chan pedidoDescida[numAndares], pedidoSubida[numAndares];
 chan atendeuAndar[numAndares], pedidoDestino[numAndares];
+
+chan andarAlcancado;
 
 //Portas dos Andares
 broadcast chan portaAbertaAndar[numAndares];   
@@ -167,6 +169,7 @@ int remove(bool selectQueue)
 	</template>
 	<template>
 		<name>Usuario2</name>
+		<parameter>int numViagens</parameter>
 		<declaration>int[0,numAndares] andarAtualUsuario, andarDestinoUsuario;
 
 bool cond_elevador_requisitado()
@@ -179,268 +182,278 @@ bool cond_destino_requisitado()
 {
     return estado_andar[andarDestinoUsuario] == 3;
 }</declaration>
-		<location id="id7" x="-340" y="-59">
+		<location id="id7" x="-280" y="-493">
+			<name x="-290" y="-527">Fim</name>
+		</location>
+		<location id="id8" x="-340" y="-59">
 			<name x="-493" y="-85">Esperando_Destino</name>
 		</location>
-		<location id="id8" x="-340" y="-187">
+		<location id="id9" x="-340" y="-187">
 			<name x="-493" y="-212">Dentro_do_Elevador</name>
 		</location>
-		<location id="id9" x="-340" y="-263">
+		<location id="id10" x="-340" y="-263">
 			<name x="-501" y="-280">Esperando_Elevador</name>
 		</location>
-		<location id="id10" x="-340" y="-374">
+		<location id="id11" x="-340" y="-374">
 			<name x="-467" y="-391">Fora_do_Elevador</name>
 		</location>
-		<location id="id11" x="-340" y="-442">
+		<location id="id12" x="-340" y="-442">
 			<name x="-484" y="-467">Escolhendo_Destino</name>
 		</location>
-		<location id="id12" x="-340" y="-561">
+		<location id="id13" x="-340" y="-561">
 			<name x="-384" y="-595">Inicial</name>
 		</location>
-		<init ref="id12"/>
+		<init ref="id13"/>
 		<transition>
-			<source ref="id7"/>
-			<target ref="id11"/>
+			<source ref="id12"/>
+			<target ref="id7"/>
+			<label kind="guard" x="-306" y="-476">numViagens == 0</label>
+		</transition>
+		<transition>
+			<source ref="id8"/>
+			<target ref="id12"/>
 			<label kind="synchronisation" x="-34" y="-459">portaAbertaAndar[andarDestinoUsuario]?</label>
-			<label kind="assignment" x="-34" y="-476">andarAtualUsuario = andarDestinoUsuario</label>
+			<label kind="assignment" x="-34" y="-493">andarAtualUsuario = andarDestinoUsuario,
+numViagens--</label>
 			<nail x="136" y="-68"/>
 			<nail x="272" y="-263"/>
 			<nail x="110" y="-425"/>
 		</transition>
 		<transition>
-			<source ref="id8"/>
-			<target ref="id7"/>
+			<source ref="id9"/>
+			<target ref="id8"/>
 			<label kind="guard" x="-289" y="-153">!cond_destino_requisitado()</label>
 			<label kind="synchronisation" x="-306" y="-119">pedidoDestino[andarDestinoUsuario]!</label>
 			<nail x="-306" y="-144"/>
 		</transition>
 		<transition>
-			<source ref="id8"/>
-			<target ref="id7"/>
+			<source ref="id9"/>
+			<target ref="id8"/>
 			<label kind="guard" x="-552" y="-144">cond_destino_requisitado()</label>
 			<nail x="-374" y="-144"/>
 		</transition>
 		<transition>
-			<source ref="id9"/>
-			<target ref="id8"/>
+			<source ref="id10"/>
+			<target ref="id9"/>
 			<label kind="synchronisation" x="-323" y="-246">portaAbertaAndar[andarAtualUsuario]?</label>
 		</transition>
 		<transition>
-			<source ref="id10"/>
-			<target ref="id9"/>
+			<source ref="id11"/>
+			<target ref="id10"/>
 			<label kind="guard" x="-442" y="-331">cond_elevador_requisitado()</label>
 		</transition>
 		<transition>
-			<source ref="id10"/>
-			<target ref="id9"/>
+			<source ref="id11"/>
+			<target ref="id10"/>
 			<label kind="guard" x="-297" y="-357">!cond_elevador_requisitado() &amp;&amp; andarAtualUsuario &lt;= andarDestinoUsuario &amp;&amp; andarAtualUsuario != numAndares-1</label>
 			<label kind="synchronisation" x="-144" y="-323">pedidoSubida[andarAtualUsuario]!</label>
 			<nail x="-297" y="-331"/>
 		</transition>
 		<transition>
-			<source ref="id10"/>
-			<target ref="id9"/>
+			<source ref="id11"/>
+			<target ref="id10"/>
 			<label kind="guard" x="-1037" y="-348">!cond_elevador_requisitado() &amp;&amp; andarAtualUsuario &gt;= andarDestinoUsuario &amp;&amp; andarAtualUsuario != 0</label>
 			<label kind="synchronisation" x="-756" y="-314">pedidoDescida[andarAtualUsuario]!</label>
 			<nail x="-383" y="-331"/>
 		</transition>
 		<transition>
-			<source ref="id11"/>
-			<target ref="id10"/>
+			<source ref="id12"/>
+			<target ref="id11"/>
 			<label kind="select" x="-510" y="-433">rnd : int[0,numAndares - 1]</label>
+			<label kind="guard" x="-331" y="-425">numViagens != 0</label>
 			<label kind="assignment" x="-527" y="-416">andarDestinoUsuario = rnd</label>
 		</transition>
 		<transition>
-			<source ref="id12"/>
-			<target ref="id11"/>
+			<source ref="id13"/>
+			<target ref="id12"/>
 			<label kind="select" x="-501" y="-552">rnd : int[0,numAndares -1 ]</label>
 			<label kind="assignment" x="-501" y="-527">andarAtualUsuario = rnd</label>
 		</transition>
 	</template>
 	<template>
 		<name>Porta</name>
-		<location id="id13" x="-365" y="-221">
+		<location id="id14" x="-365" y="-221">
 			<name x="-399" y="-204">Fechada</name>
 		</location>
-		<location id="id14" x="-110" y="-221">
+		<location id="id15" x="-110" y="-221">
 			<name x="-127" y="-204">Aberta</name>
 		</location>
-		<init ref="id13"/>
+		<init ref="id14"/>
 		<transition>
-			<source ref="id14"/>
-			<target ref="id13"/>
+			<source ref="id15"/>
+			<target ref="id14"/>
 			<label kind="synchronisation" x="-280" y="-323">fecharPorta?</label>
 			<label kind="assignment" x="-297" y="-340">portaAberta = false</label>
 			<nail x="-238" y="-306"/>
 		</transition>
 		<transition>
-			<source ref="id13"/>
-			<target ref="id14"/>
+			<source ref="id14"/>
+			<target ref="id15"/>
 			<label kind="synchronisation" x="-280" y="-221">abrirPorta?</label>
 			<label kind="assignment" x="-297" y="-204">portaAberta = true</label>
 		</transition>
 	</template>
 	<template>
 		<name>Controlador</name>
-		<location id="id15" x="-263" y="-229">
+		<location id="id16" x="-263" y="-229">
 			<name x="-323" y="-272">Destino_alcancado</name>
 			<label kind="invariant" x="-348" y="-306">(destino==noAndar) imply portaAberta</label>
 		</location>
-		<location id="id16" x="-425" y="-119">
+		<location id="id17" x="-425" y="-119">
 			<name x="-569" y="-144">Aguardando_Destino</name>
 		</location>
-		<location id="id17" x="-263" y="-119">
+		<location id="id18" x="-263" y="-119">
 			<name x="-340" y="-161">Elevador_indo_a_origem</name>
 		</location>
-		<location id="id18" x="-93" y="-119">
+		<location id="id19" x="-93" y="-119">
 			<name x="-68" y="-136">Elevador_Requisitado</name>
 		</location>
-		<location id="id19" x="-93" y="-229">
+		<location id="id20" x="-93" y="-229">
 			<name x="-110" y="-272">Inicial</name>
 		</location>
-		<location id="id20" x="-425" y="-229">
+		<location id="id21" x="-425" y="-229">
 			<name x="-518" y="-272">Elevador_indo_ao_destino</name>
 		</location>
-		<location id="id21" x="-425" y="0">
+		<location id="id22" x="-425" y="0">
 			<name x="-459" y="25">Porta_aberta</name>
 		</location>
-		<location id="id22" x="-263" y="0">
+		<location id="id23" x="-263" y="0">
 			<name x="-305" y="25">Elevador_na_origem</name>
 		</location>
-		<location id="id23" x="-535" y="-68">
+		<location id="id24" x="-535" y="-68">
 			<name x="-654" y="-76">Usuario_dentro</name>
 		</location>
-		<init ref="id19"/>
+		<init ref="id20"/>
 		<transition>
-			<source ref="id23"/>
-			<target ref="id16"/>
+			<source ref="id24"/>
+			<target ref="id17"/>
 			<label kind="guard" x="-680" y="-119">objetoBloqueante == 0</label>
 			<label kind="synchronisation" x="-620" y="-102">fecharPorta!</label>
 			<nail x="-535" y="-119"/>
 		</transition>
 		<transition>
-			<source ref="id21"/>
-			<target ref="id23"/>
+			<source ref="id22"/>
+			<target ref="id24"/>
 			<label kind="synchronisation" x="-527" y="-25">usuarioEntrou?</label>
 			<nail x="-535" y="0"/>
 		</transition>
 		<transition>
-			<source ref="id22"/>
-			<target ref="id21"/>
+			<source ref="id23"/>
+			<target ref="id22"/>
 			<label kind="synchronisation" x="-365" y="-25">abrirPorta!</label>
 		</transition>
 		<transition>
-			<source ref="id17"/>
-			<target ref="id22"/>
+			<source ref="id18"/>
+			<target ref="id23"/>
 			<label kind="guard" x="-255" y="-68">noAndar == origem</label>
 		</transition>
 		<transition>
-			<source ref="id20"/>
-			<target ref="id15"/>
+			<source ref="id21"/>
+			<target ref="id16"/>
 			<label kind="synchronisation" x="-391" y="-255">acaoDestino!</label>
+		</transition>
+		<transition>
+			<source ref="id17"/>
+			<target ref="id21"/>
+			<label kind="synchronisation" x="-544" y="-195">escolheDestino?</label>
 		</transition>
 		<transition>
 			<source ref="id16"/>
 			<target ref="id20"/>
-			<label kind="synchronisation" x="-544" y="-195">escolheDestino?</label>
-		</transition>
-		<transition>
-			<source ref="id15"/>
-			<target ref="id19"/>
 			<label kind="synchronisation" x="-221" y="-255">usuarioSaiu?</label>
-		</transition>
-		<transition>
-			<source ref="id18"/>
-			<target ref="id17"/>
-			<label kind="synchronisation" x="-221" y="-144">acaoOrigem!</label>
 		</transition>
 		<transition>
 			<source ref="id19"/>
 			<target ref="id18"/>
+			<label kind="synchronisation" x="-221" y="-144">acaoOrigem!</label>
+		</transition>
+		<transition>
+			<source ref="id20"/>
+			<target ref="id19"/>
 			<label kind="synchronisation" x="-68" y="-195">chamaElevador?</label>
 		</transition>
 	</template>
 	<template>
 		<name>Andar</name>
 		<parameter>int num</parameter>
-		<location id="id24" x="-187" y="68">
+		<location id="id25" x="-187" y="68">
 			<name x="-272" y="59">semPedido</name>
 			<label kind="testcodeEnter">estado_andar[num] = 0</label>
 		</location>
-		<location id="id25" x="-8" y="-102">
+		<location id="id26" x="-8" y="-102">
 			<name x="-51" y="-144">Pedido_Subida</name>
 			<label kind="testcodeEnter">estado_andar[num] = 1</label>
 		</location>
-		<location id="id26" x="0" y="229">
+		<location id="id27" x="0" y="229">
 			<name x="-42" y="246">Pedido_Descida</name>
 			<label kind="testcodeEnter">estado_andar[num] = 2</label>
 		</location>
-		<location id="id27" x="187" y="42">
+		<location id="id28" x="187" y="42">
 			<name x="213" y="34">Pedido_Destino</name>
 			<label kind="testcodeEnter">estado_andar[num] = 3</label>
 		</location>
-		<init ref="id24"/>
+		<init ref="id25"/>
 		<transition>
-			<source ref="id26"/>
-			<target ref="id27"/>
+			<source ref="id27"/>
+			<target ref="id28"/>
 			<label kind="synchronisation" x="34" y="127">pedidoDestino[num]?</label>
 			<label kind="assignment" x="59" y="153">add(num,false)</label>
 			<nail x="76" y="119"/>
 		</transition>
 		<transition>
-			<source ref="id25"/>
-			<target ref="id27"/>
+			<source ref="id26"/>
+			<target ref="id28"/>
 			<label kind="synchronisation" x="68" y="-17">pedidoDestino[num]?</label>
 			<label kind="assignment" x="76" y="-42">add(num,false)</label>
 			<nail x="93" y="-17"/>
 		</transition>
 		<transition>
-			<source ref="id24"/>
-			<target ref="id27"/>
+			<source ref="id25"/>
+			<target ref="id28"/>
 			<label kind="synchronisation" x="-59" y="17">pedidoDestino[num]?</label>
 			<label kind="assignment" x="-42" y="0">add(num,false)</label>
 			<nail x="-17" y="42"/>
 		</transition>
 		<transition>
-			<source ref="id26"/>
-			<target ref="id24"/>
+			<source ref="id27"/>
+			<target ref="id25"/>
 			<label kind="synchronisation" x="-246" y="195">atendeuAndar[num]?</label>
 			<nail x="-136" y="187"/>
 		</transition>
 		<transition>
-			<source ref="id25"/>
-			<target ref="id24"/>
+			<source ref="id26"/>
+			<target ref="id25"/>
 			<label kind="synchronisation" x="-238" y="-93">atendeuAndar[num]?</label>
 			<nail x="-161" y="-34"/>
 		</transition>
 		<transition>
-			<source ref="id27"/>
-			<target ref="id24"/>
+			<source ref="id28"/>
+			<target ref="id25"/>
 			<label kind="synchronisation" x="-59" y="85">atendeuAndar[num]?</label>
 			<nail x="-18" y="81"/>
 		</transition>
 		<transition>
-			<source ref="id26"/>
-			<target ref="id27"/>
+			<source ref="id27"/>
+			<target ref="id28"/>
 			<label kind="synchronisation" x="178" y="178">pedidoSubida[num]?</label>
 			<nail x="161" y="187"/>
 		</transition>
 		<transition>
-			<source ref="id24"/>
-			<target ref="id26"/>
+			<source ref="id25"/>
+			<target ref="id27"/>
 			<label kind="synchronisation" x="-119" y="119">pedidoDescida[num]?</label>
 			<label kind="assignment" x="-93" y="102">add(num,true)</label>
 			<nail x="-76" y="144"/>
 		</transition>
 		<transition>
-			<source ref="id25"/>
-			<target ref="id27"/>
+			<source ref="id26"/>
+			<target ref="id28"/>
 			<label kind="synchronisation" x="153" y="-93">pedidoDescida[num]?</label>
 			<nail x="187" y="-59"/>
 		</transition>
 		<transition>
-			<source ref="id24"/>
-			<target ref="id25"/>
+			<source ref="id25"/>
+			<target ref="id26"/>
 			<label kind="synchronisation" x="-76" y="-34">pedidoSubida[num]?</label>
 			<label kind="assignment" x="-59" y="-51">add(num,true)</label>
 			<nail x="-93" y="-26"/>
@@ -466,138 +479,152 @@ void def_direcao()
     if (andarAtual == andarObjetivo ) direcao2 = 0;
     else direcao2 = andarAtual &gt; andarObjetivo ? -1 : 1;
 }</declaration>
-		<location id="id28" x="-986" y="-85">
+		<location id="id29" x="-986" y="-85">
 			<name x="-1105" y="-93">Fechando_Porta</name>
 			<label kind="comments" x="-1182" y="-178">IDEIA: Adicionar espera por confirmacao de fechamento (do sensor de porta ou outro coisa).</label>
 		</location>
-		<location id="id29" x="-918" y="-85">
+		<location id="id30" x="-918" y="-85">
 			<name x="-893" y="-93">Abrindo_Porta</name>
 			<label kind="testcodeEnter">timerPorta = 0</label>
 		</location>
-		<location id="id30" x="-739" y="76">
+		<location id="id31" x="-739" y="76">
 			<name x="-714" y="68">Movendo</name>
+			<label kind="testcodeEnter">movimento = 1</label>
+			<label kind="testcodeExit">movimento = 0</label>
 		</location>
-		<location id="id31" x="-952" y="8">
+		<location id="id32" x="-952" y="8">
 			<name x="-1011" y="-42">Manipulando_Porta</name>
 		</location>
-		<location id="id32" x="-1173" y="8">
+		<location id="id33" x="-1173" y="8">
 			<name x="-1275" y="-59">Processando_Req_Destino</name>
 			<label kind="testcodeEnter">andarObjetivo = remove(tratandoOrigem)</label>
 		</location>
-		<location id="id33" x="-1453" y="68">
+		<location id="id34" x="-1453" y="68">
 			<name x="-1580" y="59">Elevador_Livre</name>
 		</location>
-		<location id="id34" x="-1300" y="68">
+		<location id="id35" x="-1300" y="68">
 			<name x="-1385" y="25">Selecao_Fila_Req</name>
 		</location>
-		<location id="id35" x="-1054" y="8">
+		<location id="id36" x="-1054" y="8">
 			<name x="-1122" y="25">Definido_Direcao</name>
 			<label kind="testcodeEnter">def_direcao()</label>
 		</location>
-		<location id="id36" x="-952" y="-127">
+		<location id="id37" x="-952" y="-127">
 		</location>
-		<init ref="id33"/>
+		<init ref="id34"/>
 		<transition>
-			<source ref="id29"/>
-			<target ref="id36"/>
+			<source ref="id30"/>
+			<target ref="id37"/>
 			<label kind="guard" x="-918" y="-119">timerPorta &gt;= tempoEsperaPorta</label>
 			<nail x="-943" y="-102"/>
 		</transition>
 		<transition>
-			<source ref="id29"/>
-			<target ref="id36"/>
+			<source ref="id30"/>
+			<target ref="id37"/>
 			<label kind="synchronisation" x="-909" y="-136">portaAbertaAndar[andarAtual]!</label>
 			<nail x="-926" y="-110"/>
 		</transition>
 		<transition>
-			<source ref="id36"/>
-			<target ref="id28"/>
+			<source ref="id37"/>
+			<target ref="id29"/>
 			<label kind="synchronisation" x="-1139" y="-136">atendeuAndar[andarAtual]!</label>
 		</transition>
 		<transition>
-			<source ref="id33"/>
-			<target ref="id34"/>
+			<source ref="id34"/>
+			<target ref="id35"/>
 			<label kind="guard" x="-1436" y="76">pos != 0 || pos2 != 0</label>
 		</transition>
 		<transition>
-			<source ref="id30"/>
-			<target ref="id31"/>
+			<source ref="id31"/>
+			<target ref="id32"/>
+			<label kind="synchronisation" x="-926" y="102">andarAlcancado?</label>
 			<label kind="assignment" x="-960" y="85">andarAtual = andarAtual + direcao</label>
 			<nail x="-867" y="76"/>
 		</transition>
 		<transition>
-			<source ref="id31"/>
-			<target ref="id33"/>
+			<source ref="id32"/>
+			<target ref="id34"/>
 			<label kind="guard" x="-1368" y="212">andarAtual == andarObjetivo &amp;&amp; estado_andar[andarAtual] == 0</label>
 			<nail x="-1045" y="195"/>
 			<nail x="-1360" y="195"/>
 		</transition>
 		<transition>
-			<source ref="id28"/>
-			<target ref="id31"/>
+			<source ref="id29"/>
+			<target ref="id32"/>
+			<label kind="guard" x="-1113" y="-76">!objetoBloqueante</label>
 			<label kind="synchronisation" x="-1071" y="-59">fecharPorta!</label>
 			<nail x="-986" y="-68"/>
 			<nail x="-986" y="-34"/>
 		</transition>
 		<transition>
-			<source ref="id31"/>
-			<target ref="id29"/>
+			<source ref="id32"/>
+			<target ref="id30"/>
 			<label kind="guard" x="-918" y="-68">cond_abertura_porta()</label>
 			<label kind="synchronisation" x="-892" y="-51">abrirPorta!</label>
 			<nail x="-926" y="-34"/>
 		</transition>
 		<transition>
-			<source ref="id32"/>
-			<target ref="id33"/>
+			<source ref="id33"/>
+			<target ref="id34"/>
 			<label kind="guard" x="-1640" y="-8">estado_andar[andarObjetivo] == 0</label>
 			<nail x="-1394" y="0"/>
 		</transition>
 		<transition>
-			<source ref="id35"/>
-			<target ref="id31"/>
+			<source ref="id36"/>
+			<target ref="id32"/>
 		</transition>
 		<transition>
-			<source ref="id32"/>
-			<target ref="id35"/>
+			<source ref="id33"/>
+			<target ref="id36"/>
 			<label kind="guard" x="-1249" y="-25">estado_andar[andarObjetivo] != 0</label>
 		</transition>
 		<transition>
-			<source ref="id31"/>
-			<target ref="id30"/>
-			<label kind="guard" x="-841" y="8">andarAtual != andarObjetivo &amp;&amp; !cond_abertura_porta()</label>
-			<nail x="-841" y="25"/>
+			<source ref="id32"/>
+			<target ref="id31"/>
+			<label kind="guard" x="-867" y="-17">andarAtual != andarObjetivo &amp;&amp; !cond_abertura_porta()</label>
+			<nail x="-807" y="8"/>
 		</transition>
 		<transition>
-			<source ref="id34"/>
-			<target ref="id32"/>
+			<source ref="id35"/>
+			<target ref="id33"/>
 			<label kind="assignment" x="-1258" y="51">tratandoOrigem = (pos2 != 0) ? 0:1</label>
 		</transition>
 	</template>
 	<template>
 		<name>SensorAndar</name>
-		<location id="id37" x="-314" y="-42">
+		<declaration>clock tempoDeslocamento;</declaration>
+		<location id="id38" x="-153" y="-42">
+			<name x="-163" y="-76">Andar_invalido</name>
+		</location>
+		<location id="id39" x="-314" y="-42">
 			<name x="-374" y="-76">Andar_valido</name>
 		</location>
-		<init ref="id37"/>
+		<init ref="id39"/>
 		<transition>
-			<source ref="id37"/>
-			<target ref="id37"/>
-			<label kind="select" x="-272" y="-153">x : int[0,numAndares]</label>
-			<label kind="guard" x="-272" y="-136">movimento == 1</label>
-			<label kind="assignment" x="-272" y="-119">noAndar = x</label>
-			<nail x="-195" y="-110"/>
-			<nail x="-102" y="-34"/>
+			<source ref="id38"/>
+			<target ref="id39"/>
+			<label kind="select" x="-314" y="42">randTempo: int[1,3]</label>
+			<label kind="guard" x="-314" y="59">tempoDeslocamento &gt;= randTempo</label>
+			<label kind="synchronisation" x="-280" y="25">andarAlcancado!</label>
+			<nail x="-238" y="8"/>
+		</transition>
+		<transition>
+			<source ref="id39"/>
+			<target ref="id38"/>
+			<label kind="guard" x="-289" y="-127">movimento == 1</label>
+			<label kind="assignment" x="-314" y="-110">tempoDeslocamento = 0</label>
+			<nail x="-255" y="-93"/>
 		</transition>
 	</template>
 	<template>
 		<name>SensorEstadoPorta</name>
-		<location id="id38" x="-59" y="-85">
+		<location id="id40" x="-59" y="-85">
 			<label kind="invariant" x="476" y="-8">(objetoBloqueante == 1)imply(portaAberta)</label>
 		</location>
-		<init ref="id38"/>
+		<init ref="id40"/>
 		<transition>
-			<source ref="id38"/>
-			<target ref="id38"/>
+			<source ref="id40"/>
+			<target ref="id40"/>
 			<label kind="select" x="-119" y="-195">z : int[0,1]</label>
 			<label kind="guard" x="-144" y="-178">portaAberta == true</label>
 			<label kind="assignment" x="-144" y="-161">objetoBloqueante = z</label>
@@ -608,64 +635,77 @@ void def_direcao()
 	</template>
 	<template>
 		<name>Elevador</name>
-		<location id="id39" x="-153" y="-153">
+		<location id="id41" x="-153" y="-153">
 		</location>
-		<location id="id40" x="-42" y="-51">
+		<location id="id42" x="-42" y="-51">
 		</location>
-		<location id="id41" x="68" y="-161">
+		<location id="id43" x="68" y="-161">
 			<name x="59" y="-195">Elevador_indo_a_origem</name>
 		</location>
-		<location id="id42" x="-42" y="-272">
+		<location id="id44" x="-42" y="-272">
 		</location>
-		<init ref="id42"/>
+		<init ref="id44"/>
 		<transition>
-			<source ref="id39"/>
-			<target ref="id42"/>
+			<source ref="id41"/>
+			<target ref="id44"/>
 			<label kind="synchronisation" x="-153" y="-238">chegou!</label>
 			<label kind="assignment" x="-178" y="-255">movimento = 0</label>
 		</transition>
 		<transition>
-			<source ref="id40"/>
-			<target ref="id39"/>
+			<source ref="id42"/>
+			<target ref="id41"/>
 			<label kind="synchronisation" x="-178" y="-102">acaoDestino?</label>
 			<label kind="assignment" x="-178" y="-85">movimento =1</label>
 		</transition>
 		<transition>
-			<source ref="id41"/>
-			<target ref="id40"/>
+			<source ref="id43"/>
+			<target ref="id42"/>
 			<label kind="guard" x="0" y="-76">noAndar == origem</label>
 			<label kind="synchronisation" x="8" y="-110">esperaElevador!</label>
 			<label kind="assignment" x="8" y="-93">movimento = 0</label>
 		</transition>
 		<transition>
-			<source ref="id42"/>
-			<target ref="id41"/>
+			<source ref="id44"/>
+			<target ref="id43"/>
 			<label kind="synchronisation" x="8" y="-255">acaoOrigem?</label>
 			<label kind="assignment" x="0" y="-272">movimento = 1</label>
 		</transition>
 	</template>
 	<system>// Place template instantiations here.
 //ze = Usuario();
-zee = Usuario();
-zeee = Usuario();
-clp = Controlador();
-habitaculo = Elevador();
+zee = Usuario2(3);
+paulo = Usuario2(3);
+carlos = Usuario2(3);
+
+clp = Controlador2();
+
+andar0 = Andar(0);
+andar1 = Andar(1);
+andar2 = Andar(2);
+andar3 = Andar(3);
+andar4 = Andar(4);
+andar5 = Andar(5);
+
+//habitaculo = Elevador();
 portas = Porta();
-sensor_de_andar = SensorAndar();
-sensor_de_estado_de_porta = SensorEstadoPorta();
+
+//sensor_de_andar = SensorAndar();
+sensor_de_estado_da_porta = SensorEstadoPorta();
+
+
 // List one or more processes to be composed into a system.
-system /*ze, zee,*/zee, zeee, clp, habitaculo, portas, sensor_de_andar, sensor_de_estado_de_porta;</system>
+system zee, paulo, carlos, clp, andar0, andar1, andar2, andar3, andar4, andar5, portas, sensor_de_estado_da_porta;</system>
 	<queries>
 		<query>
-			<formula></formula>
+			<formula>A[] not deadlock</formula>
 			<comment></comment>
 		</query>
 		<query>
-			<formula></formula>
+			<formula>A[] movimento == 1 imply not portaAberta</formula>
 			<comment></comment>
 		</query>
 		<query>
-			<formula>(not movimento) &amp;&amp; (noAndar == destino || noAndar==origem)</formula>
+			<formula>E[] zee.Fim and paulo.Fim and carlos.Fim</formula>
 			<comment></comment>
 		</query>
 	</queries>
