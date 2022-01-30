@@ -3,8 +3,14 @@
 <nta>
 	<declaration>// Place global declarations here.
 
+//==================================== Constantes ========================================//
 //#define numAndares
 const int numAndares = 6;
+//Capacidade da fila de chamadas
+const int capacidade = 20*(numAndares - 1);
+const int maxNumPessoas =  4;
+//=======================================================================================//
+
 
 chan fecharPorta, abrirPorta;
 int numPessoasDentro = 0;
@@ -25,7 +31,10 @@ chan andarAlcancado;
 
 //Portas dos Andares
 broadcast chan portaAbertaAndar[numAndares];   
-//chan fecharPortaAndar[numAndares], abrirPortaAndar[numAndares];
+
+//Aviso de Excesso de passageiros
+chan ExpulsaoPorLotacao;
+
 
 
 //enum ESTADOS_ANDAR{SEM_PEDIDO = 0, PEDIDO_SUBIDA = 1, PEDIDO_DESCIDA= 2, PEDIDO_DESTINO=3};
@@ -34,8 +43,7 @@ int estado_andar[numAndares];
 
 int andarAtual = 0;
 //-----------------------------------------------------------------------------------------//
-//Capacidade da fila de chamadas
-const int capacidade = 20*(numAndares - 1);
+
 
 int enter = 0, pos = 0;
 int enter2 = 0, pos2 = 0;
@@ -99,12 +107,12 @@ bool cond_elevador_requisitado()
            (andarAtualUsuario &lt;= andarDestinoUsuario &amp;&amp; (estado_andar[andarAtualUsuario] == 3 || estado_andar[andarAtualUsuario] == 1));
 }
 
-bool cond_subida_requisitada()
+bool cond_descida()
 {
     return andarAtualUsuario &gt;= andarDestinoUsuario &amp;&amp; andarAtualUsuario != 0;
 }
 
-bool cond_descida_requisitada()
+bool cond_subida()
 {
     return andarAtualUsuario &lt;= andarDestinoUsuario &amp;&amp; andarAtualUsuario != numAndares-1;
 }
@@ -135,6 +143,20 @@ bool cond_destino_requisitado()
 			<name x="-391" y="-578">Inicial</name>
 		</location>
 		<init ref="id6"/>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id4"/>
+			<label kind="synchronisation" x="-1037" y="-110">ExpulsaoPorLotacao?</label>
+			<nail x="-892" y="-25"/>
+			<nail x="-892" y="-340"/>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id4"/>
+			<label kind="synchronisation" x="-1037" y="-263">ExpulsaoPorLotacao?</label>
+			<nail x="-892" y="-153"/>
+			<nail x="-892" y="-340"/>
+		</transition>
 		<transition>
 			<source ref="id5"/>
 			<target ref="id0"/>
@@ -185,7 +207,7 @@ numPessoasDentro--</label>
 		<transition>
 			<source ref="id4"/>
 			<target ref="id3"/>
-			<label kind="guard" x="-229" y="-314">!cond_elevador_requisitado() &amp;&amp; cond_descida_requisitada()</label>
+			<label kind="guard" x="-229" y="-314">!cond_elevador_requisitado() &amp;&amp; cond_subida()</label>
 			<label kind="synchronisation" x="-229" y="-297">pedidoSubida[andarAtualUsuario]!</label>
 			<nail x="-314" y="-314"/>
 			<nail x="-238" y="-314"/>
@@ -195,8 +217,8 @@ numPessoasDentro--</label>
 		<transition>
 			<source ref="id4"/>
 			<target ref="id3"/>
-			<label kind="guard" x="-833" y="-314">!cond_elevador_requisitado() &amp;&amp; cond_subida_requisitada()</label>
-			<label kind="synchronisation" x="-672" y="-297">pedidoDescida[andarAtualUsuario]!</label>
+			<label kind="guard" x="-765" y="-314">!cond_elevador_requisitado() &amp;&amp; cond_descida()</label>
+			<label kind="synchronisation" x="-680" y="-297">pedidoDescida[andarAtualUsuario]!</label>
 			<nail x="-365" y="-314"/>
 			<nail x="-442" y="-314"/>
 			<nail x="-442" y="-263"/>
@@ -368,7 +390,7 @@ void def_direcao()
     else direcao = andarAtual &gt; andarObjetivo ? -1 : 1;
 }</declaration>
 		<location id="id13" x="-1011" y="-204">
-			<name x="-1139" y="-229">Fechando_Porta</name>
+			<name x="-1130" y="-204">Fechando_Porta</name>
 		</location>
 		<location id="id14" x="-654" y="-110">
 			<name x="-629" y="-127">Abrindo_Porta</name>
@@ -399,6 +421,15 @@ void def_direcao()
 			<name x="-756" y="-238">Arquivando_Requisicao</name>
 		</location>
 		<init ref="id18"/>
+		<transition>
+			<source ref="id13"/>
+			<target ref="id13"/>
+			<label kind="guard" x="-1309" y="-255">numPessoasDentro &gt; maxNumPessoas</label>
+			<label kind="synchronisation" x="-1249" y="-272">ExpulsaoPorLotacao!</label>
+			<nail x="-1011" y="-255"/>
+			<nail x="-1054" y="-255"/>
+			<nail x="-1054" y="-204"/>
+		</transition>
 		<transition>
 			<source ref="id14"/>
 			<target ref="id21"/>
@@ -435,7 +466,8 @@ movimento = false</label>
 		<transition>
 			<source ref="id13"/>
 			<target ref="id16"/>
-			<label kind="guard" x="-1003" y="-161">!objetoBloqueante</label>
+			<label kind="guard" x="-1003" y="-178">!objetoBloqueante &amp;&amp; 
+numPessoasDentro&lt;= maxNumPessoas</label>
 			<label kind="synchronisation" x="-1003" y="-144">fecharPorta!</label>
 			<label kind="assignment" x="-1003" y="-127">portaAberta = false</label>
 			<nail x="-1011" y="-42"/>
