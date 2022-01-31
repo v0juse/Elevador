@@ -12,6 +12,7 @@ const int maxNumPessoas =  4;
 std::queue<int> filaChamadasOrigem, filaChamadasDestino;
 
 int andarAtual = 0;
+int estadoAndar[numAndares];
 bool portaAberta = false;
 bool movimento = 0;
 int objetoBloqueante = 0;
