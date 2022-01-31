@@ -16,3 +16,54 @@ enum ESTADOS_ANDAR Andar::estado_andar()
 {
     return _estado;
 }
+
+
+void atendeuAndar()
+{
+    _estado = SEM_PEDIDO;
+}
+
+/*---------------------------------------------------------//
+* estado_andar WIP
+//---------------------------------------------------------*/
+void pedidoSubida())
+{
+    switch _estado
+    {
+        case SEM_PEDIDO:
+            _estado = PEDIDO_SUBIDA;
+            filaChamadasOrigem.push(_num);
+            break;
+        case PEDIDO_DESCIDA:
+            _estado = PEDIDO_DESTINO;
+            break;
+    }
+}
+
+/*---------------------------------------------------------//
+* estado_andar WIP
+//---------------------------------------------------------*/
+void pedidoDescida()
+{
+    switch _estado
+    {
+        case SEM_PEDIDO:
+            _estado = PEDIDO_DESCIDA;
+            filaChamadasOrigem.push(_num);
+            break;
+        case PEDIDO_SUBIDA:
+            _estado = PEDIDO_DESTINO;
+            break;
+    }
+}
+
+/*---------------------------------------------------------//
+* estado_andar WIP
+//---------------------------------------------------------*/
+void pedidoDestino()
+{
+
+    filaChamadasDestino.push(_num);
+    _estado = PEDIDO_DESTINO;
+
+}
