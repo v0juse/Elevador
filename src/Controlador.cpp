@@ -119,7 +119,7 @@ void Controlador::threadBehavior()
     while(_sistemON)
     {   
         //inicio rc da lista de chamadas------------------------------------
-	    lock.lock();//entra rc
+	    lock.lock();//entra rc fila de chamadas
         
         if(filaChamadasDestino.empty() && filaChamadasOrigem.empty() ) novaChamada.wait(lock);
 
@@ -137,6 +137,7 @@ void Controlador::threadBehavior()
         lock.unlock();
         //fim rc da lista de chamadas----------------------------------------
         //volta para elevador livre
+        
         if(vetorAndares[andarObjetivo].estado_andar() == SEM_PEDIDO) continue;
 
         def_direcao();
@@ -150,7 +151,7 @@ void Controlador::threadBehavior()
                 if(andarAtual == andarObjetivo) andarObjetivo = -1;//objetivo concluido
 
                 mutexImpressao.lock();
-                std::cout << "porta aberta/n";
+                    std::cout << "porta aberta/n";
                 mutexImpressao.unlock();    
                 //TODO entrada/expulsao de usuario
                 while(ptrSensorEstadoPorta->objetoBloqueante()); //busy wait ate a porta nao estar bloqueada
@@ -161,9 +162,6 @@ void Controlador::threadBehavior()
             if(andarObjetivo = -1) break;//objetivo ja concluido
 
             moverElevador();
-
-
-
 
         }  
 

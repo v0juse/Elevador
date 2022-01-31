@@ -1,13 +1,16 @@
 #include "Andar.hpp"
 
 int Andar::_num_andares = 0;
+std::mutex mutexAndares;
 
 Andar vetorAndares[numAndares];
 
 Andar::Andar()
-{
-    _num = _num_andares++;
-    _estado = SEM_PEDIDO;
+{   
+    mutexAndares.lock();
+        _num = _num_andares++;
+        _estado = SEM_PEDIDO;
+    mutexAndares.unlock();
 }
 Andar::~Andar()
 {
@@ -15,13 +18,15 @@ Andar::~Andar()
 }
 
 enum ESTADOS_ANDAR Andar::estado_andar()
-{
+{   
+    std::unique_lock<std::mutex> lock(mutexAndares);
     return _estado;
 }
 
 
 void Andar::atendeuAndar()
-{
+{   
+    std::unique_lock<std::mutex> lock(mutexAndares);
     _estado = SEM_PEDIDO;
 }
 
@@ -29,12 +34,15 @@ void Andar::atendeuAndar()
 * estado_andar WIP
 //---------------------------------------------------------*/
 void Andar::pedidoSubida()
-{
+{   
+    std::unique_lock<std::mutex> lock(mutexAndares);
     switch (_estado)
     {
         case SEM_PEDIDO:
             _estado = PEDIDO_SUBIDA;
-            filaChamadasOrigem.push(_num);
+            mutexFilasChamadas.lock(); //rc fila de chamadas
+                filaChamadasOrigem.push(_num);
+            mutexFilasChamadas.unlock();
             break;
         case PEDIDO_DESCIDA:
             _estado = PEDIDO_DESTINO;
@@ -49,11 +57,14 @@ void Andar::pedidoSubida()
 //---------------------------------------------------------*/
 void Andar::pedidoDescida()
 {
+    std::unique_lock<std::mutex> lock(mutexAndares);
     switch (_estado)
     {
         case SEM_PEDIDO:
             _estado = PEDIDO_DESCIDA;
-            filaChamadasOrigem.push(_num);
+            mutexFilasChamadas.lock();//rc fila de chamadas 
+                filaChamadasOrigem.push(_num);
+            mutexFilasChamadas.unlock();
             break;
         case PEDIDO_SUBIDA:
             _estado = PEDIDO_DESTINO;
@@ -68,8 +79,12 @@ void Andar::pedidoDescida()
 //---------------------------------------------------------*/
 void Andar::pedidoDestino()
 {
+    std::unique_lock<std::mutex> lock(mutexAndares);
 
-    filaChamadasDestino.push(_num);
+    mutexFilasChamadas.lock();//rc fila de chamadas 
+        filaChamadasDestino.push(_num);
+    mutexFilasChamadas.unlock();
+    
     _estado = PEDIDO_DESTINO;
 
 }

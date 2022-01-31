@@ -60,7 +60,7 @@ private:
     int _num;
     static int _num_andares;
     enum ESTADOS_ANDAR _estado;
-
+    static std::mutex mutexAndares;
 //-----------------------------------------------------------------//
 };
 

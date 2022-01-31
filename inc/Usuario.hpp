@@ -1,6 +1,7 @@
 #ifndef USUARIO_HPP_
 #define USUARIO_HPP_
 
+
 /*=================================================================//
  * Includes necessarios        
 //=================================================================*/
@@ -19,6 +20,7 @@
 
 
 #include "Andar.hpp"
+#include "Porta.hpp"
 //#include "Utility.h"
 
 using namespace std::chrono;
@@ -36,7 +38,7 @@ class Usuario: public std::thread
          * construtor com valor de inicializacao do atributo "_id"
         //---------------------------------------------------------*/
         
-        Usuario(std::string nome, int numViagens);
+        Usuario(std::string nome);
         
         /*---------------------------------------------------------//
          * destrutor padrao
@@ -45,80 +47,46 @@ class Usuario: public std::thread
         ~Usuario();
 
         /*---------------------------------------------------------//
-         * metodo que faz o objeto "pensar" por 0~2 segundos,
-         * escolhido aleatoriamente.timed mensure c++
+         * TODO
         //---------------------------------------------------------*/
-        
-        duration<double> Filosofar();
+        virtual void setAndarInicial();
 
         /*---------------------------------------------------------//
-         * tenta coletar entre 2~n garrafas, onde n é o
-         * numero maximo de garrafas que este filosofo consegue 
-         * pegar, e calcula o tempo usado para isso.
+         * TODO
         //---------------------------------------------------------*/
-        
-        duration<double> Pegar_garrafas(uint);
-        
-        /*---------------------------------------------------------//
-         * faz o objeto gastar 1 segundo para consumir as bebidas.
-        //---------------------------------------------------------*/
-        
-        duration<double> Beber();
+
+        virtual void setAndarDestino();
 
         /*---------------------------------------------------------//
-         * metodo usado para sinalizar a garrafa que ela pode se
-         * posicionar como disponivel novamente.
+         * TODO
         //---------------------------------------------------------*/
-        
-        void Retornar_garrafas();
+
+        void botaoSubida();
         
         /*---------------------------------------------------------//
-         * metodo get para o atributo "_id"
+         * TODO
         //---------------------------------------------------------*/
-        
-        int id();
+        void botaoDescida();
 
         /*---------------------------------------------------------//
-		 * adiciona uma garrafa acessivel para o filosofo
+         * TODO
+        //---------------------------------------------------------*/
+        void botaoDestino(int andarDestino);
+
+        /*---------------------------------------------------------//
+         * TODO
+        //---------------------------------------------------------*/
+        void entrarElevador();
+
+        /*---------------------------------------------------------//
+         * TODO
+        //---------------------------------------------------------*/
+        void sairElevador();
+
+        /*---------------------------------------------------------//
+		 * metodos que dita o comportamento da thread interna
 		//---------------------------------------------------------*/
-
-		void Adicionar_garrafa(Garrafa*);
-
-        /*---------------------------------------------------------//
-		 * metodos que dita o comportamento da thread
-		//---------------------------------------------------------*/
-
 		void threadBehavior();
-
-		/*---------------------------------------------------------//
-		 * metodos get para os tempos que o filosofo passou em cada
-		 * estado
-		//---------------------------------------------------------*/
-
-		std::chrono::duration<double> t_tranquilo();
-		std::chrono::duration<double> t_com_sede();
-		std::chrono::duration<double> t_bebendo();
-
-		/*---------------------------------------------------------//
-		 *metodo get que retorna o atributo "_simulationON"
-		//---------------------------------------------------------*/
-
-		bool simulationON();
-
-        /*---------------------------------------------------------//
-		 *informa se a simulacao pode ser iniciada, ou terminada.
-		//---------------------------------------------------------*/
-
-		static void iniciaSimulacao(void);
-		static void terminaSimulacao(void);
-
-		/*---------------------------------------------------------//
-		 * metodo para obter uma impressao formatada dos dados que cada
-		 * filosofo passou em cada estado (tranquilo, com sede e bebendo),
-		 * e tempo medio de espera
-		//---------------------------------------------------------*/
-
-		void printResults();
         
 //-----------------------------------------------------------------//
     
@@ -140,13 +108,15 @@ class Usuario: public std::thread
          * atributo para localizacao de andares do usuario
         //---------------------------------------------------------*/
         
-		int andarAtualUsuario; 
-		int andarDestinoUsuario;
+		int _andarAtualUsuario; 
+		int _andarDestinoUsuario;
 		
 		bool cond_elevador_requisitado();
 		bool cond_descida();
 		bool cond_subida();
 		bool cond_destino_requisitado();
+        bool cond_subida_requisitada();
+        bool cond_descida_requisitada();
 
         /*---------------------------------------------------------//
 		 * mutexes e conds.
@@ -163,13 +133,7 @@ class Usuario: public std::thread
 	
         static unsigned int _num_usuarios;
 
-        /*---------------------------------------------------------//
-		 * variavel utilizada para verificar se a simulacao deve 
-         * estar acontecendo, ou nao.
-		//---------------------------------------------------------*/
-
-        static bool _simulationON;
-
+        void botoesOrigem();
 
 		/*---------------------------------------------------------//
 		 * funcao a ser passada para a thread na inicializacao
