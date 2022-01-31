@@ -2,6 +2,8 @@
 
 int Andar::_num_andares = 0;
 
+Andar vetorAndares[numAndares];
+
 Andar::Andar()
 {
     _num = _num_andares++;

@@ -64,6 +64,6 @@ private:
 //-----------------------------------------------------------------//
 };
 
-Andar vetorAndares[numAndares];
+extern Andar vetorAndares[numAndares];
 
 #endif

@@ -10,11 +10,11 @@ const int capacidade = 20*(numAndares - 1);
 const int maxNumPessoas =  4;
 //=======================================================================================//
 
-std::queue<int> filaChamadasOrigem, filaChamadasDestino;
+extern std::queue<int> filaChamadasOrigem, filaChamadasDestino;
 
-int objetoBloqueante = 0;
-int direcao = 0;
-int numPessoasDentro = 0;
+extern int objetoBloqueante;
+extern int direcao;
+extern int numPessoasDentro;
 
 
 
