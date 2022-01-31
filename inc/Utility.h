@@ -17,4 +17,4 @@ bool portaAberta = false;
 bool movimento = 0;
 int objetoBloqueante = 0;
 int direcao = 0;
-
+int numPessoasDentro = 0;

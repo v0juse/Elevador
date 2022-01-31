@@ -3,10 +3,11 @@
 /*=================================================================//
  * CONSTRUTOR                                         
 //=================================================================*/
-Controlador::Controlador()
+Controlador::Controlador(Porta* p)
 {
     andarObjetivo = -1;
     tratandoOrigem = false;
+    ptrPorta = p;
 }
 
 /*=================================================================//
@@ -102,3 +103,4 @@ bool Controlador::atendeu_andar()
 {
     andarObjetivo = (andarAtual == andarObjetivo) ? -1 : andarObjetivo;
 }
+
