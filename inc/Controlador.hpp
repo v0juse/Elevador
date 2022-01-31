@@ -13,6 +13,8 @@
 
 #include "Andar.hpp"
 #include "Porta.hpp"
+#include "SensorEstadoPorta.hpp"
+#include "SensorAndar.hpp"
 
 /*=================================================================//
  * Definicao da classe                                           
@@ -86,6 +88,8 @@ class Controlador: public std::thread
         bool tratandoOrigem;
         bool movimento;
         Porta* ptrPorta;
+        SensorEstadoPorta* ptrSensorEstadoPorta;
+        SensorAndar* ptrSensorAndar;
 
         /*---------------------------------------------------------//
 		 * funcao a ser passada para a thread na inicializacao
