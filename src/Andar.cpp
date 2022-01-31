@@ -1,6 +1,6 @@
 #include "Andar.hpp"
 
-int _num_andares = 0;
+int Andar::_num_andares = 0;
 
 Andar::Andar()
 {
@@ -18,7 +18,7 @@ enum ESTADOS_ANDAR Andar::estado_andar()
 }
 
 
-void atendeuAndar()
+void Andar::atendeuAndar()
 {
     _estado = SEM_PEDIDO;
 }
@@ -26,9 +26,9 @@ void atendeuAndar()
 /*---------------------------------------------------------//
 * estado_andar WIP
 //---------------------------------------------------------*/
-void pedidoSubida())
+void Andar::pedidoSubida()
 {
-    switch _estado
+    switch (_estado)
     {
         case SEM_PEDIDO:
             _estado = PEDIDO_SUBIDA;
@@ -37,15 +37,17 @@ void pedidoSubida())
         case PEDIDO_DESCIDA:
             _estado = PEDIDO_DESTINO;
             break;
+        default:
+            break;
     }
 }
 
 /*---------------------------------------------------------//
 * estado_andar WIP
 //---------------------------------------------------------*/
-void pedidoDescida()
+void Andar::pedidoDescida()
 {
-    switch _estado
+    switch (_estado)
     {
         case SEM_PEDIDO:
             _estado = PEDIDO_DESCIDA;
@@ -54,13 +56,15 @@ void pedidoDescida()
         case PEDIDO_SUBIDA:
             _estado = PEDIDO_DESTINO;
             break;
+        default:
+            break;
     }
 }
 
 /*---------------------------------------------------------//
 * estado_andar WIP
 //---------------------------------------------------------*/
-void pedidoDestino()
+void Andar::pedidoDestino()
 {
 
     filaChamadasDestino.push(_num);
