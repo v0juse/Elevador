@@ -4,6 +4,12 @@
 /*=================================================================//
  * Includes
 //=================================================================*/
+#include <iostream>
+#include <thread>         // std::thread
+#include <mutex>          // std::mutex
+#include <condition_variable> // std::condition_variable
+#include <random>
+
 
 #include "Andar.hpp"
 #include "Porta.hpp"
@@ -12,7 +18,7 @@
  * Definicao da classe                                           
 //=================================================================*/
 
-class Controlador
+class Controlador: public std::thread
 //-----------------------------------------------------------------//
 {
     public:
@@ -61,6 +67,15 @@ class Controlador
         //---------------------------------------------------------*/
         void atendeu_andar();
 
+        /*---------------------------------------------------------//
+		 * metodos que dita o comportamento da thread interna
+		//---------------------------------------------------------*/
+		void threadBehavior();
+
+        /*---------------------------------------------------------//
+		 * metodos que dita o comportamento da thread interna
+		//---------------------------------------------------------*/
+        void moverElevador();
 //-----------------------------------------------------------------//
     private:
         /*---------------------------------------------------------//
@@ -71,6 +86,13 @@ class Controlador
         bool tratandoOrigem;
         bool movimento;
         Porta* ptrPorta;
+
+        /*---------------------------------------------------------//
+		 * funcao a ser passada para a thread na inicializacao
+		//---------------------------------------------------------*/
+
+		static void * InternalThreadEntryFunc(void * This)
+		{((Controlador *)This)->threadBehavior(); return nullptr;};
 
 //-----------------------------------------------------------------//
 };
