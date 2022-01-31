@@ -5,7 +5,6 @@
  * Includes
 //=================================================================*/
 
-#include "Utility.h"
 #include "Andar.hpp"
 #include "Porta.hpp"
 
@@ -60,7 +59,7 @@ class Controlador
         /*---------------------------------------------------------//
         * alcancou_andar   WIP
         //---------------------------------------------------------*/
-        bool atendeu_andar(int);
+        void atendeu_andar();
 
 //-----------------------------------------------------------------//
     private:
@@ -68,7 +67,9 @@ class Controlador
         * ATRIBUTOS 
         //---------------------------------------------------------*/
         int andarObjetivo;
+        int andarAtual;
         bool tratandoOrigem;
+        bool movimento;
         Porta* ptrPorta;
 
 //-----------------------------------------------------------------//

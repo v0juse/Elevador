@@ -60,8 +60,10 @@ private:
     int _num;
     static int _num_andares;
     enum ESTADOS_ANDAR _estado;
+
 //-----------------------------------------------------------------//
 };
 
+Andar vetorAndares[numAndares];
 
 #endif

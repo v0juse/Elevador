@@ -20,7 +20,6 @@
 #define NUM_TENTATIVAS_MAX 1
 
 #include "Utility.h"
-#include "Garrafa.h"
 
 using namespace std::chrono;
 

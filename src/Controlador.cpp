@@ -23,7 +23,7 @@ Controlador::~Controlador()
 //=================================================================*/
 bool Controlador::cond_abertura_porta()
 {
-    int estAndar = estadoAndar[andarAtual];
+    int estAndar = vetorAndares[andarAtual].estado_andar();
     return ((estAndar == 3) || 
             (estAndar == 1 && direcao != -1) || 
             (estAndar == 2 && direcao != 1) || 
@@ -99,8 +99,9 @@ bool Controlador::alcancou_andar()
 /*=================================================================//
  * METODO: atendeu_andar
 //=================================================================*/
-bool Controlador::atendeu_andar()
+void Controlador::atendeu_andar()
 {
     andarObjetivo = (andarAtual == andarObjetivo) ? -1 : andarObjetivo;
+    vetorAndares[andarAtual].atendeuAndar();
 }
 
