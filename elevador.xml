@@ -733,7 +733,7 @@ andar5 = Andar(5);
 
 //Visualizacao
 pos_habitaculo = Elevador();
-
+ 
 //Porta
 portas = Porta();
 
@@ -743,7 +743,7 @@ sensor_de_estado_da_porta = SensorEstadoPorta();
 sensor_de_pessoas =  SensorPessoas();
 
 // List one or more processes to be composed into a system.
-system pos_habitaculo, sensor_de_pessoas, zee, clp, andar0, andar1, andar2, andar3, andar4, andar5, portas, sensor_de_estado_da_porta, sensor_de_andar;</system>
+system pos_habitaculo, sensor_de_pessoas, zee,paulo, clp, andar0, andar1, andar2, andar3, andar4, andar5, portas, sensor_de_estado_da_porta, sensor_de_andar;</system>
 	<queries>
 		<query>
 			<formula>A[] not deadlock</formula>
