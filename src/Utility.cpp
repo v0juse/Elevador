@@ -10,4 +10,14 @@ bool _sistemON;
 std::mutex mutexFilasChamadas;
 std::mutex mutexImpressao;
 std::condition_variable novaChamada; 
+
+int blindagem(std::string s)
+{
+    try { return stoi(s); }
+
+    catch (...) { return -1; }
+    
+    return -1;
+}
+
  

@@ -38,6 +38,6 @@ extern int numPessoasDentro;
 extern bool _sistemON;
 extern std::condition_variable novaChamada; 
 
-
+int blindagem(std::string s);
 
 #endif

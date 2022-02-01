@@ -88,11 +88,14 @@ bool Usuario::cond_destino_requisitado()
 
 void Usuario::setAndarInicial()
 {   
+    std::string temp;
     int num;
     mutexImpressao.lock();
         do{
             std::cout<< "Digite um andar inicial, entre 0 e "<< numAndares - 1<<std::endl;
-            std::cin >> num;
+            std::cin >> temp;
+            num = blindagem(temp);
+
         }while (num < 0 || num > numAndares - 1);
     mutexImpressao.unlock();
     _andarAtualUsuario = num;
@@ -104,7 +107,8 @@ void Usuario::setAndarInicial()
 
 void Usuario::botoesOrigem()
 {
-   int num;
+    std::string temp;
+    int num;
     mutexImpressao.lock();
         do{ 
             std::cout<< "Voce esta fora do elevador,\nDigite";
@@ -112,7 +116,8 @@ void Usuario::botoesOrigem()
             if(_andarAtualUsuario != numAndares-1) std::cout<< " 1 para pressionar o botao de subida" << std::endl;
             if(_andarAtualUsuario != 0) std::cout<< " 2 para pressionar o botao de descida" <<std::endl;
             if(_andarAtualUsuario != numAndares-1 && _andarAtualUsuario != 0) std::cout<< " ou 3 para pressionar ambos"<<std::endl;
-            std::cin >> num;
+            std::cin >> temp;
+            num = blindagem(temp);
         }while ((num < 1 || num > 3)||
         (_andarAtualUsuario == numAndares-1 && num !=2 ) ||
         (_andarAtualUsuario == 0 && num !=1 ) );
@@ -167,12 +172,14 @@ void Usuario::botaoDestino(int andarDestino)
 //=================================================================*/
 
 void Usuario::setAndarDestino()
-{   
+{  
+    std::string temp; 
     int num;
     mutexImpressao.lock();
         do{
             std::cout<< "Digite um andar destino, entre 0 e "<< numAndares - 1<<std::endl;
-            std::cin >> num;
+            std::cin >> temp;
+            num = blindagem(temp);
         }while (num < 0 || num > numAndares - 1);
     mutexImpressao.unlock();
     _andarDestinoUsuario = num;
@@ -208,16 +215,18 @@ void Usuario::sairElevador()
 
 bool Usuario::novaViagem()
 {   
-    bool resposta;
+    std::string temp;
+    int valorRetorno;
     mutexImpressao.lock();
     do{
         std::cout<< "Voce deseja fazer uma nova viagem?\n" <<
                     "1 - caso sim\n"<<
                     "0 - caso nao\n"<<std::endl;
-        std::cin >> resposta;
-    }while(resposta != 0 && resposta != 1);
+        std::cin >> temp;
+        valorRetorno = blindagem(temp);
+    }while(valorRetorno != 0 && valorRetorno != 1);
     mutexImpressao.unlock();    
-    return resposta;
+    return (bool) valorRetorno;
 }
 
 /*=================================================================//
