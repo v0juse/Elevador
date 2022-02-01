@@ -1,6 +1,16 @@
 #ifndef PORTA_HPP_
 #define PORTA_HPP_
 
+/*=================================================================//
+ * Includes
+//=================================================================*/
+
+#include <thread>         // std::thread
+#include <mutex>          // std::mutex
+#include <condition_variable> // std::condition_variable
+#include <vector>
+
+#include "Utility.h"
 
 /*=================================================================//
  * Definicao da Classe
@@ -23,12 +33,12 @@ public:
     /*---------------------------------------------------------//
     * estado_andar WIP
     //---------------------------------------------------------*/
-    bool abrir(int num);
+    void abrir(int num);
 
     /*---------------------------------------------------------//
     * estado_andar WIP
     //---------------------------------------------------------*/
-    bool fechar(int num );
+    void fechar();
 
     /*---------------------------------------------------------//
     * estado_andar WIP
@@ -42,6 +52,10 @@ private:
     * ATRIBUTOS 
     //---------------------------------------------------------*/
     bool aberta;
+    
+    std::mutex mutexPorta;
+    std::vector<std::unique_ptr<std::condition_variable>> portasCondsPtrs;
+    std::condition_variable portaQualquerAberta;
 //-----------------------------------------------------------------//
 };
 

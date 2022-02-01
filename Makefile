@@ -7,7 +7,7 @@ INCLUDE_DIR := inc
 $(shell mkdir -p obj)
 
 OBJ=$(patsubst ./src%, ./obj%, $(patsubst %.cpp, %.o , $(SOURCES_DIR)))
-CXXFLAGS= -Wall  -g -Wextra -Wshadow $(addprefix -I ,$(INCLUDE_DIR))
+CXXFLAGS= -Wall  -g -Wextra -pthread -Wshadow $(addprefix -I ,$(INCLUDE_DIR))
 
 all: $(PROJ)
 

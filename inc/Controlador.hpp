@@ -27,7 +27,7 @@ class Controlador: public std::thread
         /*---------------------------------------------------------//
         * construtor WIP
         //---------------------------------------------------------*/
-        Controlador(Porta* p);
+        Controlador(Porta* p, SensorEstadoPorta* sp, SensorAndar* sa);
 
         /*---------------------------------------------------------//
         * destrutor WIP

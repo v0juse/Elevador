@@ -38,7 +38,7 @@ class Usuario: public std::thread
          * construtor com valor de inicializacao do atributo "_id"
         //---------------------------------------------------------*/
         
-        Usuario(std::string nome);
+        Usuario(std::string nome, Porta* porta);
         
         /*---------------------------------------------------------//
          * destrutor padrao
@@ -84,6 +84,12 @@ class Usuario: public std::thread
         void sairElevador();
 
         /*---------------------------------------------------------//
+         * TODO
+        //---------------------------------------------------------*/
+        bool viagemSatisfeita();
+
+        
+        /*---------------------------------------------------------//
 		 * metodos que dita o comportamento da thread interna
 		//---------------------------------------------------------*/
 		void threadBehavior();
@@ -118,13 +124,6 @@ class Usuario: public std::thread
         bool cond_subida_requisitada();
         bool cond_descida_requisitada();
 
-        /*---------------------------------------------------------//
-		 * mutexes e conds.
-		//---------------------------------------------------------*/
-		/*
-        static std::mutex mutex_garafas;
-        static std::mutex mutex_escrita;
-        static std::vector<std::unique_ptr<std::condition_variable>> filosofos_conds_ptrs;
 
         /*---------------------------------------------------------//
 		 * variavel utilizada para armazenar a quantidade de 
@@ -135,7 +134,14 @@ class Usuario: public std::thread
 
         void botoesOrigem();
 
-		/*---------------------------------------------------------//
+        Porta *_ptrPorta;
+
+        bool _dentroElevador;
+		
+        
+        bool novaViagem();
+        
+        /*---------------------------------------------------------//
 		 * funcao a ser passada para a thread na inicializacao
 		//---------------------------------------------------------*/
 

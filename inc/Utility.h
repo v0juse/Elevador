@@ -6,6 +6,21 @@
 #include <mutex>
 #include <condition_variable>
 
+/*=====================================================================//
+ * Defines      
+//=====================================================================*/
+
+#define DEBUG 0
+#define VERMELHO "\033[1;31;1m"
+#define VERDE "\033[1;32;1m"
+#define AMARELO "\033[1;33;1m"
+#define AZUL "\033[1;34;1m"
+#define MAGENTA "\033[1;35;1m"
+#define CIANO "\033[1;36;1m"
+#define BRANCO "\033[0;m"
+
+
+
 //==================================== Constantes ========================================//
 const int numAndares = 6;
 //Capacidade da fila de chamadas

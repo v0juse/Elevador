@@ -1,7 +1,7 @@
 #include "Andar.hpp"
 
 int Andar::_num_andares = 0;
-std::mutex mutexAndares;
+std::mutex Andar::mutexAndares;
 
 Andar vetorAndares[numAndares];
 
@@ -42,7 +42,9 @@ void Andar::pedidoSubida()
             _estado = PEDIDO_SUBIDA;
             mutexFilasChamadas.lock(); //rc fila de chamadas
                 filaChamadasOrigem.push(_num);
+                novaChamada.notify_one();
             mutexFilasChamadas.unlock();
+            
             break;
         case PEDIDO_DESCIDA:
             _estado = PEDIDO_DESTINO;
@@ -64,7 +66,9 @@ void Andar::pedidoDescida()
             _estado = PEDIDO_DESCIDA;
             mutexFilasChamadas.lock();//rc fila de chamadas 
                 filaChamadasOrigem.push(_num);
+                novaChamada.notify_one();
             mutexFilasChamadas.unlock();
+            
             break;
         case PEDIDO_SUBIDA:
             _estado = PEDIDO_DESTINO;
@@ -82,8 +86,13 @@ void Andar::pedidoDestino()
     std::unique_lock<std::mutex> lock(mutexAndares);
 
     mutexFilasChamadas.lock();//rc fila de chamadas 
+    
         filaChamadasDestino.push(_num);
+        novaChamada.notify_one();
+    
     mutexFilasChamadas.unlock();
+
+    
     
     _estado = PEDIDO_DESTINO;
 
