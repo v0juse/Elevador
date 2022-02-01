@@ -92,7 +92,8 @@ void Usuario::setAndarInicial()
     int num;
     mutexImpressao.lock();
         do{
-            std::cout<< "Digite um andar inicial, entre 0 e "<< numAndares - 1<<std::endl;
+            std::cout<<CIANO<<"* Digite um andar Inicial, entre 0 e "<< numAndares - 1<<"*"<<BRANCO<<std::endl;
+            std::cout<<AZUL<<"*"<<" \t\t ";
             std::cin >> temp;
             num = blindagem(temp);
 
@@ -111,11 +112,17 @@ void Usuario::botoesOrigem()
     int num;
     mutexImpressao.lock();
         do{ 
-            std::cout<< "Voce esta fora do elevador,\nDigite";
+            std::cout<<AMARELO<<"//====================================//"<<std::endl;
+            std::cout<<"   Voce esta fora do elevador.\n";
+            std::cout<<"//====================================//"<< BRANCO<<std::endl;
+
+            std::cout<<CIANO<<"* Digite:"<<std::endl;
             
-            if(_andarAtualUsuario != numAndares-1) std::cout<< " 1 para pressionar o botao de subida" << std::endl;
-            if(_andarAtualUsuario != 0) std::cout<< " 2 para pressionar o botao de descida" <<std::endl;
-            if(_andarAtualUsuario != numAndares-1 && _andarAtualUsuario != 0) std::cout<< " ou 3 para pressionar ambos"<<std::endl;
+            if(_andarAtualUsuario != numAndares-1) std::cout<< "* "<<MAGENTA<<"1"<<BRANCO<<" para pressionar o botao de"<<MAGENTA<<" Subida"<<BRANCO << std::endl;
+            if(_andarAtualUsuario != 0) std::cout<<"* "<<VERMELHO<< "2"<<BRANCO<<" para pressionar o botao de"<<VERMELHO<<" Descida" <<BRANCO<<std::endl;
+            if(_andarAtualUsuario != numAndares-1 && _andarAtualUsuario != 0) std::cout<< "* "<<VERDE <<"3"<< BRANCO<<" para pressionar" <<VERDE <<" Ambos"<< BRANCO<<std::endl;
+
+
             std::cin >> temp;
             num = blindagem(temp);
         }while ((num < 1 || num > 3)||
@@ -203,7 +210,8 @@ void Usuario::sairElevador()
 {   
     _andarAtualUsuario = _andarDestinoUsuario;
     mutexImpressao.lock();
-        std::cout<<"Voce chegou no " <<_andarAtualUsuario<<"º andar"<<std::endl;
+        if (_andarAtualUsuario == 0) std::cout<<"Voce chegou no "<<AMARELO<<"Terreo"<<BRANCO<<std::endl;
+        else std::cout<<"Voce chegou no "<<AMARELO<<_andarAtualUsuario<<"º andar"<<BRANCO<<std::endl;
     mutexImpressao.unlock();    
     _dentroElevador = false;
     numPessoasDentro--;
@@ -220,8 +228,8 @@ bool Usuario::novaViagem()
     mutexImpressao.lock();
     do{
         std::cout<< "Voce deseja fazer uma nova viagem?\n" <<
-                    "1 - caso sim\n"<<
-                    "0 - caso nao\n"<<std::endl;
+                    VERDE<<"1 - caso sim.\n"<<
+                    VERMELHO<<"0 - caso nao.\n"<< BRANCO<<std::endl;
         std::cin >> temp;
         valorRetorno = blindagem(temp);
     }while(valorRetorno != 0 && valorRetorno != 1);

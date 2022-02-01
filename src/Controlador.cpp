@@ -11,8 +11,11 @@ Controlador::Controlador(Porta* p, SensorEstadoPorta* sp, SensorAndar* sa): std:
     ptrPorta = p;
     ptrSensorEstadoPorta = sp;
     ptrSensorAndar = sa;
+
     mutexImpressao.lock();
-        std::cout << "Elevador no andar: " << andarAtual << std::endl;
+        std::cout<<AMARELO<<"//====================================//"<< BRANCO<<std::endl;
+        std::cout<<AMARELO<<"\t Elevador no andar: " << andarAtual << BRANCO<<std::endl;
+        std::cout<<AMARELO<<"//====================================//"<< BRANCO<<std::endl;
     mutexImpressao.unlock();
 }
 
@@ -88,28 +91,21 @@ void Controlador::alternar_movimento()
     movimento = !movimento;
 }
 
-/*=================================================================//
- * METODO: alcancou_andar
-//=================================================================*/
-bool Controlador::alcancou_andar()
-{
-    if (andarAtual != andarObjetivo)
-    {
-        andarAtual = andarAtual + direcao;
-        alternar_movimento();
-        return false;
-    }
-    return true;
-}
 
 /*=================================================================//
  * METODO: atendeu_andar
+ * metodo que atualiza o andar objetivo
 //=================================================================*/
 void Controlador::atendeu_andar()
 {
     andarObjetivo = (andarAtual == andarObjetivo) ? -1 : andarObjetivo;
     vetorAndares[andarAtual].atendeuAndar();
 }
+
+/*=================================================================//
+ * METODO: moverElevador 
+ * metodo que altera a posicao do andar    
+//=================================================================*/
 
 void Controlador::moverElevador()
 {
@@ -118,6 +114,10 @@ void Controlador::moverElevador()
     movimento = false;
 }
 
+/*=================================================================//
+ * METODO: threadBehavior    
+ * metodos que dita o comportamento da thread interna  
+//=================================================================*/
 void Controlador::threadBehavior()
 {   
     
@@ -130,7 +130,7 @@ void Controlador::threadBehavior()
         if(filaChamadasDestino.empty() && filaChamadasOrigem.empty() )
         { 
             mutexImpressao.lock();
-                std::cout << "Elevador livre, aguardando novas chamadas "<<std::endl;
+                std::cout<<AMARELO<<"* "<<VERDE<<"  Elevador livre"<<BRANCO<<", aguardando...     "<<AMARELO<<"*"<<BRANCO<<std::endl;
             mutexImpressao.unlock();
 
             novaChamada.wait(lockFila);
@@ -165,7 +165,7 @@ void Controlador::threadBehavior()
                 if(andarAtual == andarObjetivo) andarObjetivo = -1;//objetivo concluido
 
                 mutexImpressao.lock();
-                    std::cout << "Porta aberta\n";
+                    std::cout << MAGENTA<<"Porta aberta\n"<<BRANCO;
                 mutexImpressao.unlock();    
                 //TODO entrada/expulsao de usuario
                 //while(ptrSensorEstadoPorta->objetoBloqueante()); //busy wait ate a porta nao estar bloqueada
@@ -177,7 +177,9 @@ void Controlador::threadBehavior()
 
             moverElevador();
             mutexImpressao.lock();
-                std::cout << "Elevador no andar: " << andarAtual << std::endl;
+                std::cout<<AMARELO<<"//====================================//"<< BRANCO<<std::endl;
+                std::cout<<AMARELO<<"\t Elevador no andar: " << andarAtual << BRANCO<<std::endl;
+                std::cout<<AMARELO<<"//====================================//"<< BRANCO<<std::endl;
             mutexImpressao.unlock();
 
 

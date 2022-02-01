@@ -10,6 +10,11 @@ bool _sistemON;
 std::mutex mutexFilasChamadas;
 std::mutex mutexImpressao;
 std::condition_variable novaChamada; 
+ 
+
+/*=================================================================//
+ * BLINDAGEM       
+//=================================================================*/
 
 int blindagem(std::string s)
 {

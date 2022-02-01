@@ -48,7 +48,7 @@ void Porta::fechar()
 void Porta::esperaPorta(int num)
 {
     std::unique_lock<std::mutex> lock(mutexPorta, std::defer_lock);
-	lock.lock();//entra rc
+	lock.lock(); //entra rc
 
     (portasCondsPtrs[num])->wait(lock);
 }
