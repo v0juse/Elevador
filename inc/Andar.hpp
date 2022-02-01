@@ -18,50 +18,52 @@ class Andar
 {
 public:
     /*---------------------------------------------------------//
-    * construtor WIP
+    * construtor padrao
     //---------------------------------------------------------*/
     Andar();
 
     /*---------------------------------------------------------//
-    * destrutor WIP
+    * destrutor padrao
     //---------------------------------------------------------*/
     ~Andar();
 
     /*---------------------------------------------------------//
-    * estado_andar WIP
+    * estado_andar: retorna o estado do andar selecionado
     //---------------------------------------------------------*/
     enum ESTADOS_ANDAR estado_andar();
 
     /*---------------------------------------------------------//
-    * estado_andar WIP
+    * atendeuAndar: restaura o estado do andar selecionado para
+    * SEM_PEDIDO com uso de mutex
     //---------------------------------------------------------*/
     void atendeuAndar();
 
     /*---------------------------------------------------------//
-    * estado_andar WIP
+    * pedidoSubida: metodo que registra os pedidos de subida
     //---------------------------------------------------------*/
     void pedidoSubida();
 
     /*---------------------------------------------------------//
-    * estado_andar WIP
+    * pedidoDescida: metodo que registra os pedidos de descida
     //---------------------------------------------------------*/
     void pedidoDescida();
 
     /*---------------------------------------------------------//
-    * estado_andar WIP
+    * pedidoDescida: metodo que registra os pedidos de destino
     //---------------------------------------------------------*/
     void pedidoDestino();
 
-//-----------------------------------------------------------------// 
+//-------------------------------------------------------------// 
 private:
     /*---------------------------------------------------------//
     * ATRIBUTOS 
     //---------------------------------------------------------*/
     int _num;
-    static int _num_andares;
     enum ESTADOS_ANDAR _estado;
+    
+    static int _num_andares;
     static std::mutex mutexAndares;
-//-----------------------------------------------------------------//
+//-------------------------------------------------------------//
 };
 
 extern Andar vetorAndares[numAndares];

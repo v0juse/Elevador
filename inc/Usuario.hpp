@@ -47,44 +47,50 @@ class Usuario: public std::thread
         ~Usuario();
 
         /*---------------------------------------------------------//
-         * TODO
+         * metodo que recebe o andar inicial selecionado pelo
+         * usuario
         //---------------------------------------------------------*/
         virtual void setAndarInicial();
 
         /*---------------------------------------------------------//
-         * TODO
+         * metodo que recebe o andar de destino selecionado pelo
+         * usuario
         //---------------------------------------------------------*/
 
         virtual void setAndarDestino();
 
         /*---------------------------------------------------------//
-         * TODO
+         * metodo que adiciona o andar em que foi pressionado o botao
+         * de subida
         //---------------------------------------------------------*/
 
         void botaoSubida();
         
         /*---------------------------------------------------------//
-         * TODO
+         * metodo que adiciona o andar em que foi pressionado o botao
+         * de descida
         //---------------------------------------------------------*/
         void botaoDescida();
 
         /*---------------------------------------------------------//
-         * TODO
+         * metodo que adiciona o pedido de destino a fila de destinos
         //---------------------------------------------------------*/
         void botaoDestino(int andarDestino);
 
         /*---------------------------------------------------------//
-         * TODO
+         * metodo que incrementa o numero de pessoas no elevador
         //---------------------------------------------------------*/
         void entrarElevador();
 
         /*---------------------------------------------------------//
-         * TODO
+         * metodo que retira o usuario do elevador quando este chega 
+         * ao seu destino
         //---------------------------------------------------------*/
         void sairElevador();
 
         /*---------------------------------------------------------//
-         * TODO
+         * metodo que verifica se o usuario chegou ao destino 
+         * desejado
         //---------------------------------------------------------*/
         bool viagemSatisfeita();
 

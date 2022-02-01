@@ -28,7 +28,7 @@ Usuario::~Usuario()
 }
 
 /*=================================================================//
- * METODO: WIP
+ * METODO: cond_elevador_requisitado
 //=================================================================*/
 
 bool Usuario::cond_elevador_requisitado()
@@ -38,7 +38,7 @@ bool Usuario::cond_elevador_requisitado()
 }
 
 /*=================================================================//
- * METODO: WIP
+ * METODO: cond_subida_requisitada
 //=================================================================*/
 
 bool Usuario::cond_subida_requisitada()
@@ -47,7 +47,7 @@ bool Usuario::cond_subida_requisitada()
 }
 
 /*=================================================================//
- * METODO: WIP
+ * METODO: cond_descida_requisitada
 //=================================================================*/
 
 bool Usuario::cond_descida_requisitada()
@@ -56,7 +56,7 @@ bool Usuario::cond_descida_requisitada()
 }
 
 /*=================================================================//
- * METODO: WIP
+ * METODO: cond_descida
 //=================================================================*/
 
 bool Usuario::cond_descida()
@@ -65,7 +65,7 @@ bool Usuario::cond_descida()
 }
 
 /*=================================================================//
- * METODO: WIP
+ * METODO: cond_subida
 //=================================================================*/
 
 bool Usuario::cond_subida()
@@ -74,7 +74,7 @@ bool Usuario::cond_subida()
 }		
 		
 /*=================================================================//
- * METODO: WIP
+ * METODO: cond_destino_requisitado
 //=================================================================*/
 
 bool Usuario::cond_destino_requisitado()
@@ -83,7 +83,7 @@ bool Usuario::cond_destino_requisitado()
 }
 
 /*=================================================================//
- * METODO: WIP
+ * METODO: setAndarInicial
 //=================================================================*/
 
 void Usuario::setAndarInicial()
@@ -103,7 +103,7 @@ void Usuario::setAndarInicial()
 }
 
 /*=================================================================//
- * METODO: WIP
+ * METODO: botoesOrigem
 //=================================================================*/
 
 void Usuario::botoesOrigem()
@@ -148,7 +148,7 @@ void Usuario::botoesOrigem()
 }
 
 /*=================================================================//
- * METODO: WIP
+ * METODO: botaoSubida
 //=================================================================*/
 
 void Usuario::botaoSubida()
@@ -157,7 +157,7 @@ void Usuario::botaoSubida()
 }
 
 /*=================================================================//
- * METODO: WIP
+ * METODO: botaoDescida
 //=================================================================*/
 
 void Usuario::botaoDescida()
@@ -166,7 +166,7 @@ void Usuario::botaoDescida()
 }
 
 /*=================================================================//
- * METODO: WIP
+ * METODO: botaoDestino
 //=================================================================*/
 
 void Usuario::botaoDestino(int andarDestino)
@@ -175,7 +175,7 @@ void Usuario::botaoDestino(int andarDestino)
 }
 
 /*=================================================================//
- * METODO: WIP
+ * METODO: setAndarDestino
 //=================================================================*/
 
 void Usuario::setAndarDestino()
@@ -193,7 +193,7 @@ void Usuario::setAndarDestino()
 }
 
 /*=================================================================//
- * METODO: WIP
+ * METODO: entrarElevador
 //=================================================================*/
 
 void Usuario::entrarElevador()
@@ -203,7 +203,7 @@ void Usuario::entrarElevador()
 }
 
 /*=================================================================//
- * METODO: WIP
+ * METODO: sairElevador
 //=================================================================*/
 
 void Usuario::sairElevador()
@@ -218,7 +218,7 @@ void Usuario::sairElevador()
 }
 
 /*=================================================================//
- * METODO: WIP
+ * METODO: novaViagem
 //=================================================================*/
 
 bool Usuario::novaViagem()
@@ -239,7 +239,6 @@ bool Usuario::novaViagem()
 
 /*=================================================================//
  * METODO: threadBehavior
- * metodos que dita o comportamento da thread interna
 //=================================================================*/
 
 void Usuario::threadBehavior()

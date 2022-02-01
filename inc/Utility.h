@@ -26,7 +26,10 @@ const int numAndares = 6;
 //Capacidade da fila de chamadas
 const int capacidade = 20*(numAndares - 1);
 const int maxNumPessoas =  4;
-//=======================================================================================//
+
+
+
+//================================= Variaveis Globais =====================================//
 
 extern std::queue<int> filaChamadasOrigem, filaChamadasDestino;
 extern std::mutex mutexFilasChamadas;
@@ -38,6 +41,15 @@ extern int numPessoasDentro;
 extern bool _sistemON;
 extern std::condition_variable novaChamada; 
 
+
+
+
+//===================================== Metodos =========================================//
+/*---------------------------------------------------------//
+ * metodo que faz a blindagem para as entradas do usuario
+//---------------------------------------------------------*/
 int blindagem(std::string s);
+
+//=======================================================================================//
 
 #endif

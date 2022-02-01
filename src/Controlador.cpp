@@ -94,7 +94,6 @@ void Controlador::alternar_movimento()
 
 /*=================================================================//
  * METODO: atendeu_andar
- * metodo que atualiza o andar objetivo
 //=================================================================*/
 void Controlador::atendeu_andar()
 {
@@ -104,7 +103,6 @@ void Controlador::atendeu_andar()
 
 /*=================================================================//
  * METODO: moverElevador 
- * metodo que altera a posicao do andar    
 //=================================================================*/
 
 void Controlador::moverElevador()

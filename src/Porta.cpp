@@ -25,6 +25,8 @@ Porta::~Porta()
 
 /*=================================================================//
  * METODO: cond_abertura_porta
+ * realiza um broadcast para os usuarios que estao esperando a 
+ * abertura da porta
 //=================================================================*/
 void Porta::abrir(int num)
 {   

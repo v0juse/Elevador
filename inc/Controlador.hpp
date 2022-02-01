@@ -25,59 +25,64 @@ class Controlador: public std::thread
 {
     public:
         /*---------------------------------------------------------//
-        * construtor WIP
+        * construtor: requer a entrada de um ponteiro para um objeto
+        * da classe Porta, um objeto da classe SensorEstadoPorta, e
+        * para um objeto SensorAndar, inicializando; ptrPorta,
+        * ptrSensorEstadoPorta e ptrAndar, respectivamente
         //---------------------------------------------------------*/
         Controlador(Porta* p, SensorEstadoPorta* sp, SensorAndar* sa);
 
         /*---------------------------------------------------------//
-        * destrutor WIP
+        * destrutor padrao
         //---------------------------------------------------------*/
         ~Controlador();
 
         /*---------------------------------------------------------//
-        * cond_abertura_porta WIP
+        * cond_abertura_porta: condicao para abertura da porta do 
+        * elevador quando um pedido e realizado
         //---------------------------------------------------------*/
         bool cond_abertura_porta();
 
         /*---------------------------------------------------------//
-        * def_direcao   WIP
+        * def_direcao: realiza um calculo para determinar se o
+        * elevador deve subir, descer, ou ficar parado
         //---------------------------------------------------------*/
         void def_direcao();
 
         /*---------------------------------------------------------//
-        * def_direcao   WIP
+        * def_direcao: metodo de remocao de um item da fila de 
+        * pedidos de origem e de destino, de forma alternada
         //---------------------------------------------------------*/
         int remove(bool);
 
         /*---------------------------------------------------------//
-        * def_direcao   WIP
+        * trata_origem: funcao para determinar de qual das duas
+        * filas deve ser removido o proximo pedido
         //---------------------------------------------------------*/
         void trata_origem();
 
         /*---------------------------------------------------------//
-        * alternar_movimento   WIP
+        * alternar_movimento: manipula a variavel "movimento" de 
+        * forma alternada
         //---------------------------------------------------------*/
         void alternar_movimento();
 
         /*---------------------------------------------------------//
-        * alcancou_andar   WIP
-        //---------------------------------------------------------*/
-        bool alcancou_andar();
-
-        /*---------------------------------------------------------//
-        * alcancou_andar   WIP
+        * atendeu_andar: metodo que atualiza o andar objetivo
         //---------------------------------------------------------*/
         void atendeu_andar();
 
         /*---------------------------------------------------------//
-		 * metodos que dita o comportamento da thread interna
+		 * threadBehavior: metodo que dita o comportamento da 
+         * thread interna
 		//---------------------------------------------------------*/
 		void threadBehavior();
 
         /*---------------------------------------------------------//
-		 * metodos que dita o comportamento da thread interna
+		 * moverElevador: metodo que altera a posicao do elevador    
 		//---------------------------------------------------------*/
         void moverElevador();
+
 //-----------------------------------------------------------------//
     private:
         /*---------------------------------------------------------//
