@@ -119,6 +119,8 @@ void Controlador::moverElevador()
 void Controlador::threadBehavior()
 {   
     
+    //acesso aos atributos internos da classe
+    _internAtributes.lock();
     std::unique_lock<std::mutex> lockFila(mutexFilasChamadas, std::defer_lock);
     while(1)
     {   

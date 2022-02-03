@@ -11,11 +11,16 @@
 //=================================================================*/
 
 Usuario::Usuario(std::string nome, Porta* porta):
-		std::thread(InternalThreadEntryFunc,this)
+		std::thread(InternalThreadEntryFunc,this), _internAtributesLock(_internAtributes)
 {   
+        
         _nome = nome;
         _ptrPorta = porta;
         _dentroElevador = false;
+
+        //finaliza setup
+        _internAtributesLock.unlock();
+
 }
 
 /*=================================================================//
@@ -243,6 +248,9 @@ bool Usuario::novaViagem()
 
 void Usuario::threadBehavior()
 {   
+    //acesso aos atributos internos da classe
+    _internAtributes.lock();
+
     setAndarInicial();
     do
     {

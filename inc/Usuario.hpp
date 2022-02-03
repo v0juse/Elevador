@@ -119,10 +119,10 @@ class Usuario: public std::thread
 		 /*---------------------------------------------------------//
          * atributo para localizacao de andares do usuario
         //---------------------------------------------------------*/
-        
 		int _andarAtualUsuario; 
 		int _andarDestinoUsuario;
 		
+
 		bool cond_elevador_requisitado();
 		bool cond_descida();
 		bool cond_subida();
@@ -148,9 +148,16 @@ class Usuario: public std::thread
         bool novaViagem();
         
         /*---------------------------------------------------------//
+		 * mutex utilizado para controlar acesso aos atributos 
+         * internos da classe
+		//---------------------------------------------------------*/
+        std::mutex _internAtributes; 
+        std::unique_lock<std::mutex> _internAtributesLock;
+
+
+        /*---------------------------------------------------------//
 		 * funcao a ser passada para a thread na inicializacao
 		//---------------------------------------------------------*/
-
 		static void * InternalThreadEntryFunc(void * This)
 		{((Usuario *)This)->threadBehavior(); return nullptr;};
 

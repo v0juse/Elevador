@@ -96,6 +96,15 @@ class Controlador: public std::thread
         SensorEstadoPorta* ptrSensorEstadoPorta;
         SensorAndar* ptrSensorAndar;
 
+
+        /*---------------------------------------------------------//
+		 * mutex utilizado para controlar acesso aos atributos 
+         * internos da classe
+		//---------------------------------------------------------*/
+        std::mutex _internAtributes; 
+        std::unique_lock<std::mutex> _internAtributesLock;
+
+
         /*---------------------------------------------------------//
 		 * funcao a ser passada para a thread na inicializacao
 		//---------------------------------------------------------*/
