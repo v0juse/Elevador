@@ -1,5 +1,5 @@
-#ifndef USUARIO_HPP_
-#define USUARIO_HPP_
+#ifndef USUARIOIA_HPP_
+#define USUARIOIA_HPP_
 
 
 /*=================================================================//
@@ -18,9 +18,8 @@
 #include <condition_variable> // std::condition_variable
 #include <random>
 
-
-#include "Andar.hpp"
 #include "Porta.hpp"
+#include "Usuario.hpp"
 //#include "Utility.h"
 
 using namespace std::chrono;
@@ -29,7 +28,7 @@ using namespace std::chrono;
  * Definicao das classes                                           
 //=================================================================*/
 
-class Usuario: public std::thread
+class UsuarioIA: public std::thread
 {
 //-----------------------------------------------------------------//
     
@@ -38,13 +37,13 @@ class Usuario: public std::thread
          * construtor com valor de inicializacao do atributo "_id"
         //---------------------------------------------------------*/
         
-        Usuario(std::string nome, Porta* porta);
+        UsuarioIA(std::string nome, Porta* porta);
         
         /*---------------------------------------------------------//
          * destrutor padrao
         //---------------------------------------------------------*/
         
-        ~Usuario();
+        ~UsuarioIA();
 
         /*---------------------------------------------------------//
          * metodo que recebe o andar inicial selecionado pelo
@@ -80,13 +79,13 @@ class Usuario: public std::thread
         /*---------------------------------------------------------//
          * metodo que incrementa o numero de pessoas no elevador
         //---------------------------------------------------------*/
-        virtual void entrarElevador();
+        void entrarElevador();
 
         /*---------------------------------------------------------//
          * metodo que retira o usuario do elevador quando este chega 
          * ao seu destino
         //---------------------------------------------------------*/
-        virtual void sairElevador();
+        void sairElevador();
 
         /*---------------------------------------------------------//
          * metodo que verifica se o usuario chegou ao destino 
@@ -98,7 +97,7 @@ class Usuario: public std::thread
         /*---------------------------------------------------------//
 		 * metodos que dita o comportamento da thread interna
 		//---------------------------------------------------------*/
-		virtual void threadBehavior();
+		void threadBehavior();
         
 //-----------------------------------------------------------------//
     
