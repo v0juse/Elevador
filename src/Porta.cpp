@@ -12,6 +12,7 @@ Porta::Porta()
         std::condition_variable* tmp;
         tmp = new std::condition_variable;
         portasCondsPtrs.emplace_back(tmp);
+        _abertaNoAndar[i] = false;
     }
 }
 
@@ -30,7 +31,11 @@ Porta::~Porta()
 //=================================================================*/
 void Porta::abrir(int num)
 {   
+    std::unique_lock<std::mutex> lock(mutexPorta);
     aberta = true;
+    _abertaNoAndar[num] = true;
+    lock.unlock();
+
     portasCondsPtrs[num]->notify_all(); //porta aberta em cada andar
 
     portaQualquerAberta.notify_all(); //porta aberta em um andar qualquer 
@@ -39,8 +44,10 @@ void Porta::abrir(int num)
 /*=================================================================//
  * METODO: def_direcao
 //=================================================================*/
-void Porta::fechar()
+void Porta::fechar(int num)
 {
+    std::unique_lock<std::mutex> lock(mutexPorta);
+    _abertaNoAndar[num] = true;
     aberta = false;
 }
 

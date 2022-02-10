@@ -214,7 +214,7 @@ void UsuarioIA::threadBehavior()
 
     setAndarInicial();
     
-    do
+    while(true)
     {
         setAndarDestino();
         
@@ -228,15 +228,19 @@ void UsuarioIA::threadBehavior()
         //dentro do elevador
         entrarElevador();
 
-        if(!cond_destino_requisitado()) vetorAndares[_andarDestinoUsuario].pedidoDestino();
+        if(!cond_destino_requisitado()) 
+            vetorAndares[_andarDestinoUsuario].pedidoDestino();
         
+        while(!_ptrPorta->abertaNoAndar(_andarDestinoUsuario) && 
+            numPessoasDentro  <= maxNumPessoas)
+        {
 
+        }
 
         _ptrPorta->esperaPorta(_andarDestinoUsuario);
-
         sairElevador();
 
-    }while(true);
+    }
 }
 
 //=================================================================//

@@ -170,7 +170,7 @@ void Controlador::threadBehavior()
                 //TODO entrada/expulsao de usuario
                 //while(ptrSensorEstadoPorta->objetoBloqueante()); //busy wait ate a porta nao estar bloqueada
 
-                ptrPorta->fechar();
+                ptrPorta->fechar(andarAtual);
             }
 
             if(andarObjetivo == -1) break;//objetivo ja concluido

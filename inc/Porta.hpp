@@ -12,6 +12,7 @@
 
 #include "Utility.h"
 
+//TODO: remodelar a porta como uma por andar
 /*=================================================================//
  * Definicao da Classe
 //=================================================================*/
@@ -38,7 +39,7 @@ public:
     /*---------------------------------------------------------//
     * fechar: metodo para fechar a porta
     //---------------------------------------------------------*/
-    void fechar();
+    void fechar(int num);
 
     /*---------------------------------------------------------//
     * esperaPorta: metodo espera a abertura da porta feito na 
@@ -46,7 +47,13 @@ public:
     //---------------------------------------------------------*/
     void esperaPorta(int num);
 
-//-----------------------------------------------------------------// 
+
+    /*---------------------------------------------------------//
+    * abertaNoAndar: metodo que retorna true caso a porta esteja 
+    * aberta no andar 'num', false caso contrario 
+    * classe Andar   
+    //---------------------------------------------------------*/
+    bool abertaNoAndar(int num);
 private:
     
     /*---------------------------------------------------------//
@@ -54,6 +61,8 @@ private:
     //---------------------------------------------------------*/
     bool aberta;
     
+    bool _abertaNoAndar[numAndares];
+
     std::mutex mutexPorta;
     std::vector<std::unique_ptr<std::condition_variable>> portasCondsPtrs;
     std::condition_variable portaQualquerAberta;
