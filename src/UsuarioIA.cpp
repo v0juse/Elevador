@@ -1,18 +1,18 @@
 #include "UsuarioIA.hpp"
 
 
-
 /*=================================================================//
  * CONSTRUTOR                                         
 //=================================================================*/
 
-UsuarioIA::UsuarioIA(std::string nome, Porta* porta):
+UsuarioIA::UsuarioIA(std::string nome, Porta* porta, SensorPresencaUsuario *sp):
 		std::thread(InternalThreadEntryFunc,this), _internAtributesLock(_internAtributes)
 {   
         
         _nome = nome;
         _ptrPorta = porta;
         _dentroElevador = false;
+        _ptrSensor = sp;
 
         //finaliza setup
         _internAtributesLock.unlock();
@@ -28,6 +28,7 @@ UsuarioIA::~UsuarioIA()
 
 }
 
+
 /*=================================================================//
  * METODO: cond_elevador_requisitado
 //=================================================================*/
@@ -39,8 +40,50 @@ bool UsuarioIA::cond_elevador_requisitado()
 }
 
 
+/*=================================================================//
+ * METODO: cond_subida_requisitada
+//=================================================================*/
 
+bool UsuarioIA::cond_subida_requisitada()
+{
+    return (vetorAndares[_andarAtualUsuario].estado_andar() == PEDIDO_DESTINO|| vetorAndares[_andarAtualUsuario].estado_andar() == PEDIDO_SUBIDA);
+}
 
+/*=================================================================//
+ * METODO: cond_descida_requisitada
+//=================================================================*/
+
+bool UsuarioIA::cond_descida_requisitada()
+{
+    return (vetorAndares[_andarAtualUsuario].estado_andar() == PEDIDO_DESTINO || vetorAndares[_andarAtualUsuario].estado_andar() == PEDIDO_DESCIDA);
+}
+
+/*=================================================================//
+ * METODO: cond_descida
+//=================================================================*/
+
+bool UsuarioIA::cond_descida()
+{
+    return _andarAtualUsuario >= _andarDestinoUsuario && _andarAtualUsuario != 0;
+}
+
+/*=================================================================//
+ * METODO: cond_subida
+//=================================================================*/
+
+bool UsuarioIA::cond_subida()
+{
+    return _andarAtualUsuario <= _andarDestinoUsuario && _andarAtualUsuario != numAndares-1;
+}		
+		
+/*=================================================================//
+ * METODO: cond_destino_requisitado
+//=================================================================*/
+
+bool UsuarioIA::cond_destino_requisitado()
+{
+    return vetorAndares[_andarDestinoUsuario].estado_andar() == 3;
+}
 
 /*=================================================================//
  * METODO: setAndarInicial
@@ -72,7 +115,7 @@ void UsuarioIA::setAndarDestino()
  * METODO: botoesOrigem
 //=================================================================*/
 
-void Usuario::botoesOrigem()
+void UsuarioIA::botoesOrigem()
 {
     std::string temp;
     int num;
@@ -117,7 +160,7 @@ void Usuario::botoesOrigem()
  * METODO: botaoSubida
 //=================================================================*/
 
-void Usuario::botaoSubida()
+void UsuarioIA::botaoSubida()
 {
     vetorAndares[_andarAtualUsuario].pedidoSubida();
 }
@@ -126,7 +169,7 @@ void Usuario::botaoSubida()
  * METODO: botaoDescida
 //=================================================================*/
 
-void Usuario::botaoDescida()
+void UsuarioIA::botaoDescida()
 {
     vetorAndares[_andarAtualUsuario].pedidoDescida();
 }
@@ -135,44 +178,27 @@ void Usuario::botaoDescida()
  * METODO: botaoDestino
 //=================================================================*/
 
-void Usuario::botaoDestino(int andarDestino)
+void UsuarioIA::botaoDestino(int andarDestino)
 {
     vetorAndares[andarDestino].pedidoDestino();
-}
-
-/*=================================================================//
- * METODO: setAndarDestino
-//=================================================================*/
-
-void Usuario::setAndarDestino()
-{  
-    std::string temp; 
-    int num;
-    mutexImpressao.lock();
-        do{
-            std::cout<< "Digite um andar destino, entre 0 e "<< numAndares - 1<<std::endl;
-            std::cin >> temp;
-            num = blindagem(temp);
-        }while (num < 0 || num > numAndares - 1);
-    mutexImpressao.unlock();
-    _andarDestinoUsuario = num;
 }
 
 /*=================================================================//
  * METODO: entrarElevador
 //=================================================================*/
 
-void Usuario::entrarElevador()
+void UsuarioIA::entrarElevador()
 {   
     _dentroElevador = true;
-    numPessoasDentro++;
+    _ptrSensor->registrarEntrada();
+    //numPessoasDentro++;
 }
 
 /*=================================================================//
  * METODO: sairElevador
 //=================================================================*/
 
-void Usuario::sairElevador()
+void UsuarioIA::sairElevador()
 {   
     _andarAtualUsuario = _andarDestinoUsuario;
     mutexImpressao.lock();
@@ -180,14 +206,15 @@ void Usuario::sairElevador()
         else std::cout<<"Voce chegou no "<<AMARELO<<_andarAtualUsuario<<"º andar"<<BRANCO<<std::endl;
     mutexImpressao.unlock();    
     _dentroElevador = false;
-    numPessoasDentro--;
+    _ptrSensor->registrarSaida();
+    //numPessoasDentro--;
 }
 
 /*=================================================================//
  * METODO: novaViagem
 //=================================================================*/
 
-bool Usuario::novaViagem()
+bool UsuarioIA::novaViagem()
 {   
     std::string temp;
     int valorRetorno;
@@ -225,20 +252,24 @@ void UsuarioIA::threadBehavior()
         //espera a porta do andar abrir
         _ptrPorta->esperaPorta(_andarAtualUsuario);
         
+        //conferir depois que usuarios desceram
+        if(_ptrSensor->numPessoasDentro()  >= maxNumPessoas)continue;   
+
         //dentro do elevador
         entrarElevador();
 
         if(!cond_destino_requisitado()) 
             vetorAndares[_andarDestinoUsuario].pedidoDestino();
         
-        while(!_ptrPorta->abertaNoAndar(_andarDestinoUsuario) && 
-            numPessoasDentro  <= maxNumPessoas)
+        //sem expulsao por lotacao (modelo)
+        while(!_ptrPorta->abertaNoAndar(_andarDestinoUsuario))
         {
-
+            //botao emergencia
         }
 
         _ptrPorta->esperaPorta(_andarDestinoUsuario);
         sairElevador();
+        
 
     }
 }

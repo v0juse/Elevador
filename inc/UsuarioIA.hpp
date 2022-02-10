@@ -18,9 +18,11 @@
 #include <condition_variable> // std::condition_variable
 #include <random>
 
+#include "Andar.hpp"
 #include "Porta.hpp"
-#include "Usuario.hpp"
 //#include "Utility.h"
+
+#include "SensorPresenca.hpp"
 
 using namespace std::chrono;
 
@@ -37,7 +39,7 @@ class UsuarioIA: public std::thread
          * construtor com valor de inicializacao do atributo "_id"
         //---------------------------------------------------------*/
         
-        UsuarioIA(std::string nome, Porta* porta);
+        UsuarioIA(std::string nome, Porta* porta, SensorPresencaUsuario* sp);
         
         /*---------------------------------------------------------//
          * destrutor padrao
@@ -130,6 +132,8 @@ class UsuarioIA: public std::thread
         bool cond_descida_requisitada();
 
 
+        SensorPresencaUsuario* _ptrSensor;
+
         /*---------------------------------------------------------//
 		 * variavel utilizada para armazenar a quantidade de 
          * usuarios a partir do arquivo de entrada.
@@ -140,6 +144,7 @@ class UsuarioIA: public std::thread
         void botoesOrigem();
 
         Porta *_ptrPorta;
+        
 
         bool _dentroElevador;
 		
@@ -158,7 +163,7 @@ class UsuarioIA: public std::thread
 		 * funcao a ser passada para a thread na inicializacao
 		//---------------------------------------------------------*/
 		static void * InternalThreadEntryFunc(void * This)
-		{((Usuario *)This)->threadBehavior(); return nullptr;};
+		{((UsuarioIA *)This)->threadBehavior(); return nullptr;};
 
 //-----------------------------------------------------------------//
 };

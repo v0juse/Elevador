@@ -15,6 +15,7 @@
 #include "Porta.hpp"
 #include "SensorEstadoPorta.hpp"
 #include "SensorAndar.hpp"
+#include "SensorPresenca.hpp"
 
 /*=================================================================//
  * Definicao da classe                                           
@@ -95,6 +96,7 @@ class Controlador: public std::thread
         Porta* ptrPorta;
         SensorEstadoPorta* ptrSensorEstadoPorta;
         SensorAndar* ptrSensorAndar;
+        //SensorPresencaUsuario *ptrSensorP;
 
 
         /*---------------------------------------------------------//

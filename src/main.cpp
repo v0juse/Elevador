@@ -11,7 +11,9 @@
 #include <random>
 
 #include "Controlador.hpp"
-#include "Usuario.hpp"
+#include "UsuarioIA.hpp"
+#include "SensorPresenca.hpp"
+
 
 /*=================================================================//
  * MAIN
@@ -19,14 +21,15 @@
 
 int main()
 {
+    
     Porta porta;
     SensorEstadoPorta sensor_porta;
     SensorAndar sensor_andar;
+    SensorPresencaUsuario sensor_presenca;
 
     Controlador clp(&porta,&sensor_porta,&sensor_andar);
     
-    Usuario zee("zee", &porta);
-    
+    UsuarioIA zee("zee", &porta, &sensor_presenca);
     
 
     clp.join();

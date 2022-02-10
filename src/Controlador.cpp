@@ -168,8 +168,9 @@ void Controlador::threadBehavior()
                     std::cout << MAGENTA<<"Porta aberta\n"<<BRANCO;
                 mutexImpressao.unlock();    
                 //TODO entrada/expulsao de usuario
-                //while(ptrSensorEstadoPorta->objetoBloqueante()); //busy wait ate a porta nao estar bloqueada
 
+                //while(ptrSensorEstadoPorta->objetoBloqueante()); //busy wait ate a porta nao estar bloqueada
+                //while(ptrSensorP->numPessoasDentro() >= maxNumPessoas){}
                 ptrPorta->fechar(andarAtual);
             }
 

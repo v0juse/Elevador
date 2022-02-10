@@ -21,6 +21,7 @@
 
 #include "Andar.hpp"
 #include "Porta.hpp"
+
 //#include "Utility.h"
 
 using namespace std::chrono;
@@ -94,12 +95,11 @@ class Usuario: public std::thread
         //---------------------------------------------------------*/
         bool viagemSatisfeita();
 
-        
         /*---------------------------------------------------------//
 		 * metodos que dita o comportamento da thread interna
 		//---------------------------------------------------------*/
 		virtual void threadBehavior();
-        
+
 //-----------------------------------------------------------------//
     
     private:
@@ -129,7 +129,6 @@ class Usuario: public std::thread
 		bool cond_destino_requisitado();
         bool cond_subida_requisitada();
         bool cond_descida_requisitada();
-
 
         /*---------------------------------------------------------//
 		 * variavel utilizada para armazenar a quantidade de 
