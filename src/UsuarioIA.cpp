@@ -201,10 +201,14 @@ void UsuarioIA::entrarElevador()
 void UsuarioIA::sairElevador()
 {   
     _andarAtualUsuario = _andarDestinoUsuario;
+
     mutexImpressao.lock();
-        if (_andarAtualUsuario == 0) std::cout<<"Voce chegou no "<<AMARELO<<"Terreo"<<BRANCO<<std::endl;
-        else std::cout<<"Voce chegou no "<<AMARELO<<_andarAtualUsuario<<"º andar"<<BRANCO<<std::endl;
+        std::cout<<CIANO<<"//------------------------------------//"<< BRANCO<<std::endl;
+        if (_andarAtualUsuario == 0) std::cout<<VERDE<<"*\t "<<_nome<<" chegou no Terreo"<<BRANCO<<std::endl;
+        else std::cout<<VERDE<<"*\t "<<_nome<<" chegou no "<<_andarAtualUsuario<<"º andar"<<BRANCO<<std::endl;
+        std::cout<<CIANO<<"//------------------------------------//"<< BRANCO<<std::endl;
     mutexImpressao.unlock();    
+
     _dentroElevador = false;
     _ptrSensor->registrarSaida();
     //numPessoasDentro--;
@@ -240,10 +244,24 @@ void UsuarioIA::threadBehavior()
     _internAtributes.lock();
 
     setAndarInicial();
+    mutexImpressao.lock();
+        std::cout<<CIANO<<"//------------------------------------//"<< BRANCO<<std::endl;
+        std::cout<<CIANO<<"* "<<_nome<<" esta no andar: " << _andarAtualUsuario << BRANCO<<std::endl;
+        std::cout<<CIANO<<"//------------------------------------//"<< BRANCO<<std::endl;
+    mutexImpressao.unlock();
     
-    while(true)
+    //TESTANDO
+    volatile int i = 0;
+
+    while(i++ < 4)
     {
+
         setAndarDestino();
+        mutexImpressao.lock();
+            std::cout<<CIANO<<"//------------------------------------//"<< BRANCO<<std::endl;
+            std::cout<<CIANO<<"* "<<_nome<<" deseja chegar no andar: " << _andarDestinoUsuario << BRANCO<<std::endl;
+            std::cout<<CIANO<<"//------------------------------------//"<< BRANCO<<std::endl;
+        mutexImpressao.unlock();
         
         //fora do elevador
         if(!cond_elevador_requisitado() && cond_descida()) botaoDescida();
@@ -257,6 +275,11 @@ void UsuarioIA::threadBehavior()
 
         //dentro do elevador
         entrarElevador();
+        mutexImpressao.lock();
+            std::cout<<CIANO<<"//------------------------------------//"<< BRANCO<<std::endl;
+            std::cout<<CIANO<<"*      "<<_nome<<" entrou no Elevador      *"<< BRANCO<<std::endl;
+            std::cout<<CIANO<<"//------------------------------------//"<< BRANCO<<std::endl;
+        mutexImpressao.unlock();
 
         if(!cond_destino_requisitado()) 
             vetorAndares[_andarDestinoUsuario].pedidoDestino();
@@ -267,10 +290,9 @@ void UsuarioIA::threadBehavior()
             //botao emergencia
         }
 
-        _ptrPorta->esperaPorta(_andarDestinoUsuario);
+        //_ptrPorta->esperaPorta(_andarDestinoUsuario);
         sairElevador();
         
-
     }
 }
 
