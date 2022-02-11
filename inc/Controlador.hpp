@@ -51,24 +51,6 @@ class Controlador: public std::thread
         void def_direcao();
 
         /*---------------------------------------------------------//
-        * def_direcao: metodo de remocao de um item da fila de 
-        * pedidos de origem e de destino, de forma alternada
-        //---------------------------------------------------------*/
-        int remove(bool);
-
-        /*---------------------------------------------------------//
-        * trata_origem: funcao para determinar de qual das duas
-        * filas deve ser removido o proximo pedido
-        //---------------------------------------------------------*/
-        void trata_origem();
-
-        /*---------------------------------------------------------//
-        * alternar_movimento: manipula a variavel "movimento" de 
-        * forma alternada
-        //---------------------------------------------------------*/
-        void alternar_movimento();
-
-        /*---------------------------------------------------------//
         * atendeu_andar: metodo que atualiza o andar objetivo
         //---------------------------------------------------------*/
         void atendeu_andar();
@@ -84,11 +66,6 @@ class Controlador: public std::thread
 		//---------------------------------------------------------*/
         void moverElevador();
 
-        /*---------------------------------------------------------//
-		 * clpEmergencia:  
-		//---------------------------------------------------------*/
-        void clpEmergencia();
-
 //-----------------------------------------------------------------//
     private:
         /*---------------------------------------------------------//
@@ -101,16 +78,14 @@ class Controlador: public std::thread
         Porta* ptrPorta;
         SensorEstadoPorta* ptrSensorEstadoPorta;
         SensorAndar* ptrSensorAndar;
-        //SensorPresencaUsuario *ptrSensorP;
-
 
         /*---------------------------------------------------------//
 		 * mutex utilizado para controlar acesso aos atributos 
          * internos da classe
 		//---------------------------------------------------------*/
+        
         std::mutex _internAtributes; 
         std::unique_lock<std::mutex> _internAtributesLock;
-
 
         /*---------------------------------------------------------//
 		 * funcao a ser passada para a thread na inicializacao

@@ -6,7 +6,6 @@
  * Includes necessarios        
 //=================================================================*/
 
-
 #include <iostream>
 #include <list>
 #include <string>
@@ -145,33 +144,24 @@ class UsuarioIA: public std::thread
         bool cond_subida_requisitada();
         bool cond_descida_requisitada();
 
-
-        SensorPresencaUsuario* _ptrSensor;
-
         /*---------------------------------------------------------//
 		 * variavel utilizada para armazenar a quantidade de 
          * usuarios a partir do arquivo de entrada.
 		//---------------------------------------------------------*/
 	
-        static unsigned int _num_usuarios;
-
-        void botoesOrigem();
-
+        SensorPresencaUsuario* _ptrSensor;
         Porta *_ptrPorta;
-        
 
+        static unsigned int _num_usuarios;
         bool _dentroElevador;
-		
-        
-        bool novaViagem();
         
         /*---------------------------------------------------------//
 		 * mutex utilizado para controlar acesso aos atributos 
          * internos da classe
 		//---------------------------------------------------------*/
+
         std::mutex _internAtributes; 
         std::unique_lock<std::mutex> _internAtributesLock;
-
 
         /*---------------------------------------------------------//
 		 * funcao a ser passada para a thread na inicializacao

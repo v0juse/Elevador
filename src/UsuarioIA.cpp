@@ -110,54 +110,6 @@ void UsuarioIA::setAndarDestino()
 }
 
 
-
-
-
-/*=================================================================//
- * METODO: botoesOrigem
-//=================================================================*/
-
-void UsuarioIA::botoesOrigem()
-{
-    std::string temp;
-    int num;
-    mutexImpressao.lock();
-        do{ 
-            std::cout<<AMARELO<<"//====================================//"<<std::endl;
-            std::cout<<"   Voce esta fora do elevador.\n";
-            std::cout<<"//====================================//"<< BRANCO<<std::endl;
-
-            std::cout<<CIANO<<"* Digite:"<<std::endl;
-            
-            if(_andarAtualUsuario != numAndares-1) std::cout<< "* "<<MAGENTA<<"1"<<BRANCO<<" para pressionar o botao de"<<MAGENTA<<" Subida"<<BRANCO << std::endl;
-            if(_andarAtualUsuario != 0) std::cout<<"* "<<VERMELHO<< "2"<<BRANCO<<" para pressionar o botao de"<<VERMELHO<<" Descida" <<BRANCO<<std::endl;
-            if(_andarAtualUsuario != numAndares-1 && _andarAtualUsuario != 0) std::cout<< "* "<<VERDE <<"3"<< BRANCO<<" para pressionar" <<VERDE <<" Ambos"<< BRANCO<<std::endl;
-
-
-            std::cin >> temp;
-            num = blindagem(temp);
-        }while ((num < 1 || num > 3)||
-        (_andarAtualUsuario == numAndares-1 && num !=2 ) ||
-        (_andarAtualUsuario == 0 && num !=1 ) );
-    mutexImpressao.unlock();
-
-    switch (num)
-    {
-    case 1:
-        if(!cond_subida_requisitada()) vetorAndares[_andarAtualUsuario].pedidoSubida();
-        break;
-    case 2:
-        if(!cond_descida_requisitada()) vetorAndares[_andarAtualUsuario].pedidoDescida();
-        break;
-    case 3: 
-        if(!cond_subida_requisitada()) vetorAndares[_andarAtualUsuario].pedidoSubida();
-        if(!cond_descida_requisitada()) vetorAndares[_andarAtualUsuario].pedidoDescida();
-        break;
-    default:
-        break;
-    }
-}
-
 /*=================================================================//
  * METODO: botaoSubida
 //=================================================================*/
@@ -194,7 +146,6 @@ void UsuarioIA::entrarElevador()
     _dentroElevador = true;
     vetorEntrou.push_back(_andarAtualUsuario);
     _ptrSensor->registrarEntrada();
-    //numPessoasDentro++;
 }
 
 /*=================================================================//
@@ -216,27 +167,6 @@ void UsuarioIA::sairElevador()
 
     _dentroElevador = false;
     _ptrSensor->registrarSaida();
-    //numPessoasDentro--;
-}
-
-/*=================================================================//
- * METODO: novaViagem
-//=================================================================*/
-
-bool UsuarioIA::novaViagem()
-{   
-    std::string temp;
-    int valorRetorno;
-    mutexImpressao.lock();
-    do{
-        std::cout<< "Voce deseja fazer uma nova viagem?\n" <<
-                    VERDE<<"1 - caso sim.\n"<<
-                    VERMELHO<<"0 - caso nao.\n"<< BRANCO<<std::endl;
-        std::cin >> temp;
-        valorRetorno = blindagem(temp);
-    }while(valorRetorno != 0 && valorRetorno != 1);
-    mutexImpressao.unlock();    
-    return (bool) valorRetorno;
 }
 
 /*=================================================================//
@@ -258,14 +188,15 @@ void UsuarioIA::botaoEmergencia()
         mutexEmergencia.unlock();
     
     }
- 
 }
+
+/*=================================================================//
+ * METODO: resetDestino
+//=================================================================*/
 
 void UsuarioIA::resetDestino()
 {
-    
    _andarDestinoUsuario = 0;
-
 }
 
 
@@ -284,8 +215,9 @@ void UsuarioIA::threadBehavior()
         std::cout<<CIANO<<"* "<<_nome<<" esta no andar: " << _andarAtualUsuario << BRANCO<<std::endl;
         std::cout<<CIANO<<"//------------------------------------//"<< BRANCO<<std::endl;
     mutexImpressao.unlock();
+
+    std::this_thread::sleep_for(std::chrono::seconds(2));
     
-    //TESTANDO
     volatile int i = 0;
 
     while(i++ < _numViagens)
@@ -308,7 +240,6 @@ void UsuarioIA::threadBehavior()
         //espera a porta do andar abrir
         //_ptrPorta->esperaPorta(_andarAtualUsuario);
         
-        //conferir depois que usuarios desceram
         if(_ptrSensor->numPessoasDentro() >= maxNumPessoas)continue;   
 
         //dentro do elevador
@@ -320,15 +251,10 @@ void UsuarioIA::threadBehavior()
         mutexImpressao.unlock();
 
 
-        
-        //sem expulsao por lotacao (modelo)
         while(!_ptrPorta->abertaNoAndar(_andarDestinoUsuario))
         {   
-            if(!cond_destino_requisitado()) vetorAndares[_andarDestinoUsuario].pedidoDestino();
+            if(!cond_destino_requisitado()) botaoDestino(_andarDestinoUsuario);
             botaoEmergencia();
-            // mutexEmergencia.lock();
-            // if(botaoEmergenciaPressionado)_andarDestinoUsuario = 0;
-            // mutexEmergencia.unlock();
         } 
             
         //_ptrPorta->esperaPorta(_andarDestinoUsuario);
@@ -350,7 +276,6 @@ void UsuarioIA::threadBehavior()
 
         std::cout<<AMARELO<<"//------------------------------------//"<< BRANCO<<std::endl;
     mutexImpressao.unlock();
-    std::this_thread::sleep_for(std::chrono::seconds(2));
 }
 
 //=================================================================//

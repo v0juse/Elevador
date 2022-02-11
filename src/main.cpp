@@ -39,8 +39,8 @@ int main()
 
     Zeh.join();
     Paulo.join();
-    //Joao.join();
-    //Carlos.join();
+    Joao.join();
+    Carlos.join();
 
     return 0;
 }

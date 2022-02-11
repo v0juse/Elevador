@@ -50,49 +50,6 @@ void Controlador::def_direcao()
 }
 
 /*=================================================================//
- * METODO: remove
-//=================================================================*/
-int Controlador::remove(bool selectQueue)
-{
-    int aux;
-    if(selectQueue)
-    {    
-        int tamFilaOrigem = filaChamadasOrigem.size();
-        if(tamFilaOrigem== 0) return -1; 
-
-        aux = filaChamadasOrigem.front();
-        filaChamadasOrigem.pop();
-    }
-    else
-    {   
-        int tamFilaDestino = filaChamadasDestino.size();
-        if(tamFilaDestino == 0) return -1; 
-
-        aux = filaChamadasDestino.front();
-        filaChamadasOrigem.pop();
-    }
-    return aux;
-}
-
-/*=================================================================//
- * METODO: trata_origem
-//=================================================================*/
-void Controlador::trata_origem()
-{
-    tratandoOrigem = (filaChamadasDestino.size() != 0) ? 0:1;
-    andarObjetivo = remove(tratandoOrigem);
-}
-
-/*=================================================================//
- * METODO: alternar_movimento
-//=================================================================*/
-void Controlador::alternar_movimento()
-{
-    movimento = !movimento;
-}
-
-
-/*=================================================================//
  * METODO: atendeu_andar
 //=================================================================*/
 void Controlador::atendeu_andar()
@@ -112,12 +69,6 @@ void Controlador::moverElevador()
     movimento = false;
 }
 
-void Controlador::clpEmergencia()
-{
-
-
-}
-
 /*=================================================================//
  * METODO: threadBehavior    
  * metodos que dita o comportamento da thread interna  
@@ -135,10 +86,6 @@ void Controlador::threadBehavior()
 	    lockFila.lock();//entra rc
         if(filaChamadasDestino.empty() && filaChamadasOrigem.empty() )
         { 
-            //mutexImpressao.lock();
-            //    std::cout<<AMARELO<<"* "<<VERDE<<"  Elevador livre"<<BRANCO<<", aguardando...     "<<AMARELO<<"*"<<BRANCO<<std::endl;
-            //mutexImpressao.unlock();
-
             novaChamada.wait(lockFila);
         }
 
@@ -165,8 +112,8 @@ void Controlador::threadBehavior()
             if(cond_abertura_porta()) 
             {
                 ptrPorta->abrir(andarAtual);
-                vetorAndares[andarAtual].atendeuAndar();
-                if(andarAtual == andarObjetivo) andarObjetivo = -1;//objetivo concluido
+
+                atendeu_andar();
 
                 mutexImpressao.lock();
                     std::cout<<MAGENTA<<"//====================================//"<< BRANCO<<std::endl;
@@ -174,22 +121,14 @@ void Controlador::threadBehavior()
                     std::cout<<MAGENTA<<"//====================================//"<< BRANCO<<std::endl;
                 mutexImpressao.unlock();
 
-                //TODO entrada/expulsao de usuario
-
                 while(ptrSensorEstadoPorta->objetoBloqueante()); //busy wait ate a porta nao estar bloqueada
 
-                //while(ptrSensorP->numPessoasDentro() >= maxNumPessoas){}
                 ptrPorta->fechar(andarAtual);
-                //mutexImpressao.lock();
-                //    std::cout<<MAGENTA<<"//====================================//"<< BRANCO<<std::endl;
-                //    std::cout<<MAGENTA<<"      Porta "<<VERMELHO<<"FECHADA." << BRANCO<<std::endl;
-                //    std::cout<<MAGENTA<<"//====================================//"<< BRANCO<<std::endl;
-                //mutexImpressao.unlock();
             }
 
             if(andarObjetivo == -1) break;//objetivo ja concluido
             
-            //boa posicao check emergencia
+            
             mutexEmergencia.lock();
             if(botaoEmergenciaPressionado == true)
             {   
