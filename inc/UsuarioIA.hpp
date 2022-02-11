@@ -39,7 +39,7 @@ class UsuarioIA: public std::thread
          * construtor com valor de inicializacao do atributo "_id"
         //---------------------------------------------------------*/
         
-        UsuarioIA(std::string nome, Porta* porta, SensorPresencaUsuario* sp);
+        UsuarioIA(std::string nome, int nv, Porta* porta, SensorPresencaUsuario* sp);
         
         /*---------------------------------------------------------//
          * destrutor padrao
@@ -94,12 +94,19 @@ class UsuarioIA: public std::thread
          * desejado
         //---------------------------------------------------------*/
         bool viagemSatisfeita();
-
         
+        /*---------------------------------------------------------//
+		 * metodo que retorna a possibilidade do usuario pressionar
+         * o botao de emergencia
+		//---------------------------------------------------------*/
+		void botaoEmergencia();
+
         /*---------------------------------------------------------//
 		 * metodos que dita o comportamento da thread interna
 		//---------------------------------------------------------*/
 		void threadBehavior();
+
+ 
         
 //-----------------------------------------------------------------//
     
@@ -121,8 +128,15 @@ class UsuarioIA: public std::thread
          * atributo para localizacao de andares do usuario
         //---------------------------------------------------------*/
 		int _andarAtualUsuario; 
-		int _andarDestinoUsuario;
-		
+        int _andarDestinoUsuario;
+		static std::list<UsuarioIA*> _listaUsuarios;
+        std::vector<int> vetorEntrou;
+        std::vector<int> vetorSaiu;
+        /*---------------------------------------------------------//
+		 * metodo para reiniciar todos 
+		//---------------------------------------------------------*/
+        void resetDestino();
+
 
 		bool cond_elevador_requisitado();
 		bool cond_descida();

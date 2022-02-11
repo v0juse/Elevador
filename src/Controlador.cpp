@@ -112,6 +112,12 @@ void Controlador::moverElevador()
     movimento = false;
 }
 
+void Controlador::clpEmergencia()
+{
+
+
+}
+
 /*=================================================================//
  * METODO: threadBehavior    
  * metodos que dita o comportamento da thread interna  
@@ -129,14 +135,12 @@ void Controlador::threadBehavior()
 	    lockFila.lock();//entra rc
         if(filaChamadasDestino.empty() && filaChamadasOrigem.empty() )
         { 
-            mutexImpressao.lock();
-                std::cout<<AMARELO<<"* "<<VERDE<<"  Elevador livre"<<BRANCO<<", aguardando...     "<<AMARELO<<"*"<<BRANCO<<std::endl;
-            mutexImpressao.unlock();
+            //mutexImpressao.lock();
+            //    std::cout<<AMARELO<<"* "<<VERDE<<"  Elevador livre"<<BRANCO<<", aguardando...     "<<AMARELO<<"*"<<BRANCO<<std::endl;
+            //mutexImpressao.unlock();
 
             novaChamada.wait(lockFila);
         }
-
-
 
         if(!filaChamadasDestino.empty())
         {
@@ -173,6 +177,7 @@ void Controlador::threadBehavior()
                 //TODO entrada/expulsao de usuario
 
                 while(ptrSensorEstadoPorta->objetoBloqueante()); //busy wait ate a porta nao estar bloqueada
+
                 //while(ptrSensorP->numPessoasDentro() >= maxNumPessoas){}
                 ptrPorta->fechar(andarAtual);
                 //mutexImpressao.lock();
@@ -183,7 +188,34 @@ void Controlador::threadBehavior()
             }
 
             if(andarObjetivo == -1) break;//objetivo ja concluido
-
+            
+            //boa posicao check emergencia
+            mutexEmergencia.lock();
+            if(botaoEmergenciaPressionado == true)
+            {   
+                botaoEmergenciaPressionado = false;
+                while (!filaChamadasDestino.empty()) filaChamadasDestino.pop();
+                while (!filaChamadasOrigem.empty()) filaChamadasOrigem.pop();   
+                andarObjetivo = -1;
+                andarAtual = 0; 
+                
+                mutexImpressao.lock();
+                    std::cout<<VERMELHO<<"//------------------------------------//"<< BRANCO<<std::endl;
+                    std::cout<<VERMELHO<<"*\t  EMERGENCIA!!! "<<BRANCO<<std::endl;
+                    std::cout<<VERMELHO<<"//------------------------------------//"<< BRANCO<<std::endl;
+                mutexImpressao.unlock(); 
+                mutexEmergencia.unlock();           
+                
+                ptrPorta->abrir(0);
+                std::this_thread::sleep_for(std::chrono::seconds(2));
+                ptrPorta->fechar(0); 
+                break;
+            
+            }
+            else mutexEmergencia.unlock();
+            
+            
+            
             moverElevador();
             mutexImpressao.lock();
                 std::cout<<AMARELO<<"//====================================//"<< BRANCO<<std::endl;

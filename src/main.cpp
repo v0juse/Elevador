@@ -29,18 +29,18 @@ int main()
 
     Controlador clp(&porta,&sensor_porta,&sensor_andar);
     
-    UsuarioIA Zeh("Zeh", &porta, &sensor_presenca);
-    UsuarioIA Paulo("Paulo", &porta, &sensor_presenca);
-    UsuarioIA Joao("Joao", &porta, &sensor_presenca);
-    UsuarioIA Carlos("Carlos", &porta, &sensor_presenca);
+    UsuarioIA Zeh("Zeh", 4, &porta, &sensor_presenca);
+    UsuarioIA Paulo("Paulo", 4, &porta, &sensor_presenca);
+    UsuarioIA Joao("Joao", 4, &porta, &sensor_presenca);
+    UsuarioIA Carlos("Carlos", 4, &porta, &sensor_presenca);
     
 
     clp.join();
 
     Zeh.join();
     Paulo.join();
-    Joao.join();
-    Carlos.join();
+    //Joao.join();
+    //Carlos.join();
 
     return 0;
 }
