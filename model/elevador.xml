@@ -283,7 +283,7 @@ bool cond_destino_requisitado()
 			<name x="467" y="68">Escolhendo_Novo_Destino</name>
 		</location>
 		<location id="id10" x="646" y="-51">
-			<name x="501" y="-68">Criacao_do_Usuario</name>
+			<name x="501" y="-76">Criacao_do_Usuario</name>
 		</location>
 		<init ref="id10"/>
 		<transition>
@@ -304,6 +304,7 @@ bool cond_destino_requisitado()
 		<transition>
 			<source ref="id8"/>
 			<target ref="id7"/>
+			<label kind="guard" x="680" y="238">numPessoasDentro &gt; 4</label>
 			<label kind="synchronisation" x="680" y="255">portaAbertaAndar[andarAtualUsuario]?</label>
 			<label kind="assignment" x="722" y="272">numPessoasDentro++</label>
 		</transition>
@@ -341,14 +342,6 @@ bool cond_destino_requisitado()
 		</transition>
 		<transition>
 			<source ref="id7"/>
-			<target ref="id8"/>
-			<label kind="synchronisation" x="357" y="263">ExpulsaoPorLotacao?</label>
-			<label kind="assignment" x="357" y="289">numPessoasDentro--</label>
-			<nail x="493" y="348"/>
-			<nail x="493" y="212"/>
-		</transition>
-		<transition>
-			<source ref="id7"/>
 			<target ref="id9"/>
 			<label kind="synchronisation" x="765" y="-9">portaAbertaAndar[andarDestinoUsuario]?</label>
 			<label kind="assignment" x="765" y="17">andarAtualUsuario = andarAtual,
@@ -360,13 +353,13 @@ numPessoasDentro--</label>
 			<source ref="id9"/>
 			<target ref="id8"/>
 			<label kind="select" x="467" y="110">rnd : int[0,numAndares - 1]</label>
-			<label kind="assignment" x="476" y="127">andarDestinoUsuario = rnd</label>
+			<label kind="assignment" x="467" y="127">andarDestinoUsuario = rnd</label>
 		</transition>
 		<transition>
 			<source ref="id10"/>
 			<target ref="id9"/>
 			<label kind="select" x="467" y="-17">rnd : int[0,numAndares -1 ]</label>
-			<label kind="assignment" x="484" y="17">andarAtualUsuario = rnd</label>
+			<label kind="assignment" x="484" y="8">andarAtualUsuario = rnd</label>
 		</transition>
 	</template>
 	<template>
@@ -957,8 +950,8 @@ tempoDeslocamento = 0</label>
 	</template>
 	<system>// Place template instantiations here.
 //Usuarios
-zee = Usuario(-1);
-paulo = Usuario(-1);
+zee = Usuario(1);
+paulo = Usuario(1);
 carlos = Usuario(-1);
 joo = UsuarioND();
 jee = UsuarioND();
@@ -987,7 +980,7 @@ sensor_de_estado_da_porta = SensorEstadoPorta();
 sensor_de_pessoas =  SensorPessoas();
 
 // List one or more processes to be composed into a system.
-system joo, jee, clp, clp_emergencia, andar0, andar1, andar2, andar3, andar4, andar5, portas, sensor_de_estado_da_porta, sensor_de_andar;</system>
+system joo, clp, clp_emergencia, andar0, andar1, andar2, andar3, andar4, andar5, portas, sensor_de_estado_da_porta, sensor_de_andar;</system>
 	<queries>
 		<query>
 			<formula>A[] not deadlock</formula>
@@ -995,6 +988,26 @@ system joo, jee, clp, clp_emergencia, andar0, andar1, andar2, andar3, andar4, an
 		</query>
 		<query>
 			<formula>A[] movimento == 1 imply not portaAberta</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>A[] numPessoasDentro &lt;= 4</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt;joo.Escolhendo_Novo_Destino</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>joo.Dentro_do_Elevador --&gt; joo.Fora_do_Elevador</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt;(joo.andarDestinoUsuario == andarAtual)</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>A[] not(portas.Fechada and objetoBloqueante)</formula>
 			<comment></comment>
 		</query>
 	</queries>
