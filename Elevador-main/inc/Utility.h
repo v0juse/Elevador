@@ -34,14 +34,13 @@ const int maxNumPessoas =  4;
 extern std::queue<int> filaChamadasOrigem, filaChamadasDestino;
 extern std::mutex mutexFilasChamadas;
 extern std::mutex mutexImpressao;
-extern std::mutex mutexEmergencia;
 
 extern int objetoBloqueante;
 extern int direcao;
 extern int numPessoasDentro;
 extern bool _sistemON;
 extern std::condition_variable novaChamada; 
-extern bool botaoEmergenciaPressionado;
+
 
 
 

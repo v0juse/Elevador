@@ -25,14 +25,6 @@ Porta::~Porta()
 }
 
 /*=================================================================//
- * METODO: abertaNoAndar     
-//=================================================================*/
-bool Porta::abertaNoAndar(int num)
-{
-    return _abertaNoAndar[num];
-}
-
-/*=================================================================//
  * METODO: cond_abertura_porta
  * realiza um broadcast para os usuarios que estao esperando a 
  * abertura da porta

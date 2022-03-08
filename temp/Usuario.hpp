@@ -1,10 +1,11 @@
-#ifndef USUARIOIA_HPP_
-#define USUARIOIA_HPP_
+#ifndef USUARIO_HPP_
+#define USUARIO_HPP_
 
 
 /*=================================================================//
  * Includes necessarios        
 //=================================================================*/
+
 
 #include <iostream>
 #include <list>
@@ -17,11 +18,11 @@
 #include <condition_variable> // std::condition_variable
 #include <random>
 
+
 #include "Andar.hpp"
 #include "Porta.hpp"
-//#include "Utility.h"
 
-#include "SensorPresenca.hpp"
+//#include "Utility.h"
 
 using namespace std::chrono;
 
@@ -29,7 +30,7 @@ using namespace std::chrono;
  * Definicao das classes                                           
 //=================================================================*/
 
-class UsuarioIA: public std::thread
+class Usuario: public std::thread
 {
 //-----------------------------------------------------------------//
     
@@ -38,13 +39,13 @@ class UsuarioIA: public std::thread
          * construtor com valor de inicializacao do atributo "_id"
         //---------------------------------------------------------*/
         
-        UsuarioIA(std::string nome, int nv, Porta* porta, SensorPresencaUsuario* sp);
+        Usuario(std::string nome, Porta* porta);
         
         /*---------------------------------------------------------//
          * destrutor padrao
         //---------------------------------------------------------*/
         
-        ~UsuarioIA();
+        ~Usuario();
 
         /*---------------------------------------------------------//
          * metodo que recebe o andar inicial selecionado pelo
@@ -80,33 +81,25 @@ class UsuarioIA: public std::thread
         /*---------------------------------------------------------//
          * metodo que incrementa o numero de pessoas no elevador
         //---------------------------------------------------------*/
-        void entrarElevador();
+        virtual void entrarElevador();
 
         /*---------------------------------------------------------//
          * metodo que retira o usuario do elevador quando este chega 
          * ao seu destino
         //---------------------------------------------------------*/
-        void sairElevador();
+        virtual void sairElevador();
 
         /*---------------------------------------------------------//
          * metodo que verifica se o usuario chegou ao destino 
          * desejado
         //---------------------------------------------------------*/
         bool viagemSatisfeita();
-        
-        /*---------------------------------------------------------//
-		 * metodo que retorna a possibilidade do usuario pressionar
-         * o botao de emergencia
-		//---------------------------------------------------------*/
-		void botaoEmergencia();
 
         /*---------------------------------------------------------//
 		 * metodos que dita o comportamento da thread interna
 		//---------------------------------------------------------*/
-		void threadBehavior();
+		virtual void threadBehavior();
 
- 
-        
 //-----------------------------------------------------------------//
     
     private:
@@ -127,15 +120,8 @@ class UsuarioIA: public std::thread
          * atributo para localizacao de andares do usuario
         //---------------------------------------------------------*/
 		int _andarAtualUsuario; 
-        int _andarDestinoUsuario;
-		static std::list<UsuarioIA*> _listaUsuarios;
-        std::vector<int> vetorEntrou;
-        std::vector<int> vetorSaiu;
-        /*---------------------------------------------------------//
-		 * metodo para reiniciar todos 
-		//---------------------------------------------------------*/
-        void resetDestino();
-
+		int _andarDestinoUsuario;
+		
 
 		bool cond_elevador_requisitado();
 		bool cond_descida();
@@ -149,25 +135,30 @@ class UsuarioIA: public std::thread
          * usuarios a partir do arquivo de entrada.
 		//---------------------------------------------------------*/
 	
-        SensorPresencaUsuario* _ptrSensor;
+        static unsigned int _num_usuarios;
+
+        void botoesOrigem();
+
         Porta *_ptrPorta;
 
-        static unsigned int _num_usuarios;
         bool _dentroElevador;
+		
+        
+        bool novaViagem();
         
         /*---------------------------------------------------------//
 		 * mutex utilizado para controlar acesso aos atributos 
          * internos da classe
 		//---------------------------------------------------------*/
-
         std::mutex _internAtributes; 
         std::unique_lock<std::mutex> _internAtributesLock;
+
 
         /*---------------------------------------------------------//
 		 * funcao a ser passada para a thread na inicializacao
 		//---------------------------------------------------------*/
 		static void * InternalThreadEntryFunc(void * This)
-		{((UsuarioIA *)This)->threadBehavior(); return nullptr;};
+		{((Usuario *)This)->threadBehavior(); return nullptr;};
 
 //-----------------------------------------------------------------//
 };

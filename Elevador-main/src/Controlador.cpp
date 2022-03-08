@@ -3,7 +3,7 @@
 /*=================================================================//
  * CONSTRUTOR                                         
 //=================================================================*/
-Controlador::Controlador(Porta* p, SensorEstadoPorta* sp, SensorAndar* sa): std::thread(InternalThreadEntryFunc,this) 
+Controlador::Controlador(Porta* p, SensorEstadoPorta* sp, SensorAndar* sa, SensorPresenca *spresenca): std::thread(InternalThreadEntryFunc,this) 
 {
     andarObjetivo = -1;
     andarAtual = 0;
@@ -11,6 +11,7 @@ Controlador::Controlador(Porta* p, SensorEstadoPorta* sp, SensorAndar* sa): std:
     ptrPorta = p;
     ptrSensorEstadoPorta = sp;
     ptrSensorAndar = sa;
+    ptrSensorP = spresenca;
 
     mutexImpressao.lock();
         std::cout<<AMARELO<<"//====================================//"<< BRANCO<<std::endl;
@@ -50,6 +51,49 @@ void Controlador::def_direcao()
 }
 
 /*=================================================================//
+ * METODO: remove
+//=================================================================*/
+int Controlador::remove(bool selectQueue)
+{
+    int aux;
+    if(selectQueue)
+    {    
+        int tamFilaOrigem = filaChamadasOrigem.size();
+        if(tamFilaOrigem== 0) return -1; 
+
+        aux = filaChamadasOrigem.front();
+        filaChamadasOrigem.pop();
+    }
+    else
+    {   
+        int tamFilaDestino = filaChamadasDestino.size();
+        if(tamFilaDestino == 0) return -1; 
+
+        aux = filaChamadasDestino.front();
+        filaChamadasOrigem.pop();
+    }
+    return aux;
+}
+
+/*=================================================================//
+ * METODO: trata_origem
+//=================================================================*/
+void Controlador::trata_origem()
+{
+    tratandoOrigem = (filaChamadasDestino.size() != 0) ? 0:1;
+    andarObjetivo = remove(tratandoOrigem);
+}
+
+/*=================================================================//
+ * METODO: alternar_movimento
+//=================================================================*/
+void Controlador::alternar_movimento()
+{
+    movimento = !movimento;
+}
+
+
+/*=================================================================//
  * METODO: atendeu_andar
 //=================================================================*/
 void Controlador::atendeu_andar()
@@ -86,8 +130,14 @@ void Controlador::threadBehavior()
 	    lockFila.lock();//entra rc
         if(filaChamadasDestino.empty() && filaChamadasOrigem.empty() )
         { 
+            mutexImpressao.lock();
+                std::cout<<AMARELO<<"* "<<VERDE<<"  Elevador livre"<<BRANCO<<", aguardando...     "<<AMARELO<<"*"<<BRANCO<<std::endl;
+            mutexImpressao.unlock();
+
             novaChamada.wait(lockFila);
         }
+
+
 
         if(!filaChamadasDestino.empty())
         {
@@ -112,49 +162,21 @@ void Controlador::threadBehavior()
             if(cond_abertura_porta()) 
             {
                 ptrPorta->abrir(andarAtual);
-
-                atendeu_andar();
+                vetorAndares[andarAtual].atendeuAndar();
+                if(andarAtual == andarObjetivo) andarObjetivo = -1;//objetivo concluido
 
                 mutexImpressao.lock();
-                    std::cout<<MAGENTA<<"//====================================//"<< BRANCO<<std::endl;
-                    std::cout<<MAGENTA<<"       Porta "<<VERDE<<"ABERTA." << BRANCO<<std::endl;
-                    std::cout<<MAGENTA<<"//====================================//"<< BRANCO<<std::endl;
-                mutexImpressao.unlock();
+                    std::cout << MAGENTA<<"Porta aberta\n"<<BRANCO;
+                mutexImpressao.unlock();    
+                //TODO entrada/expulsao de usuario
 
-                while(ptrSensorEstadoPorta->objetoBloqueante()); //busy wait ate a porta nao estar bloqueada
-
+                //while(ptrSensorEstadoPorta->objetoBloqueante()); //busy wait ate a porta nao estar bloqueada
+                //while(ptrSensorP->numPessoasDentro() >= maxNumPessoas){}
                 ptrPorta->fechar(andarAtual);
             }
 
             if(andarObjetivo == -1) break;//objetivo ja concluido
-            
-            
-            mutexEmergencia.lock();
-            if(botaoEmergenciaPressionado == true)
-            {   
-                botaoEmergenciaPressionado = false;
-                while (!filaChamadasDestino.empty()) filaChamadasDestino.pop();
-                while (!filaChamadasOrigem.empty()) filaChamadasOrigem.pop();   
-                andarObjetivo = -1;
-                andarAtual = 0; 
-                
-                mutexImpressao.lock();
-                    std::cout<<VERMELHO<<"//------------------------------------//"<< BRANCO<<std::endl;
-                    std::cout<<VERMELHO<<"*\t  EMERGENCIA!!! "<<BRANCO<<std::endl;
-                    std::cout<<VERMELHO<<"//------------------------------------//"<< BRANCO<<std::endl;
-                mutexImpressao.unlock(); 
-                mutexEmergencia.unlock();           
-                
-                ptrPorta->abrir(0);
-                std::this_thread::sleep_for(std::chrono::seconds(2));
-                ptrPorta->fechar(0); 
-                break;
-            
-            }
-            else mutexEmergencia.unlock();
-            
-            
-            
+
             moverElevador();
             mutexImpressao.lock();
                 std::cout<<AMARELO<<"//====================================//"<< BRANCO<<std::endl;
