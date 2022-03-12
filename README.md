@@ -1,2 +1,2 @@
 # Elevador
-Modelagem do sistema do elevador 
+Modelagem do sistema de um elevador 
