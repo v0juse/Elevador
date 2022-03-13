@@ -168,6 +168,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named SensorAndar
+
+# Build rule for target.
+SensorAndar: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 SensorAndar
+.PHONY : SensorAndar
+
+# fast build rule for target.
+SensorAndar/fast:
+	$(MAKE) -f CMakeFiles/SensorAndar.dir/build.make CMakeFiles/SensorAndar.dir/build
+.PHONY : SensorAndar/fast
+
+#=============================================================================
 # Target rules for targets named PortaTest
 
 # Build rule for target.
@@ -192,6 +205,19 @@ AndarTest: cmake_check_build_system
 AndarTest/fast:
 	$(MAKE) -f CMakeFiles/AndarTest.dir/build.make CMakeFiles/AndarTest.dir/build
 .PHONY : AndarTest/fast
+
+#=============================================================================
+# Target rules for targets named utility
+
+# Build rule for target.
+utility: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 utility
+.PHONY : utility
+
+# fast build rule for target.
+utility/fast:
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/build
+.PHONY : utility/fast
 
 #=============================================================================
 # Target rules for targets named gmock_main
@@ -299,13 +325,40 @@ src/Porta.cpp.s:
 	$(MAKE) -f CMakeFiles/PortaTest.dir/build.make CMakeFiles/PortaTest.dir/src/Porta.cpp.s
 .PHONY : src/Porta.cpp.s
 
+src/SensorAndar.o: src/SensorAndar.cpp.o
+
+.PHONY : src/SensorAndar.o
+
+# target to build an object file
+src/SensorAndar.cpp.o:
+	$(MAKE) -f CMakeFiles/SensorAndar.dir/build.make CMakeFiles/SensorAndar.dir/src/SensorAndar.cpp.o
+.PHONY : src/SensorAndar.cpp.o
+
+src/SensorAndar.i: src/SensorAndar.cpp.i
+
+.PHONY : src/SensorAndar.i
+
+# target to preprocess a source file
+src/SensorAndar.cpp.i:
+	$(MAKE) -f CMakeFiles/SensorAndar.dir/build.make CMakeFiles/SensorAndar.dir/src/SensorAndar.cpp.i
+.PHONY : src/SensorAndar.cpp.i
+
+src/SensorAndar.s: src/SensorAndar.cpp.s
+
+.PHONY : src/SensorAndar.s
+
+# target to generate assembly for a file
+src/SensorAndar.cpp.s:
+	$(MAKE) -f CMakeFiles/SensorAndar.dir/build.make CMakeFiles/SensorAndar.dir/src/SensorAndar.cpp.s
+.PHONY : src/SensorAndar.cpp.s
+
 src/Utility.o: src/Utility.cpp.o
 
 .PHONY : src/Utility.o
 
 # target to build an object file
 src/Utility.cpp.o:
-	$(MAKE) -f CMakeFiles/AndarTest.dir/build.make CMakeFiles/AndarTest.dir/src/Utility.cpp.o
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/src/Utility.cpp.o
 .PHONY : src/Utility.cpp.o
 
 src/Utility.i: src/Utility.cpp.i
@@ -314,7 +367,7 @@ src/Utility.i: src/Utility.cpp.i
 
 # target to preprocess a source file
 src/Utility.cpp.i:
-	$(MAKE) -f CMakeFiles/AndarTest.dir/build.make CMakeFiles/AndarTest.dir/src/Utility.cpp.i
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/src/Utility.cpp.i
 .PHONY : src/Utility.cpp.i
 
 src/Utility.s: src/Utility.cpp.s
@@ -323,7 +376,7 @@ src/Utility.s: src/Utility.cpp.s
 
 # target to generate assembly for a file
 src/Utility.cpp.s:
-	$(MAKE) -f CMakeFiles/AndarTest.dir/build.make CMakeFiles/AndarTest.dir/src/Utility.cpp.s
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/src/Utility.cpp.s
 .PHONY : src/Utility.cpp.s
 
 testes/Andar_test.o: testes/Andar_test.cc.o
@@ -380,6 +433,33 @@ testes/Porta_test.cc.s:
 	$(MAKE) -f CMakeFiles/PortaTest.dir/build.make CMakeFiles/PortaTest.dir/testes/Porta_test.cc.s
 .PHONY : testes/Porta_test.cc.s
 
+testes/SensorAndar_test.o: testes/SensorAndar_test.cc.o
+
+.PHONY : testes/SensorAndar_test.o
+
+# target to build an object file
+testes/SensorAndar_test.cc.o:
+	$(MAKE) -f CMakeFiles/SensorAndar.dir/build.make CMakeFiles/SensorAndar.dir/testes/SensorAndar_test.cc.o
+.PHONY : testes/SensorAndar_test.cc.o
+
+testes/SensorAndar_test.i: testes/SensorAndar_test.cc.i
+
+.PHONY : testes/SensorAndar_test.i
+
+# target to preprocess a source file
+testes/SensorAndar_test.cc.i:
+	$(MAKE) -f CMakeFiles/SensorAndar.dir/build.make CMakeFiles/SensorAndar.dir/testes/SensorAndar_test.cc.i
+.PHONY : testes/SensorAndar_test.cc.i
+
+testes/SensorAndar_test.s: testes/SensorAndar_test.cc.s
+
+.PHONY : testes/SensorAndar_test.s
+
+# target to generate assembly for a file
+testes/SensorAndar_test.cc.s:
+	$(MAKE) -f CMakeFiles/SensorAndar.dir/build.make CMakeFiles/SensorAndar.dir/testes/SensorAndar_test.cc.s
+.PHONY : testes/SensorAndar_test.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -390,11 +470,13 @@ help:
 	@echo "... install/local"
 	@echo "... edit_cache"
 	@echo "... test"
+	@echo "... SensorAndar"
 	@echo "... PortaTest"
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... AndarTest"
+	@echo "... utility"
 	@echo "... gmock_main"
 	@echo "... gmock"
 	@echo "... gtest_main"
@@ -405,6 +487,9 @@ help:
 	@echo "... src/Porta.o"
 	@echo "... src/Porta.i"
 	@echo "... src/Porta.s"
+	@echo "... src/SensorAndar.o"
+	@echo "... src/SensorAndar.i"
+	@echo "... src/SensorAndar.s"
 	@echo "... src/Utility.o"
 	@echo "... src/Utility.i"
 	@echo "... src/Utility.s"
@@ -414,6 +499,9 @@ help:
 	@echo "... testes/Porta_test.o"
 	@echo "... testes/Porta_test.i"
 	@echo "... testes/Porta_test.s"
+	@echo "... testes/SensorAndar_test.o"
+	@echo "... testes/SensorAndar_test.i"
+	@echo "... testes/SensorAndar_test.s"
 .PHONY : help
 
 

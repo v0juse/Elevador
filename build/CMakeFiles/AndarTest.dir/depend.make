@@ -5,9 +5,6 @@ CMakeFiles/AndarTest.dir/src/Andar.cpp.o: ../inc/Andar.hpp
 CMakeFiles/AndarTest.dir/src/Andar.cpp.o: ../inc/Utility.h
 CMakeFiles/AndarTest.dir/src/Andar.cpp.o: ../src/Andar.cpp
 
-CMakeFiles/AndarTest.dir/src/Utility.cpp.o: ../inc/Utility.h
-CMakeFiles/AndarTest.dir/src/Utility.cpp.o: ../src/Utility.cpp
-
 CMakeFiles/AndarTest.dir/testes/Andar_test.cc.o: ../inc/Andar.hpp
 CMakeFiles/AndarTest.dir/testes/Andar_test.cc.o: ../inc/Utility.h
 CMakeFiles/AndarTest.dir/testes/Andar_test.cc.o: ../testes/Andar_test.cc

@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/SensorAndar.dir/src/SensorAndar.cpp.o CMakeFiles/SensorAndar.dir/testes/SensorAndar_test.cc.o  -o SensorAndar  lib/libgtest_main.a libutility.a lib/libgtest.a -lpthread 

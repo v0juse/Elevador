@@ -3,7 +3,6 @@ file(REMOVE_RECURSE
   "AndarTest.pdb"
   "AndarTest[1]_tests.cmake"
   "CMakeFiles/AndarTest.dir/src/Andar.cpp.o"
-  "CMakeFiles/AndarTest.dir/src/Utility.cpp.o"
   "CMakeFiles/AndarTest.dir/testes/Andar_test.cc.o"
 )
 

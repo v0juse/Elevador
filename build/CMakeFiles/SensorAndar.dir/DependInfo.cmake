@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/v0id/Faculdade/Testes/Elevador/src/Andar.cpp" "/home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles/AndarTest.dir/src/Andar.cpp.o"
-  "/home/v0id/Faculdade/Testes/Elevador/testes/Andar_test.cc" "/home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles/AndarTest.dir/testes/Andar_test.cc.o"
+  "/home/v0id/Faculdade/Testes/Elevador/src/SensorAndar.cpp" "/home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles/SensorAndar.dir/src/SensorAndar.cpp.o"
+  "/home/v0id/Faculdade/Testes/Elevador/testes/SensorAndar_test.cc" "/home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles/SensorAndar.dir/testes/SensorAndar_test.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

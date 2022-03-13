@@ -2,11 +2,13 @@
 /home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles/install/local.dir
 /home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles/edit_cache.dir
 /home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles/test.dir
+/home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles/SensorAndar.dir
 /home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles/PortaTest.dir
 /home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles/install.dir
 /home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles/list_install_components.dir
 /home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles/rebuild_cache.dir
 /home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles/AndarTest.dir
+/home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles/utility.dir
 /home/v0id/Faculdade/Testes/Elevador/build/_deps/googletest-build/CMakeFiles/install/strip.dir
 /home/v0id/Faculdade/Testes/Elevador/build/_deps/googletest-build/CMakeFiles/install/local.dir
 /home/v0id/Faculdade/Testes/Elevador/build/_deps/googletest-build/CMakeFiles/install.dir

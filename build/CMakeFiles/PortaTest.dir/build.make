@@ -95,6 +95,7 @@ PortaTest: CMakeFiles/PortaTest.dir/src/Porta.cpp.o
 PortaTest: CMakeFiles/PortaTest.dir/testes/Porta_test.cc.o
 PortaTest: CMakeFiles/PortaTest.dir/build.make
 PortaTest: lib/libgtest_main.a
+PortaTest: libutility.a
 PortaTest: lib/libgtest.a
 PortaTest: CMakeFiles/PortaTest.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable PortaTest"
