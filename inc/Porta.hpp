@@ -23,7 +23,6 @@ class Porta
 public:
     /*---------------------------------------------------------//
     * construtor:
-    * define "aberta" como false
     * define "_abertaNoAndar" de cada andar como false
     //---------------------------------------------------------*/
     Porta();
@@ -65,7 +64,7 @@ private:
     /*---------------------------------------------------------//
     * ATRIBUTOS 
     //---------------------------------------------------------*/
-    bool aberta;
+    //bool aberta;
     
     bool _abertaNoAndar[numAndares];
 

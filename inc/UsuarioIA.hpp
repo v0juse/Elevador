@@ -35,7 +35,9 @@ class UsuarioIA: public std::thread
     
     public:
         /*---------------------------------------------------------//
-         * construtor com valor de inicializacao do atributo "_id"
+         * construtor:
+         * "nome" define o identificador do usuario
+         * "nv" define o numero de viagens
         //---------------------------------------------------------*/
         
         UsuarioIA(std::string nome, int nv, Porta* porta, SensorPresencaUsuario* sp);

@@ -5,7 +5,7 @@
 //=================================================================*/
 Porta::Porta()
 {
-    aberta = false;
+    //aberta = false;
     
     for(int i = 0; i < numAndares; i++)
     {
@@ -40,7 +40,7 @@ bool Porta::abertaNoAndar(int num)
 void Porta::abrir(int num)
 {   
     std::unique_lock<std::mutex> lock(mutexPorta);
-    aberta = true;
+    //aberta = true;
     _abertaNoAndar[num] = true;
     lock.unlock();
 
@@ -56,7 +56,7 @@ void Porta::fechar(int num)
 {
     std::unique_lock<std::mutex> lock(mutexPorta);
     _abertaNoAndar[num] = false;
-    aberta = false;
+    //aberta = false;
 }
 
 /*=================================================================//

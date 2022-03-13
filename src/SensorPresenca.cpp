@@ -37,7 +37,9 @@ void SensorPresencaUsuario::registrarEntrada()
 void SensorPresencaUsuario::registrarSaida()
 {
     std::unique_lock<std::mutex> lock(_mutexPresenca);
-     _numPessoasDentro--;
+    if (_numPessoasDentro <= 0) return;
+
+    _numPessoasDentro--;
 
 }
 

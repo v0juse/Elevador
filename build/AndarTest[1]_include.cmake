@@ -1,0 +1,5 @@
+if(EXISTS "/home/eryk/Workspace/Testes_e_Verificacao/Elevador/build/AndarTest[1]_tests.cmake")
+  include("/home/eryk/Workspace/Testes_e_Verificacao/Elevador/build/AndarTest[1]_tests.cmake")
+else()
+  add_test(AndarTest_NOT_BUILT AndarTest_NOT_BUILT)
+endif()

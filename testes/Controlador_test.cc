@@ -1,7 +1,8 @@
 #include <gtest/gtest.h>
+#include <gmock/gmock.h>
 #include "../inc/Controlador.hpp"
 
-TEST(ControladorTest, Classe1) 
+TEST(ControladorTest, Classe1Instancicao) 
 {
     EXPECT_STREQ(substring("hamburger", 4), "urger");
     EXPECT_STREQ(substring("batata", 2), "tata");
