@@ -216,7 +216,7 @@ void UsuarioIA::threadBehavior()
         std::cout<<CIANO<<"//------------------------------------//"<< BRANCO<<std::endl;
     mutexImpressao.unlock();
 
-    std::this_thread::sleep_for(std::chrono::seconds(2));
+    //std::this_thread::sleep_for(std::chrono::seconds(2));
     
     volatile int i = 0;
 
@@ -253,14 +253,24 @@ void UsuarioIA::threadBehavior()
 
         while(!_ptrPorta->abertaNoAndar(_andarDestinoUsuario))
         {   
-            if(!cond_destino_requisitado()) botaoDestino(_andarDestinoUsuario);
+            if(!cond_destino_requisitado())
+            {   
+                botaoDestino(_andarDestinoUsuario);
+                mutexImpressao.lock();
+                    std::cout<<AZUL<<"//------------------------------------//"<< BRANCO<<std::endl;
+                    std::cout<<AZUL<<"*      "<<_nome<<" pressionou o Botao "<< _andarDestinoUsuario << BRANCO<<std::endl;
+                    std::cout<<AZUL<<"//------------------------------------//"<< BRANCO<<std::endl;
+                mutexImpressao.unlock();
+            }
             botaoEmergencia();
+            //std::this_thread::sleep_for(std::chrono::seconds(1));
         } 
             
         //_ptrPorta->esperaPorta(_andarDestinoUsuario);
         sairElevador();
         
     }
+    
     mutexImpressao.lock();
         std::cout<<AMARELO<<"//------------------------------------//"<< BRANCO<<std::endl;
         std::cout<<AMARELO<<"\t Lista do "<<_nome<< BRANCO<<std::endl;

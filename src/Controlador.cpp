@@ -3,7 +3,9 @@
 /*=================================================================//
  * CONSTRUTOR                                         
 //=================================================================*/
-Controlador::Controlador(Porta* p, SensorEstadoPorta* sp, SensorAndar* sa): std::thread(InternalThreadEntryFunc,this) 
+Controlador::Controlador(Porta* p, SensorEstadoPorta* sp, SensorAndar* sa): 
+std::thread(InternalThreadEntryFunc,this),
+_internAtributesLock(_internAtributes), end_thread(false)
 {
     andarObjetivo = -1;
     andarAtual = 0;
@@ -11,12 +13,16 @@ Controlador::Controlador(Porta* p, SensorEstadoPorta* sp, SensorAndar* sa): std:
     ptrPorta = p;
     ptrSensorEstadoPorta = sp;
     ptrSensorAndar = sa;
+     
 
     mutexImpressao.lock();
         std::cout<<AMARELO<<"//====================================//"<< BRANCO<<std::endl;
         std::cout<<AMARELO<<"\t Elevador no andar: " << andarAtual << BRANCO<<std::endl;
         std::cout<<AMARELO<<"//====================================//"<< BRANCO<<std::endl;
     mutexImpressao.unlock();
+
+    //finaliza setup
+    _internAtributesLock.unlock();
 }
 
 /*=================================================================//
@@ -65,6 +71,7 @@ void Controlador::atendeu_andar()
 void Controlador::moverElevador()
 {
     movimento = true;
+    while(!ptrSensorAndar->andarAlcancado());
     andarAtual += direcao;
     movimento = false;
 }
@@ -79,7 +86,8 @@ void Controlador::threadBehavior()
     //acesso aos atributos internos da classe
     _internAtributes.lock();
     std::unique_lock<std::mutex> lockFila(mutexFilasChamadas, std::defer_lock);
-    while(1)
+    
+    while(!end_thread)
     {   
         //inicio rc da lista de chamadas------------------------------------
 
@@ -122,7 +130,8 @@ void Controlador::threadBehavior()
                 mutexImpressao.unlock();
 
                 while(ptrSensorEstadoPorta->objetoBloqueante()); //busy wait ate a porta nao estar bloqueada
-
+                
+                //std::this_thread::sleep_for(std::chrono::milliseconds(1));
                 ptrPorta->fechar(andarAtual);
             }
 
@@ -130,13 +139,14 @@ void Controlador::threadBehavior()
             
             
             mutexEmergencia.lock();
-            if(botaoEmergenciaPressionado == true)
+            if(botaoEmergenciaPressionado)
             {   
                 botaoEmergenciaPressionado = false;
                 while (!filaChamadasDestino.empty()) filaChamadasDestino.pop();
                 while (!filaChamadasOrigem.empty()) filaChamadasOrigem.pop();   
                 andarObjetivo = -1;
                 andarAtual = 0; 
+                direcao = 0;
                 
                 mutexImpressao.lock();
                     std::cout<<VERMELHO<<"//------------------------------------//"<< BRANCO<<std::endl;
@@ -146,9 +156,11 @@ void Controlador::threadBehavior()
                 mutexEmergencia.unlock();           
                 
                 ptrPorta->abrir(0);
-                std::this_thread::sleep_for(std::chrono::seconds(2));
+                //std::this_thread::sleep_for(std::chrono::seconds(3));
                 ptrPorta->fechar(0); 
-                break;
+                atendeu_andar();
+                //break;
+
             
             }
             else mutexEmergencia.unlock();
@@ -170,4 +182,11 @@ void Controlador::threadBehavior()
 
 
 
+}
+
+
+void Controlador::desligar()
+{
+    end_thread = true;
+    novaChamada.notify_all();
 }

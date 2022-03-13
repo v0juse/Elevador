@@ -35,12 +35,15 @@ int main()
     UsuarioIA Carlos("Carlos", 4, &porta, &sensor_presenca);
     
 
-    clp.join();
 
     Zeh.join();
     Paulo.join();
     Joao.join();
     Carlos.join();
+
+    std::cout<<"Usuarios finalizados"<<std::endl;
+    clp.desligar();
+    clp.join();
 
     return 0;
 }

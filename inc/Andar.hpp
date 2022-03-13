@@ -18,7 +18,8 @@ class Andar
 {
 public:
     /*---------------------------------------------------------//
-    * construtor padrao
+    * define "_num" a partir de "_num_andares"
+    * define _estado como "SEM_PEDIDO"
     //---------------------------------------------------------*/
     Andar();
 
@@ -39,19 +40,34 @@ public:
     void atendeuAndar();
 
     /*---------------------------------------------------------//
-    * pedidoSubida: metodo que registra os pedidos de subida
+    * pedidoSubida: 
+      caso "_estado" for "SEM_PEDIDO" -> "_estado" recebe "PEDIDO_SUBIDA"
+      caso "_estado" for "PEDIDO_DESCIDA" -> "_estado" recebe "PEDIDO_DESTINO"
     //---------------------------------------------------------*/
     void pedidoSubida();
 
     /*---------------------------------------------------------//
-    * pedidoDescida: metodo que registra os pedidos de descida
+    * pedidoDescida:
+      caso "_estado" for "SEM_PEDIDO" -> "_estado" recebe "PEDIDO_DESCIDA"
+      caso "_estado" for "PEDIDO_SUBIDA" -> "_estado" recebe "PEDIDO_DESTINO"
     //---------------------------------------------------------*/
     void pedidoDescida();
 
     /*---------------------------------------------------------//
-    * pedidoDescida: metodo que registra os pedidos de destino
+    * pedidoDestino: "_estado" recebe "PEDIDO_DESTINO"
     //---------------------------------------------------------*/
     void pedidoDestino();
+
+    /*---------------------------------------------------------//
+    * num: retorna o numero do andar
+    //---------------------------------------------------------*/
+    int num();
+
+    /*---------------------------------------------------------//
+    * num: retorna o numero do andar
+    //---------------------------------------------------------*/
+    void setEstadoAndar(enum ESTADOS_ANDAR novo_estado);
+
 
 //-------------------------------------------------------------// 
 private:

@@ -29,7 +29,7 @@ bool SensorAndar::andarAlcancado()
 
     valor = distribution(generator);
 
-    if (valor <= 10) return true;
+    if (valor <= PROP_ANDAR_ALCANCADO) return true;
     return false;
 }
 

@@ -22,7 +22,9 @@ class Porta
 {
 public:
     /*---------------------------------------------------------//
-    * construtor padrao
+    * construtor:
+    * define "aberta" como false
+    * define "_abertaNoAndar" de cada andar como false
     //---------------------------------------------------------*/
     Porta();
 
@@ -32,12 +34,16 @@ public:
     ~Porta();
 
     /*---------------------------------------------------------//
-    * abrir: metodo para abrir a porta
+    * abrir: metodo para abrir a porta do andar "num"
+    * define "aberta" como true 
+    * define "_abertaNoAndar[num]" como true 
     //---------------------------------------------------------*/
     void abrir(int num);
 
     /*---------------------------------------------------------//
-    * fechar: metodo para fechar a porta
+    * fechar: metodo para fechar a porta do andar "num"
+    * define "aberta" como false
+    * define "_abertaNoAndar[num]" como false 
     //---------------------------------------------------------*/
     void fechar(int num);
 

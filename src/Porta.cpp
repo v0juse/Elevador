@@ -55,7 +55,7 @@ void Porta::abrir(int num)
 void Porta::fechar(int num)
 {
     std::unique_lock<std::mutex> lock(mutexPorta);
-    _abertaNoAndar[num] = true;
+    _abertaNoAndar[num] = false;
     aberta = false;
 }
 

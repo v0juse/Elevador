@@ -109,3 +109,21 @@ void Andar::pedidoDestino()
     _estado = PEDIDO_DESTINO;
 
 }
+
+
+
+/*=================================================================//
+ * METODO: PEDIDO_DESTINO                                  
+//=================================================================*/
+ int Andar::num()
+ {
+     return _num;
+ }
+
+/*=================================================================//
+ * METODO: SET_ANDAR                             
+//=================================================================*/
+void Andar::setEstadoAndar(enum ESTADOS_ANDAR novo_estado)
+{
+    _estado = novo_estado;
+}
