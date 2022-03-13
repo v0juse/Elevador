@@ -1,7 +1,7 @@
 # Make file names absolute:
 #
-get_filename_component(filename "/home/eryk/Workspace/Testes_e_Verificacao/Elevador/build/_deps/googletest-subbuild/googletest-populate-prefix/src/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip" ABSOLUTE)
-get_filename_component(directory "/home/eryk/Workspace/Testes_e_Verificacao/Elevador/build/_deps/googletest-src" ABSOLUTE)
+get_filename_component(filename "/home/v0id/Faculdade/Testes/Elevador/build/_deps/googletest-subbuild/googletest-populate-prefix/src/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip" ABSOLUTE)
+get_filename_component(directory "/home/v0id/Faculdade/Testes/Elevador/build/_deps/googletest-src" ABSOLUTE)
 
 message(STATUS "extracting...
      src='${filename}'

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/eryk/Workspace/Testes_e_Verificacao/Elevador/build
+CMAKE_SOURCE_DIR = /home/v0id/Faculdade/Testes/Elevador
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/eryk/Workspace/Testes_e_Verificacao/Elevador/build
+CMAKE_BINARY_DIR = /home/v0id/Faculdade/Testes/Elevador/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/AndarTest.dir/depend.make
@@ -57,51 +57,64 @@ include CMakeFiles/AndarTest.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/AndarTest.dir/flags.make
 
-CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.o: CMakeFiles/AndarTest.dir/flags.make
-CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.o: /home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eryk/Workspace/Testes_e_Verificacao/Elevador/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.o -c /home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp
+CMakeFiles/AndarTest.dir/src/Andar.cpp.o: CMakeFiles/AndarTest.dir/flags.make
+CMakeFiles/AndarTest.dir/src/Andar.cpp.o: ../src/Andar.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/AndarTest.dir/src/Andar.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/AndarTest.dir/src/Andar.cpp.o -c /home/v0id/Faculdade/Testes/Elevador/src/Andar.cpp
 
-CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp > CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.i
+CMakeFiles/AndarTest.dir/src/Andar.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AndarTest.dir/src/Andar.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/v0id/Faculdade/Testes/Elevador/src/Andar.cpp > CMakeFiles/AndarTest.dir/src/Andar.cpp.i
 
-CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp -o CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.s
+CMakeFiles/AndarTest.dir/src/Andar.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AndarTest.dir/src/Andar.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/v0id/Faculdade/Testes/Elevador/src/Andar.cpp -o CMakeFiles/AndarTest.dir/src/Andar.cpp.s
 
-CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.o: CMakeFiles/AndarTest.dir/flags.make
-CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.o: /home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eryk/Workspace/Testes_e_Verificacao/Elevador/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.o -c /home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc
+CMakeFiles/AndarTest.dir/src/Utility.cpp.o: CMakeFiles/AndarTest.dir/flags.make
+CMakeFiles/AndarTest.dir/src/Utility.cpp.o: ../src/Utility.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/AndarTest.dir/src/Utility.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/AndarTest.dir/src/Utility.cpp.o -c /home/v0id/Faculdade/Testes/Elevador/src/Utility.cpp
 
-CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc > CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.i
+CMakeFiles/AndarTest.dir/src/Utility.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AndarTest.dir/src/Utility.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/v0id/Faculdade/Testes/Elevador/src/Utility.cpp > CMakeFiles/AndarTest.dir/src/Utility.cpp.i
 
-CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc -o CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.s
+CMakeFiles/AndarTest.dir/src/Utility.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AndarTest.dir/src/Utility.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/v0id/Faculdade/Testes/Elevador/src/Utility.cpp -o CMakeFiles/AndarTest.dir/src/Utility.cpp.s
+
+CMakeFiles/AndarTest.dir/testes/Andar_test.cc.o: CMakeFiles/AndarTest.dir/flags.make
+CMakeFiles/AndarTest.dir/testes/Andar_test.cc.o: ../testes/Andar_test.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/AndarTest.dir/testes/Andar_test.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/AndarTest.dir/testes/Andar_test.cc.o -c /home/v0id/Faculdade/Testes/Elevador/testes/Andar_test.cc
+
+CMakeFiles/AndarTest.dir/testes/Andar_test.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AndarTest.dir/testes/Andar_test.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/v0id/Faculdade/Testes/Elevador/testes/Andar_test.cc > CMakeFiles/AndarTest.dir/testes/Andar_test.cc.i
+
+CMakeFiles/AndarTest.dir/testes/Andar_test.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AndarTest.dir/testes/Andar_test.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/v0id/Faculdade/Testes/Elevador/testes/Andar_test.cc -o CMakeFiles/AndarTest.dir/testes/Andar_test.cc.s
 
 # Object files for target AndarTest
 AndarTest_OBJECTS = \
-"CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.o" \
-"CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.o"
+"CMakeFiles/AndarTest.dir/src/Andar.cpp.o" \
+"CMakeFiles/AndarTest.dir/src/Utility.cpp.o" \
+"CMakeFiles/AndarTest.dir/testes/Andar_test.cc.o"
 
 # External object files for target AndarTest
 AndarTest_EXTERNAL_OBJECTS =
 
-AndarTest: CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.o
-AndarTest: CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.o
+AndarTest: CMakeFiles/AndarTest.dir/src/Andar.cpp.o
+AndarTest: CMakeFiles/AndarTest.dir/src/Utility.cpp.o
+AndarTest: CMakeFiles/AndarTest.dir/testes/Andar_test.cc.o
 AndarTest: CMakeFiles/AndarTest.dir/build.make
 AndarTest: lib/libgtest_main.a
-AndarTest: lib/libgmock_main.a
-AndarTest: lib/libgmock.a
 AndarTest: lib/libgtest.a
 AndarTest: CMakeFiles/AndarTest.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/eryk/Workspace/Testes_e_Verificacao/Elevador/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable AndarTest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable AndarTest"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AndarTest.dir/link.txt --verbose=$(VERBOSE)
-	/usr/bin/cmake -D TEST_TARGET=AndarTest -D TEST_EXECUTABLE=/home/eryk/Workspace/Testes_e_Verificacao/Elevador/build/AndarTest -D TEST_EXECUTOR= -D TEST_WORKING_DIR=/home/eryk/Workspace/Testes_e_Verificacao/Elevador/build -D TEST_EXTRA_ARGS= -D TEST_PROPERTIES= -D TEST_PREFIX= -D TEST_SUFFIX= -D NO_PRETTY_TYPES=FALSE -D NO_PRETTY_VALUES=FALSE -D TEST_LIST=AndarTest_TESTS -D CTEST_FILE=/home/eryk/Workspace/Testes_e_Verificacao/Elevador/build/AndarTest[1]_tests.cmake -D TEST_DISCOVERY_TIMEOUT=5 -P /usr/share/cmake-3.16/Modules/GoogleTestAddTests.cmake
+	/usr/bin/cmake -D TEST_TARGET=AndarTest -D TEST_EXECUTABLE=/home/v0id/Faculdade/Testes/Elevador/build/AndarTest -D TEST_EXECUTOR= -D TEST_WORKING_DIR=/home/v0id/Faculdade/Testes/Elevador/build -D TEST_EXTRA_ARGS= -D TEST_PROPERTIES= -D TEST_PREFIX= -D TEST_SUFFIX= -D NO_PRETTY_TYPES=FALSE -D NO_PRETTY_VALUES=FALSE -D TEST_LIST=AndarTest_TESTS -D CTEST_FILE=/home/v0id/Faculdade/Testes/Elevador/build/AndarTest[1]_tests.cmake -D TEST_DISCOVERY_TIMEOUT=5 -P /usr/share/cmake-3.16/Modules/GoogleTestAddTests.cmake
 
 # Rule to build all files generated by this target.
 CMakeFiles/AndarTest.dir/build: AndarTest
@@ -113,6 +126,6 @@ CMakeFiles/AndarTest.dir/clean:
 .PHONY : CMakeFiles/AndarTest.dir/clean
 
 CMakeFiles/AndarTest.dir/depend:
-	cd /home/eryk/Workspace/Testes_e_Verificacao/Elevador/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/eryk/Workspace/Testes_e_Verificacao/Elevador/build /home/eryk/Workspace/Testes_e_Verificacao/Elevador/build /home/eryk/Workspace/Testes_e_Verificacao/Elevador/build /home/eryk/Workspace/Testes_e_Verificacao/Elevador/build /home/eryk/Workspace/Testes_e_Verificacao/Elevador/build/CMakeFiles/AndarTest.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/v0id/Faculdade/Testes/Elevador/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/v0id/Faculdade/Testes/Elevador /home/v0id/Faculdade/Testes/Elevador /home/v0id/Faculdade/Testes/Elevador/build /home/v0id/Faculdade/Testes/Elevador/build /home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles/AndarTest.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/AndarTest.dir/depend
 

@@ -6,5 +6,5 @@ CXX_FLAGS =   -Wall -Wshadow -Werror -Wno-error=dangling-else -DGTEST_HAS_PTHREA
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/eryk/Workspace/Testes_e_Verificacao/Elevador/build/_deps/googletest-src/googletest/include -I/home/eryk/Workspace/Testes_e_Verificacao/Elevador/build/_deps/googletest-src/googletest 
+CXX_INCLUDES = -I/home/v0id/Faculdade/Testes/Elevador/build/_deps/googletest-src/googletest/include -I/home/v0id/Faculdade/Testes/Elevador/build/_deps/googletest-src/googletest 
 

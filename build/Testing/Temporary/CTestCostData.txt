@@ -1,0 +1,6 @@
+AndarTest.Classe1Instanciacao 1 0.0025743
+AndarTest.Classe2AtendimentoDeAndar 1 0.0015831
+AndarTest.Classe3PedidoDescida 1 0.0021764
+AndarTest.Classe4PedidoSubida 1 0.0030628
+AndarTest.Classe5PedidoDestino 1 0.0020066
+---

@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/eryk/Workspace/Testes_e_Verificacao/Elevador/build
+CMAKE_SOURCE_DIR = /home/v0id/Faculdade/Testes/Elevador
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/eryk/Workspace/Testes_e_Verificacao/Elevador/build
+CMAKE_BINARY_DIR = /home/v0id/Faculdade/Testes/Elevador/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -137,9 +137,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/eryk/Workspace/Testes_e_Verificacao/Elevador/build/CMakeFiles /home/eryk/Workspace/Testes_e_Verificacao/Elevador/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles /home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/eryk/Workspace/Testes_e_Verificacao/Elevador/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/v0id/Faculdade/Testes/Elevador/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -166,6 +166,19 @@ preinstall/fast:
 depend:
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
+
+#=============================================================================
+# Target rules for targets named PortaTest
+
+# Build rule for target.
+PortaTest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 PortaTest
+.PHONY : PortaTest
+
+# fast build rule for target.
+PortaTest/fast:
+	$(MAKE) -f CMakeFiles/PortaTest.dir/build.make CMakeFiles/PortaTest.dir/build
+.PHONY : PortaTest/fast
 
 #=============================================================================
 # Target rules for targets named AndarTest
@@ -232,59 +245,140 @@ gtest/fast:
 	$(MAKE) -f _deps/googletest-build/googletest/CMakeFiles/gtest.dir/build.make _deps/googletest-build/googletest/CMakeFiles/gtest.dir/build
 .PHONY : gtest/fast
 
-home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.o: home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.o
+src/Andar.o: src/Andar.cpp.o
 
-.PHONY : home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.o
-
-# target to build an object file
-home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.o:
-	$(MAKE) -f CMakeFiles/AndarTest.dir/build.make CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.o
-.PHONY : home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.o
-
-home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.i: home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.i
-
-.PHONY : home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.i
-
-# target to preprocess a source file
-home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.i:
-	$(MAKE) -f CMakeFiles/AndarTest.dir/build.make CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.i
-.PHONY : home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.i
-
-home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.s: home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.s
-
-.PHONY : home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.s
-
-# target to generate assembly for a file
-home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.s:
-	$(MAKE) -f CMakeFiles/AndarTest.dir/build.make CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.s
-.PHONY : home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.s
-
-home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.o: home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.o
-
-.PHONY : home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.o
+.PHONY : src/Andar.o
 
 # target to build an object file
-home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.o:
-	$(MAKE) -f CMakeFiles/AndarTest.dir/build.make CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.o
-.PHONY : home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.o
+src/Andar.cpp.o:
+	$(MAKE) -f CMakeFiles/AndarTest.dir/build.make CMakeFiles/AndarTest.dir/src/Andar.cpp.o
+.PHONY : src/Andar.cpp.o
 
-home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.i: home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.i
+src/Andar.i: src/Andar.cpp.i
 
-.PHONY : home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.i
+.PHONY : src/Andar.i
 
 # target to preprocess a source file
-home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.i:
-	$(MAKE) -f CMakeFiles/AndarTest.dir/build.make CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.i
-.PHONY : home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.i
+src/Andar.cpp.i:
+	$(MAKE) -f CMakeFiles/AndarTest.dir/build.make CMakeFiles/AndarTest.dir/src/Andar.cpp.i
+.PHONY : src/Andar.cpp.i
 
-home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.s: home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.s
+src/Andar.s: src/Andar.cpp.s
 
-.PHONY : home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.s
+.PHONY : src/Andar.s
 
 # target to generate assembly for a file
-home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.s:
-	$(MAKE) -f CMakeFiles/AndarTest.dir/build.make CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.s
-.PHONY : home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.s
+src/Andar.cpp.s:
+	$(MAKE) -f CMakeFiles/AndarTest.dir/build.make CMakeFiles/AndarTest.dir/src/Andar.cpp.s
+.PHONY : src/Andar.cpp.s
+
+src/Porta.o: src/Porta.cpp.o
+
+.PHONY : src/Porta.o
+
+# target to build an object file
+src/Porta.cpp.o:
+	$(MAKE) -f CMakeFiles/PortaTest.dir/build.make CMakeFiles/PortaTest.dir/src/Porta.cpp.o
+.PHONY : src/Porta.cpp.o
+
+src/Porta.i: src/Porta.cpp.i
+
+.PHONY : src/Porta.i
+
+# target to preprocess a source file
+src/Porta.cpp.i:
+	$(MAKE) -f CMakeFiles/PortaTest.dir/build.make CMakeFiles/PortaTest.dir/src/Porta.cpp.i
+.PHONY : src/Porta.cpp.i
+
+src/Porta.s: src/Porta.cpp.s
+
+.PHONY : src/Porta.s
+
+# target to generate assembly for a file
+src/Porta.cpp.s:
+	$(MAKE) -f CMakeFiles/PortaTest.dir/build.make CMakeFiles/PortaTest.dir/src/Porta.cpp.s
+.PHONY : src/Porta.cpp.s
+
+src/Utility.o: src/Utility.cpp.o
+
+.PHONY : src/Utility.o
+
+# target to build an object file
+src/Utility.cpp.o:
+	$(MAKE) -f CMakeFiles/AndarTest.dir/build.make CMakeFiles/AndarTest.dir/src/Utility.cpp.o
+.PHONY : src/Utility.cpp.o
+
+src/Utility.i: src/Utility.cpp.i
+
+.PHONY : src/Utility.i
+
+# target to preprocess a source file
+src/Utility.cpp.i:
+	$(MAKE) -f CMakeFiles/AndarTest.dir/build.make CMakeFiles/AndarTest.dir/src/Utility.cpp.i
+.PHONY : src/Utility.cpp.i
+
+src/Utility.s: src/Utility.cpp.s
+
+.PHONY : src/Utility.s
+
+# target to generate assembly for a file
+src/Utility.cpp.s:
+	$(MAKE) -f CMakeFiles/AndarTest.dir/build.make CMakeFiles/AndarTest.dir/src/Utility.cpp.s
+.PHONY : src/Utility.cpp.s
+
+testes/Andar_test.o: testes/Andar_test.cc.o
+
+.PHONY : testes/Andar_test.o
+
+# target to build an object file
+testes/Andar_test.cc.o:
+	$(MAKE) -f CMakeFiles/AndarTest.dir/build.make CMakeFiles/AndarTest.dir/testes/Andar_test.cc.o
+.PHONY : testes/Andar_test.cc.o
+
+testes/Andar_test.i: testes/Andar_test.cc.i
+
+.PHONY : testes/Andar_test.i
+
+# target to preprocess a source file
+testes/Andar_test.cc.i:
+	$(MAKE) -f CMakeFiles/AndarTest.dir/build.make CMakeFiles/AndarTest.dir/testes/Andar_test.cc.i
+.PHONY : testes/Andar_test.cc.i
+
+testes/Andar_test.s: testes/Andar_test.cc.s
+
+.PHONY : testes/Andar_test.s
+
+# target to generate assembly for a file
+testes/Andar_test.cc.s:
+	$(MAKE) -f CMakeFiles/AndarTest.dir/build.make CMakeFiles/AndarTest.dir/testes/Andar_test.cc.s
+.PHONY : testes/Andar_test.cc.s
+
+testes/Porta_test.o: testes/Porta_test.cc.o
+
+.PHONY : testes/Porta_test.o
+
+# target to build an object file
+testes/Porta_test.cc.o:
+	$(MAKE) -f CMakeFiles/PortaTest.dir/build.make CMakeFiles/PortaTest.dir/testes/Porta_test.cc.o
+.PHONY : testes/Porta_test.cc.o
+
+testes/Porta_test.i: testes/Porta_test.cc.i
+
+.PHONY : testes/Porta_test.i
+
+# target to preprocess a source file
+testes/Porta_test.cc.i:
+	$(MAKE) -f CMakeFiles/PortaTest.dir/build.make CMakeFiles/PortaTest.dir/testes/Porta_test.cc.i
+.PHONY : testes/Porta_test.cc.i
+
+testes/Porta_test.s: testes/Porta_test.cc.s
+
+.PHONY : testes/Porta_test.s
+
+# target to generate assembly for a file
+testes/Porta_test.cc.s:
+	$(MAKE) -f CMakeFiles/PortaTest.dir/build.make CMakeFiles/PortaTest.dir/testes/Porta_test.cc.s
+.PHONY : testes/Porta_test.cc.s
 
 # Help Target
 help:
@@ -296,6 +390,7 @@ help:
 	@echo "... install/local"
 	@echo "... edit_cache"
 	@echo "... test"
+	@echo "... PortaTest"
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
@@ -304,12 +399,21 @@ help:
 	@echo "... gmock"
 	@echo "... gtest_main"
 	@echo "... gtest"
-	@echo "... home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.o"
-	@echo "... home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.i"
-	@echo "... home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.s"
-	@echo "... home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.o"
-	@echo "... home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.i"
-	@echo "... home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.s"
+	@echo "... src/Andar.o"
+	@echo "... src/Andar.i"
+	@echo "... src/Andar.s"
+	@echo "... src/Porta.o"
+	@echo "... src/Porta.i"
+	@echo "... src/Porta.s"
+	@echo "... src/Utility.o"
+	@echo "... src/Utility.i"
+	@echo "... src/Utility.s"
+	@echo "... testes/Andar_test.o"
+	@echo "... testes/Andar_test.i"
+	@echo "... testes/Andar_test.s"
+	@echo "... testes/Porta_test.o"
+	@echo "... testes/Porta_test.i"
+	@echo "... testes/Porta_test.s"
 .PHONY : help
 
 
