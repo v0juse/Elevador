@@ -31,18 +31,18 @@
             <td class="headerValue">my.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">2</td>
-            <td class="headerCovTableEntry">6</td>
-            <td class="headerCovTableEntryLo">33.3 %</td>
+            <td class="headerCovTableEntry">11</td>
+            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntryMed">84.6 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-03-13 21:23:11</td>
+            <td class="headerValue">2022-03-13 23:23:05</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">1</td>
-            <td class="headerCovTableEntry">3</td>
-            <td class="headerCovTableEntryLo">33.3 %</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntryMed">83.3 %</td>
           </tr>
           <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -219,8 +219,8 @@
 <a name="157"><span class="lineNum">     157 </span>            : #else</a>
 <a name="158"><span class="lineNum">     158 </span>            :       template&lt;typename _Seq = _Sequence, typename _Requires = typename</a>
 <a name="159"><span class="lineNum">     159 </span>            :                enable_if&lt;is_default_constructible&lt;_Seq&gt;::value&gt;::type&gt;</a>
-<a name="160"><span class="lineNum">     160 </span><span class="lineCov">          2 :         queue()</span></a>
-<a name="161"><span class="lineNum">     161 </span><span class="lineCov">          2 :         : c() { }</span></a>
+<a name="160"><span class="lineNum">     160 </span><span class="lineCov">         28 :         queue()</span></a>
+<a name="161"><span class="lineNum">     161 </span><span class="lineCov">         28 :         : c() { }</span></a>
 <a name="162"><span class="lineNum">     162 </span>            : </a>
 <a name="163"><span class="lineNum">     163 </span>            :       explicit</a>
 <a name="164"><span class="lineNum">     164 </span>            :       queue(const _Sequence&amp; __c)</a>
@@ -256,8 +256,8 @@
 <a name="194"><span class="lineNum">     194 </span>            :        *  Returns true if the %queue is empty.</a>
 <a name="195"><span class="lineNum">     195 </span>            :        */</a>
 <a name="196"><span class="lineNum">     196 </span>            :       _GLIBCXX_NODISCARD bool</a>
-<a name="197"><span class="lineNum">     197 </span>            :       empty() const</a>
-<a name="198"><span class="lineNum">     198 </span>            :       { return c.empty(); }</a>
+<a name="197"><span class="lineNum">     197 </span><span class="lineCov">        989 :       empty() const</span></a>
+<a name="198"><span class="lineNum">     198 </span><span class="lineCov">        989 :       { return c.empty(); }</span></a>
 <a name="199"><span class="lineNum">     199 </span>            : </a>
 <a name="200"><span class="lineNum">     200 </span>            :       /**  Returns the number of elements in the %queue.  */</a>
 <a name="201"><span class="lineNum">     201 </span>            :       size_type</a>
@@ -269,10 +269,10 @@
 <a name="207"><span class="lineNum">     207 </span>            :        *  element of the %queue.</a>
 <a name="208"><span class="lineNum">     208 </span>            :        */</a>
 <a name="209"><span class="lineNum">     209 </span>            :       reference</a>
-<a name="210"><span class="lineNum">     210 </span>            :       front()</a>
+<a name="210"><span class="lineNum">     210 </span><span class="lineCov">        382 :       front()</span></a>
 <a name="211"><span class="lineNum">     211 </span>            :       {</a>
 <a name="212"><span class="lineNum">     212 </span>            :         __glibcxx_requires_nonempty();</a>
-<a name="213"><span class="lineNum">     213 </span>            :         return c.front();</a>
+<a name="213"><span class="lineNum">     213 </span><span class="lineCov">        382 :         return c.front();</span></a>
 <a name="214"><span class="lineNum">     214 </span>            :       }</a>
 <a name="215"><span class="lineNum">     215 </span>            : </a>
 <a name="216"><span class="lineNum">     216 </span>            :       /**</a>
@@ -318,8 +318,8 @@
 <a name="256"><span class="lineNum">     256 </span>            :        *  underlying sequence.</a>
 <a name="257"><span class="lineNum">     257 </span>            :        */</a>
 <a name="258"><span class="lineNum">     258 </span>            :       void</a>
-<a name="259"><span class="lineNum">     259 </span><span class="lineNoCov">          0 :       push(const value_type&amp; __x)</span></a>
-<a name="260"><span class="lineNum">     260 </span><span class="lineNoCov">          0 :       { c.push_back(__x); }</span></a>
+<a name="259"><span class="lineNum">     259 </span><span class="lineCov">        383 :       push(const value_type&amp; __x)</span></a>
+<a name="260"><span class="lineNum">     260 </span><span class="lineCov">        383 :       { c.push_back(__x); }</span></a>
 <a name="261"><span class="lineNum">     261 </span>            : </a>
 <a name="262"><span class="lineNum">     262 </span>            : #if __cplusplus &gt;= 201103L</a>
 <a name="263"><span class="lineNum">     263 </span>            :       void</a>
@@ -351,11 +351,11 @@
 <a name="289"><span class="lineNum">     289 </span>            :        *  called.</a>
 <a name="290"><span class="lineNum">     290 </span>            :        */</a>
 <a name="291"><span class="lineNum">     291 </span>            :       void</a>
-<a name="292"><span class="lineNum">     292 </span>            :       pop()</a>
+<a name="292"><span class="lineNum">     292 </span><span class="lineCov">        391 :       pop()</span></a>
 <a name="293"><span class="lineNum">     293 </span>            :       {</a>
 <a name="294"><span class="lineNum">     294 </span>            :         __glibcxx_requires_nonempty();</a>
-<a name="295"><span class="lineNum">     295 </span>            :         c.pop_front();</a>
-<a name="296"><span class="lineNum">     296 </span>            :       }</a>
+<a name="295"><span class="lineNum">     295 </span><span class="lineCov">        391 :         c.pop_front();</span></a>
+<a name="296"><span class="lineNum">     296 </span><span class="lineCov">        391 :       }</span></a>
 <a name="297"><span class="lineNum">     297 </span>            : </a>
 <a name="298"><span class="lineNum">     298 </span>            : #if __cplusplus &gt;= 201103L</a>
 <a name="299"><span class="lineNum">     299 </span>            :       void</a>

@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../inc/SensorEstadoPorta.hpp
+random
+-
+
+/home/v0id/Faculdade/Testes/Elevador/src/SensorEstadoPorta.cpp
+SensorEstadoPorta.hpp
+/home/v0id/Faculdade/Testes/Elevador/src/SensorEstadoPorta.hpp
+

@@ -6,17 +6,9 @@
 
 #IncludeRegexTransform: 
 
-../inc/SensorAndar.hpp
-random
--
-
 /home/v0id/Faculdade/Testes/Elevador/inc/SensorAndar.hpp
 random
 -
-
-/home/v0id/Faculdade/Testes/Elevador/src/SensorAndar.cpp
-SensorAndar.hpp
-/home/v0id/Faculdade/Testes/Elevador/src/SensorAndar.hpp
 
 /home/v0id/Faculdade/Testes/Elevador/testes/SensorAndar_test.cc
 gtest/gtest.h

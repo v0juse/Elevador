@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-03-13 21:23:11</td>
+            <td class="headerValue">2022-03-13 23:23:05</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">4</td>
-            <td class="headerCovTableEntry">4</td>
-            <td class="headerCovTableEntryHi">100.0 %</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntryLo">66.7 %</td>
           </tr>
           <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -196,7 +196,7 @@
 <a name="134"><span class="lineNum">     134 </span>            :       // _GLIBCXX_RESOLVE_LIB_DEFECTS</a>
 <a name="135"><span class="lineNum">     135 </span>            :       // 3035. std::allocator's constructors should be constexpr</a>
 <a name="136"><span class="lineNum">     136 </span>            :       _GLIBCXX20_CONSTEXPR</a>
-<a name="137"><span class="lineNum">     137 </span><span class="lineCov">          4 :       allocator() _GLIBCXX_NOTHROW { }</span></a>
+<a name="137"><span class="lineNum">     137 </span><span class="lineCov">        163 :       allocator() _GLIBCXX_NOTHROW { }</span></a>
 <a name="138"><span class="lineNum">     138 </span>            : </a>
 <a name="139"><span class="lineNum">     139 </span>            :       _GLIBCXX20_CONSTEXPR</a>
 <a name="140"><span class="lineNum">     140 </span>            :       allocator(const allocator&amp; __a) _GLIBCXX_NOTHROW</a>
@@ -209,9 +209,9 @@
 <a name="147"><span class="lineNum">     147 </span>            : </a>
 <a name="148"><span class="lineNum">     148 </span>            :       template&lt;typename _Tp1&gt;</a>
 <a name="149"><span class="lineNum">     149 </span>            :         _GLIBCXX20_CONSTEXPR</a>
-<a name="150"><span class="lineNum">     150 </span><span class="lineCov">          4 :         allocator(const allocator&lt;_Tp1&gt;&amp;) _GLIBCXX_NOTHROW { }</span></a>
+<a name="150"><span class="lineNum">     150 </span><span class="lineCov">         56 :         allocator(const allocator&lt;_Tp1&gt;&amp;) _GLIBCXX_NOTHROW { }</span></a>
 <a name="151"><span class="lineNum">     151 </span>            : </a>
-<a name="152"><span class="lineNum">     152 </span><span class="lineCov">          8 :       ~allocator() _GLIBCXX_NOTHROW { }</span></a>
+<a name="152"><span class="lineNum">     152 </span><span class="lineCov">        219 :       ~allocator() _GLIBCXX_NOTHROW { }</span></a>
 <a name="153"><span class="lineNum">     153 </span>            : </a>
 <a name="154"><span class="lineNum">     154 </span>            :       friend bool</a>
 <a name="155"><span class="lineNum">     155 </span>            :       operator==(const allocator&amp;, const allocator&amp;) _GLIBCXX_NOTHROW</a>

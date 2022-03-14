@@ -32,16 +32,16 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">0</td>
-            <td class="headerCovTableEntry">36</td>
+            <td class="headerCovTableEntry">42</td>
             <td class="headerCovTableEntryLo">0.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-03-13 21:23:11</td>
+            <td class="headerValue">2022-03-13 23:23:05</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
-            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">3</td>
             <td class="headerCovTableEntryLo">0.0 %</td>
           </tr>
           <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -630,15 +630,15 @@
 <a name="568"><span class="lineNum">     568 </span>            :   //   _M_impl._M_start._M_cur == _M_impl._M_start._M_last,</a>
 <a name="569"><span class="lineNum">     569 </span>            :   // then the deque must have at least two nodes.</a>
 <a name="570"><span class="lineNum">     570 </span>            :   template &lt;typename _Tp, typename _Alloc&gt;</a>
-<a name="571"><span class="lineNum">     571 </span>            :     void deque&lt;_Tp, _Alloc&gt;::</a>
+<a name="571"><span class="lineNum">     571 </span><span class="lineNoCov">          0 :     void deque&lt;_Tp, _Alloc&gt;::</span></a>
 <a name="572"><span class="lineNum">     572 </span>            :     _M_pop_front_aux()</a>
 <a name="573"><span class="lineNum">     573 </span>            :     {</a>
-<a name="574"><span class="lineNum">     574 </span>            :       _Alloc_traits::destroy(_M_get_Tp_allocator(),</a>
+<a name="574"><span class="lineNum">     574 </span><span class="lineNoCov">          0 :       _Alloc_traits::destroy(_M_get_Tp_allocator(),</span></a>
 <a name="575"><span class="lineNum">     575 </span>            :                              this-&gt;_M_impl._M_start._M_cur);</a>
-<a name="576"><span class="lineNum">     576 </span>            :       _M_deallocate_node(this-&gt;_M_impl._M_start._M_first);</a>
-<a name="577"><span class="lineNum">     577 </span>            :       this-&gt;_M_impl._M_start._M_set_node(this-&gt;_M_impl._M_start._M_node + 1);</a>
-<a name="578"><span class="lineNum">     578 </span>            :       this-&gt;_M_impl._M_start._M_cur = this-&gt;_M_impl._M_start._M_first;</a>
-<a name="579"><span class="lineNum">     579 </span>            :     }</a>
+<a name="576"><span class="lineNum">     576 </span><span class="lineNoCov">          0 :       _M_deallocate_node(this-&gt;_M_impl._M_start._M_first);</span></a>
+<a name="577"><span class="lineNum">     577 </span><span class="lineNoCov">          0 :       this-&gt;_M_impl._M_start._M_set_node(this-&gt;_M_impl._M_start._M_node + 1);</span></a>
+<a name="578"><span class="lineNum">     578 </span><span class="lineNoCov">          0 :       this-&gt;_M_impl._M_start._M_cur = this-&gt;_M_impl._M_start._M_first;</span></a>
+<a name="579"><span class="lineNum">     579 </span><span class="lineNoCov">          0 :     }</span></a>
 <a name="580"><span class="lineNum">     580 </span>            : </a>
 <a name="581"><span class="lineNum">     581 </span>            :   template &lt;typename _Tp, typename _Alloc&gt;</a>
 <a name="582"><span class="lineNum">     582 </span>            :     template &lt;typename _InputIterator&gt;</a>

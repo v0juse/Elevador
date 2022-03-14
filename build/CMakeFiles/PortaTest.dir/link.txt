@@ -1,1 +1,1 @@
-/usr/bin/c++  -fprofile-arcs -ftest-coverage   CMakeFiles/PortaTest.dir/src/Porta.cpp.o CMakeFiles/PortaTest.dir/testes/Porta_test.cc.o  -o PortaTest  lib/libgtest_main.a libutility.a lib/libgtest.a -lpthread 
+/usr/bin/c++  -fprofile-arcs -ftest-coverage -pthread -std=c++11    CMakeFiles/PortaTest.dir/src/Porta.cpp.o CMakeFiles/PortaTest.dir/testes/Porta_test.cc.o  -o PortaTest  lib/libgtest_main.a libutility.a lib/libgtest.a -lpthread 

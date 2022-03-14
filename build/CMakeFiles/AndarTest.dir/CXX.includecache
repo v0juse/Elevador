@@ -6,18 +6,6 @@
 
 #IncludeRegexTransform: 
 
-../inc/Andar.hpp
-Utility.h
-../inc/Utility.h
-
-../inc/Utility.h
-queue
--
-mutex
--
-condition_variable
--
-
 /home/v0id/Faculdade/Testes/Elevador/inc/Andar.hpp
 Utility.h
 /home/v0id/Faculdade/Testes/Elevador/inc/Utility.h
@@ -29,10 +17,6 @@ mutex
 -
 condition_variable
 -
-
-/home/v0id/Faculdade/Testes/Elevador/src/Andar.cpp
-Andar.hpp
-/home/v0id/Faculdade/Testes/Elevador/src/Andar.hpp
 
 /home/v0id/Faculdade/Testes/Elevador/testes/Andar_test.cc
 gtest/gtest.h

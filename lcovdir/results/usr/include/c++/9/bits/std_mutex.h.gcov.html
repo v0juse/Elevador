@@ -31,17 +31,17 @@
             <td class="headerValue">my.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">7</td>
-            <td class="headerCovTableEntry">8</td>
-            <td class="headerCovTableEntryMed">87.5 %</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntryHi">90.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-03-13 21:23:11</td>
+            <td class="headerValue">2022-03-13 23:23:05</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">2</td>
-            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -124,7 +124,7 @@
 <a name="62"><span class="lineNum">      62 </span>            : #ifdef __GTHREAD_MUTEX_INIT</a>
 <a name="63"><span class="lineNum">      63 </span>            :     __native_type  _M_mutex = __GTHREAD_MUTEX_INIT;</a>
 <a name="64"><span class="lineNum">      64 </span>            : </a>
-<a name="65"><span class="lineNum">      65 </span>            :     constexpr __mutex_base() noexcept = default;</a>
+<a name="65"><span class="lineNum">      65 </span><span class="lineCov">         91 :     constexpr __mutex_base() noexcept = default;</span></a>
 <a name="66"><span class="lineNum">      66 </span>            : #else</a>
 <a name="67"><span class="lineNum">      67 </span>            :     __native_type  _M_mutex;</a>
 <a name="68"><span class="lineNum">      68 </span>            : </a>
@@ -150,21 +150,21 @@
 <a name="88"><span class="lineNum">      88 </span>            : #ifdef __GTHREAD_MUTEX_INIT</a>
 <a name="89"><span class="lineNum">      89 </span>            :     constexpr</a>
 <a name="90"><span class="lineNum">      90 </span>            : #endif</a>
-<a name="91"><span class="lineNum">      91 </span>            :     mutex() noexcept = default;</a>
+<a name="91"><span class="lineNum">      91 </span><span class="lineCov">         91 :     mutex() noexcept = default;</span></a>
 <a name="92"><span class="lineNum">      92 </span>            :     ~mutex() = default;</a>
 <a name="93"><span class="lineNum">      93 </span>            : </a>
 <a name="94"><span class="lineNum">      94 </span>            :     mutex(const mutex&amp;) = delete;</a>
 <a name="95"><span class="lineNum">      95 </span>            :     mutex&amp; operator=(const mutex&amp;) = delete;</a>
 <a name="96"><span class="lineNum">      96 </span>            : </a>
 <a name="97"><span class="lineNum">      97 </span>            :     void</a>
-<a name="98"><span class="lineNum">      98 </span><span class="lineCov">          6 :     lock()</span></a>
+<a name="98"><span class="lineNum">      98 </span><span class="lineCov">     434655 :     lock()</span></a>
 <a name="99"><span class="lineNum">      99 </span>            :     {</a>
-<a name="100"><span class="lineNum">     100 </span><span class="lineCov">          6 :       int __e = __gthread_mutex_lock(&amp;_M_mutex);</span></a>
+<a name="100"><span class="lineNum">     100 </span><span class="lineCov">     434655 :       int __e = __gthread_mutex_lock(&amp;_M_mutex);</span></a>
 <a name="101"><span class="lineNum">     101 </span>            : </a>
 <a name="102"><span class="lineNum">     102 </span>            :       // EINVAL, EAGAIN, EBUSY, EINVAL, EDEADLK(may)</a>
-<a name="103"><span class="lineNum">     103 </span><span class="lineCov">          6 :       if (__e)</span></a>
+<a name="103"><span class="lineNum">     103 </span><span class="lineCov">     434655 :       if (__e)</span></a>
 <a name="104"><span class="lineNum">     104 </span><span class="lineNoCov">          0 :         __throw_system_error(__e);</span></a>
-<a name="105"><span class="lineNum">     105 </span><span class="lineCov">          6 :     }</span></a>
+<a name="105"><span class="lineNum">     105 </span><span class="lineCov">     434655 :     }</span></a>
 <a name="106"><span class="lineNum">     106 </span>            : </a>
 <a name="107"><span class="lineNum">     107 </span>            :     bool</a>
 <a name="108"><span class="lineNum">     108 </span>            :     try_lock() noexcept</a>
@@ -174,11 +174,11 @@
 <a name="112"><span class="lineNum">     112 </span>            :     }</a>
 <a name="113"><span class="lineNum">     113 </span>            : </a>
 <a name="114"><span class="lineNum">     114 </span>            :     void</a>
-<a name="115"><span class="lineNum">     115 </span><span class="lineCov">          6 :     unlock()</span></a>
+<a name="115"><span class="lineNum">     115 </span><span class="lineCov">     434590 :     unlock()</span></a>
 <a name="116"><span class="lineNum">     116 </span>            :     {</a>
 <a name="117"><span class="lineNum">     117 </span>            :       // XXX EINVAL, EAGAIN, EPERM</a>
-<a name="118"><span class="lineNum">     118 </span><span class="lineCov">          6 :       __gthread_mutex_unlock(&amp;_M_mutex);</span></a>
-<a name="119"><span class="lineNum">     119 </span><span class="lineCov">          6 :     }</span></a>
+<a name="118"><span class="lineNum">     118 </span><span class="lineCov">     434590 :       __gthread_mutex_unlock(&amp;_M_mutex);</span></a>
+<a name="119"><span class="lineNum">     119 </span><span class="lineCov">     434590 :     }</span></a>
 <a name="120"><span class="lineNum">     120 </span>            : </a>
 <a name="121"><span class="lineNum">     121 </span>            :     native_handle_type</a>
 <a name="122"><span class="lineNum">     122 </span>            :     native_handle() noexcept</a>

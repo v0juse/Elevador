@@ -11,7 +11,11 @@ TEST(AndarTest, Classe1Instanciacao)
 
     EXPECT_NE(andar.num(), andar2.num());
 }
-
+//-------------------------------------------------------------
+//                           |    _estado     |    retorno    | 
+//---------------------------|----------------|---------------|
+// Classe2AtendimentoDeAndar |      A[]       |   SEM_PEDIDO  | 
+//-------------------------------------------------------------
 TEST(AndarTest, Classe2AtendimentoDeAndar) 
 {
     Andar andar;
@@ -22,7 +26,14 @@ TEST(AndarTest, Classe2AtendimentoDeAndar)
 
 
 }
-
+//---------------------------------------------------------
+//                      |    _estado     |     retorno    | 
+//----------------------|----------------|----------------|
+// Classe3PedidoDescida | SEM_PEDIDO     | PEDIDO_DESCIDA | 
+// Classe3PedidoDescida | PEDIDO_SUBIDA  | PEDIDO_DESTINO | 
+// Classe3PedidoDescida | PEDIDO_DESCIDA | PEDIDO_DESCIDA | 
+// Classe3PedidoDescida | PEDIDO_DESTINO | PEDIDO_DESTINO | 
+//---------------------------------------------------------
 TEST(AndarTest, Classe3PedidoDescida) 
 {
     
@@ -46,8 +57,14 @@ TEST(AndarTest, Classe3PedidoDescida)
     andar.pedidoDescida();   
     EXPECT_EQ(andar.estado_andar(), PEDIDO_DESTINO);
 }
-
-
+//---------------------------------------------------------
+//                      |    _estado     |     retorno    | 
+//----------------------|----------------|----------------|
+// Classe4PedidoSubida | SEM_PEDIDO     | PEDIDO_DESCIDA | 
+// Classe4PedidoSubida | PEDIDO_SUBIDA  | PEDIDO_DESTINO | 
+// Classe4PedidoSubida | PEDIDO_DESCIDA | PEDIDO_DESCIDA | 
+// Classe4PedidoSubida | PEDIDO_DESTINO | PEDIDO_DESTINO | 
+//---------------------------------------------------------
 TEST(AndarTest, Classe4PedidoSubida) 
 {
     Andar andar;

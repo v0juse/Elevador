@@ -1,1 +1,1 @@
-/usr/bin/c++  -fprofile-arcs -ftest-coverage   CMakeFiles/SensorPresencaTest.dir/src/SensorPresenca.cpp.o CMakeFiles/SensorPresencaTest.dir/testes/SensorPresenca_test.cc.o  -o SensorPresencaTest  lib/libgtest_main.a libutility.a lib/libgtest.a -lpthread 
+/usr/bin/c++  -fprofile-arcs -ftest-coverage -pthread -std=c++11    CMakeFiles/SensorPresencaTest.dir/src/SensorPresenca.cpp.o CMakeFiles/SensorPresencaTest.dir/testes/SensorPresenca_test.cc.o  -o SensorPresencaTest  lib/libgtest_main.a libutility.a lib/libgtest.a -lpthread 
