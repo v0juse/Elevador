@@ -1,4 +1,4 @@
-/*=================================================================//
+ /*=================================================================//
  * Includes necessarios        
 //=================================================================*/
 
@@ -21,7 +21,11 @@
 
 int main()
 {
-    
+//     for(auto it = 0; it<numAndares; ++it)
+//     {   
+//         vetorAndares.emplace_back(new Andar);            
+//     }
+
     Porta porta;
     SensorEstadoPorta sensor_porta;
     SensorAndar sensor_andar;

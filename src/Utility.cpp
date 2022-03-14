@@ -18,13 +18,13 @@ std::condition_variable novaChamada;
  * BLINDAGEM       
 //=================================================================*/
 
-int blindagem(std::string s)
-{
-    try { return stoi(s); }
+// int blindagem(std::string s)
+// {
+//     try { return stoi(s); }
 
-    catch (...) { return -1; }
+//     catch (...) { return -1; }
     
-    return -1;
-}
+//     return -1;
+// }
 
  

@@ -17,7 +17,7 @@ TEST(AndarTest, Classe2AtendimentoDeAndar)
     Andar andar;
 
     andar.atendeuAndar();
-
+  
     EXPECT_EQ(andar.estado_andar(), SEM_PEDIDO);
 
 

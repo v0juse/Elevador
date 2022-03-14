@@ -74,8 +74,10 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/SensorAndar.dir/DependInfo.cmake"
+  "CMakeFiles/SensorPresencaTest.dir/DependInfo.cmake"
+  "CMakeFiles/SensorAndarTest.dir/DependInfo.cmake"
   "CMakeFiles/PortaTest.dir/DependInfo.cmake"
+  "CMakeFiles/ControladorTest.dir/DependInfo.cmake"
   "CMakeFiles/AndarTest.dir/DependInfo.cmake"
   "CMakeFiles/utility.dir/DependInfo.cmake"
   "_deps/googletest-build/googlemock/CMakeFiles/gmock_main.dir/DependInfo.cmake"

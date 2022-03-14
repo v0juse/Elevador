@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "../inc/Porta.hpp"
 
-TEST(ValidaIdentificadorTest, Classe1Instancicao) 
+TEST(PortaTest, Classe1Instancicao) 
 {
     Porta door;
 
@@ -9,7 +9,7 @@ TEST(ValidaIdentificadorTest, Classe1Instancicao)
         EXPECT_FALSE(door.abertaNoAndar(i));
 }
 
-TEST(ValidaIdentificadorTest, Classe2Abrir) 
+TEST(PortaTest, Classe2Abrir) 
 {
     Porta door;
 
@@ -20,13 +20,13 @@ TEST(ValidaIdentificadorTest, Classe2Abrir)
     }
 }
 
-TEST(ValidaIdentificadorTest, Classe2Fechar) 
+TEST(PortaTest, Classe3Fechar) 
 {
     Porta door;
 
     for(auto i=0; i < numAndares; ++i)
     {
         door.fechar(i);
-        EXPECT_TRUE(door.abertaNoAndar(i));
+        EXPECT_FALSE(door.abertaNoAndar(i));
     }
 }

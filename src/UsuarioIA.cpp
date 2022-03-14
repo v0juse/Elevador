@@ -6,11 +6,11 @@ std::list<UsuarioIA*> UsuarioIA::_listaUsuarios;
  * CONSTRUTOR                                         
 //=================================================================*/
 
-UsuarioIA::UsuarioIA(std::string nome, int nv, Porta* porta, SensorPresencaUsuario *sp):
-		std::thread(InternalThreadEntryFunc,this), _internAtributesLock(_internAtributes)
+UsuarioIA::UsuarioIA(const std::string& nome, int nv, Porta* porta, SensorPresencaUsuario *sp):
+		std::thread(InternalThreadEntryFunc,this), _internAtributesLock(_internAtributes),
+        _nome(nome)
 {   
         _numViagens = nv;
-        _nome = nome;
         _ptrPorta = porta;
         _dentroElevador = false;
         _ptrSensor = sp;
@@ -46,22 +46,22 @@ bool UsuarioIA::cond_elevador_requisitado()
  * METODO: cond_subida_requisitada
 //=================================================================*/
 
-bool UsuarioIA::cond_subida_requisitada()
-{
-    return (vetorAndares[_andarAtualUsuario].estado_andar() == PEDIDO_DESTINO|| vetorAndares[_andarAtualUsuario].estado_andar() == PEDIDO_SUBIDA);
-}
+// bool UsuarioIA::cond_subida_requisitada()
+// {
+//     return (vetorAndares[_andarAtualUsuario].estado_andar() == PEDIDO_DESTINO|| vetorAndares[_andarAtualUsuario].estado_andar() == PEDIDO_SUBIDA);
+// }
 
 /*=================================================================//
  * METODO: cond_descida_requisitada
 //=================================================================*/
 
-bool UsuarioIA::cond_descida_requisitada()
-{
-    return (vetorAndares[_andarAtualUsuario].estado_andar() == PEDIDO_DESTINO || vetorAndares[_andarAtualUsuario].estado_andar() == PEDIDO_DESCIDA);
-}
+// bool UsuarioIA::cond_descida_requisitada()
+// {
+//     return (vetorAndares[_andarAtualUsuario].estado_andar() == PEDIDO_DESTINO || vetorAndares[_andarAtualUsuario].estado_andar() == PEDIDO_DESCIDA);
+// }
 
 /*=================================================================//
- * METODO: cond_descida
+ * METODO: cond_descida   
 //=================================================================*/
 
 bool UsuarioIA::cond_descida()

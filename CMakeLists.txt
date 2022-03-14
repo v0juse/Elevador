@@ -20,7 +20,7 @@ FetchContent_MakeAvailable(googletest)
 SET(INC_DIR ${PROJECT_SOURCE_DIR}/inc)
 SET(SRC_DIR ${PROJECT_SOURCE_DIR}/src)
 SET(TEST_DIR ${PROJECT_SOURCE_DIR}/testes)
-
+set( CMAKE_CXX_FLAGS "-fprofile-arcs -ftest-coverage -std=c++11 ${CMAKE_CXX_FLAGS}" )
 
 enable_testing()
 message("PROJECT_SOURCE_DIR points to " ${PROJECT_SOURCE_DIR})
@@ -29,23 +29,29 @@ message("PROJECT_SOURCE_DIR points to " ${PROJECT_SOURCE_DIR})
 include_directories(${INC_DIR})
 add_library(utility ${SRC_DIR}/Utility.cpp)
 
-add_executable(AndarTest ${SRC_DIR}/Andar.cpp ${SRC_DIR}/Utility.cpp ${TEST_DIR}/Andar_test.cc)
-target_link_libraries(AndarTest gtest_main)
+add_executable(AndarTest ${SRC_DIR}/Andar.cpp  ${TEST_DIR}/Andar_test.cc)
+target_link_libraries(AndarTest gtest_main utility)
 
 #add_executable(controlador_valido Controlador.cpp Controlador_test.cc)
 #target_link_libraries(controlador_valido  gtest_main)
 
 add_executable(PortaTest ${SRC_DIR}/Porta.cpp ${TEST_DIR}/Porta_test.cc)
-target_link_libraries(PortaTest  gtest_main)
+target_link_libraries(PortaTest  gtest_main utility)
 
-add_executable(SensorAndar ${SRC_DIR}/SensorAndar.cpp Andar_test.cc)
-target_link_libraries(andar_valido  gtest_main)
+add_executable(SensorAndarTest ${SRC_DIR}/SensorAndar.cpp ${TEST_DIR}/SensorAndar_test.cc)
+target_link_libraries(SensorAndarTest  gtest_main utility)
 
-# add_executable(andar_valido Andar.cpp Andar_test.cc)
-# target_link_libraries(andar_valido  gtest_main)
+add_executable(SensorPresencaTest ${SRC_DIR}/SensorPresenca.cpp ${TEST_DIR}/SensorPresenca_test.cc)
+target_link_libraries(SensorPresencaTest  gtest_main utility)
 
-# add_executable(andar_valido Andar.cpp Andar_test.cc)
-# target_link_libraries(andar_valido  gtest_main)
+add_executable(ControladorTest ${TEST_DIR}/Controlador_test.cc ${SRC_DIR}/Controlador.cpp  ${SRC_DIR}/Andar.cpp  ${SRC_DIR}/SensorAndar.cpp ${SRC_DIR}/SensorPresenca.cpp ${SRC_DIR}/Porta.cpp ${SRC_DIR}/SensorEstadoPorta.cpp)
+target_link_libraries(ControladorTest  gtest_main gmock_main utility)
+
+
+
+#add_executable(ElevadorSimulacao ${SRC_DIR}/*)
+#target_link_libraries(ElevadorSimulacao)
+
 
 # add_executable(andar_valido Andar.cpp Andar_test.cc)
 # target_link_libraries(andar_valido  gtest_main)
@@ -59,4 +65,4 @@ target_link_libraries(andar_valido  gtest_main)
 #set(CMAKE_CXX_CLANG_TIDY "clang-tidy;--header-filter=.; --checks=*;")
 
 include(GoogleTest)
-gtest_discover_tests(AndarTest PortaTest)
+gtest_discover_tests(AndarTest PortaTest SensorAndarTest SensorPresencaTest ControladorTest)

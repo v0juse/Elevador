@@ -1,13 +1,13 @@
 #include <gtest/gtest.h>
 #include "../inc/SensorPresenca.hpp"
 
-TEST(ValidaIdentificadorTest, Classe_Instanciacao) 
+TEST(SensorPresencaTest, Classe_Instanciacao) 
 {
     SensorPresencaUsuario user_sensor;
     EXPECT_EQ(user_sensor.numPessoasDentro(), 0);
 }
 
-TEST(ValidaIdentificadorTest, Classe_registrarEntrada) 
+TEST(SensorPresencaTest, Classe_registrarEntrada) 
 {
     SensorPresencaUsuario user_sensor;
     user_sensor.registrarEntrada();
@@ -15,7 +15,7 @@ TEST(ValidaIdentificadorTest, Classe_registrarEntrada)
     EXPECT_EQ(user_sensor.numPessoasDentro(), 1);
 }
 
-TEST(ValidaIdentificadorTest, Classe_registrarSaida) 
+TEST(SensorPresencaTest, Classe_registrarSaida) 
 {
     SensorPresencaUsuario user_sensor;
     user_sensor.registrarSaida();

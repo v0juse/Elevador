@@ -62,11 +62,12 @@ void Porta::fechar(int num)
 /*=================================================================//
  * METODO: esperaPorta
 //=================================================================*/
-void Porta::esperaPorta(int num)
-{
-    std::unique_lock<std::mutex> lock(mutexPorta, std::defer_lock);
-	lock.lock(); //entra rc
+// void Porta::esperaPorta(int num)
+// {
+//     std::unique_lock<std::mutex> lock(mutexPorta, std::defer_lock);
+// 	lock.lock(); //entra rc
+    
+//     (portasCondsPtrs[num])->wait(lock);
+// }
 
-    (portasCondsPtrs[num])->wait(lock);
-}
 

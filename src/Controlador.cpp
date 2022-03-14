@@ -3,9 +3,9 @@
 /*=================================================================//
  * CONSTRUTOR                                         
 //=================================================================*/
-Controlador::Controlador(Porta* p, SensorEstadoPorta* sp, SensorAndar* sa): 
+Controlador::Controlador(Porta* p, SensorEstadoPorta* sp, SensorAndar* sa, bool no_thread): 
 std::thread(InternalThreadEntryFunc,this),
-_internAtributesLock(_internAtributes), end_thread(false)
+_internAtributesLock(_internAtributes), end_thread(no_thread)
 {
     andarObjetivo = -1;
     andarAtual = 0;
@@ -13,15 +13,9 @@ _internAtributesLock(_internAtributes), end_thread(false)
     ptrPorta = p;
     ptrSensorEstadoPorta = sp;
     ptrSensorAndar = sa;
+    movimento = 0;
      
-
-    mutexImpressao.lock();
-        std::cout<<AMARELO<<"//====================================//"<< BRANCO<<std::endl;
-        std::cout<<AMARELO<<"\t Elevador no andar: " << andarAtual << BRANCO<<std::endl;
-        std::cout<<AMARELO<<"//====================================//"<< BRANCO<<std::endl;
-    mutexImpressao.unlock();
-
-    //finaliza setup
+    //finaliza setup 
     _internAtributesLock.unlock();
 }
 
@@ -61,8 +55,8 @@ void Controlador::def_direcao()
 void Controlador::atendeu_andar()
 {
     andarObjetivo = (andarAtual == andarObjetivo) ? -1 : andarObjetivo;
-    vetorAndares[andarAtual].atendeuAndar();
-}
+    vetorAndares[andarAtual].atendeuAndar();    
+}    
 
 /*=================================================================//
  * METODO: moverElevador 
@@ -74,7 +68,7 @@ void Controlador::moverElevador()
     while(!ptrSensorAndar->andarAlcancado());
     andarAtual += direcao;
     movimento = false;
-}
+}              
 
 /*=================================================================//
  * METODO: threadBehavior    
@@ -180,13 +174,11 @@ void Controlador::threadBehavior()
 
     }
 
-
-
 }
 
 
 void Controlador::desligar()
-{
+{            
     end_thread = true;
     novaChamada.notify_all();
 }
