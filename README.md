@@ -22,3 +22,15 @@ Vitor José Duarte Quintans (18201357).
 > cmake ..
 > cmake --build .
 ```
+
+# Testes
+## lcov
+O software lcov foi utilizado para mensurar a cobertura de código, para executa-lo, execute os seguintes comandos no diretório raiz do projeto: 
+
+```sh
+> cd ./lcovdir
+> lcov -c -d .. -o my.info
+> genhtml -o results/ my.info 
+```
+Assim, os resultados do teste serão gravados no diretório 'results', nomeados como 'my.info'.
+
