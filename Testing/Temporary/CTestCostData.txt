@@ -1,0 +1,7 @@
+AndarTest_NOT_BUILT 0 0
+AndarTest.Classe1Instanciacao 3 0.000745333
+AndarTest.Classe2AtendimentoDeAndar 3 0.000527633
+AndarTest.Classe3PedidoDescida 3 0.000593133
+AndarTest.Classe4PedidoSubida 3 0.000532167
+AndarTest.Classe5PedidoDestino 3 0.000741933
+---

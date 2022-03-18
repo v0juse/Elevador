@@ -1,9 +1,8 @@
 file(REMOVE_RECURSE
   "AndarTest"
   "AndarTest.pdb"
-  "AndarTest[1]_tests.cmake"
-  "CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/src/Andar.cpp.o"
-  "CMakeFiles/AndarTest.dir/home/eryk/Workspace/Testes_e_Verificacao/Elevador/testes/Andar_test.cc.o"
+  "CMakeFiles/AndarTest.dir/src/Andar.cpp.o"
+  "CMakeFiles/AndarTest.dir/testes/Andar_test.cc.o"
 )
 
 # Per-language clean rules from dependency scanning.

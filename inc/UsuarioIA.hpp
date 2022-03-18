@@ -40,7 +40,7 @@ class UsuarioIA: public std::thread
          * "nv" define o numero de viagens
         //---------------------------------------------------------*/
         
-        UsuarioIA(std::string nome, int nv, Porta* porta, SensorPresencaUsuario* sp);
+        UsuarioIA(const std::string& nome, int nv, Porta* porta, SensorPresencaUsuario* sp);
         
         /*---------------------------------------------------------//
          * destrutor padrao
@@ -143,8 +143,8 @@ class UsuarioIA: public std::thread
 		bool cond_descida();
 		bool cond_subida();
 		bool cond_destino_requisitado();
-        bool cond_subida_requisitada();
-        bool cond_descida_requisitada();
+        // bool cond_subida_requisitada();
+        // bool cond_descida_requisitada();
 
         /*---------------------------------------------------------//
 		 * variavel utilizada para armazenar a quantidade de 
@@ -169,7 +169,7 @@ class UsuarioIA: public std::thread
 		 * funcao a ser passada para a thread na inicializacao
 		//---------------------------------------------------------*/
 		static void * InternalThreadEntryFunc(void * This)
-		{((UsuarioIA *)This)->threadBehavior(); return nullptr;};
+		{static_cast<UsuarioIA *>(This)->threadBehavior(); return nullptr;};
 
 //-----------------------------------------------------------------//
 };

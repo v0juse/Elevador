@@ -6,13 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/eryk/Workspace/Testes_e_Verificacao/Elevador/build/_deps/googletest-src/googlemock/src/gmock_main.cc
+/home/v0id/Faculdade/Testes/Elevador/build/_deps/googletest-src/googlemock/src/gmock_main.cc
 iostream
 -
 gmock/gmock.h
-/home/eryk/Workspace/Testes_e_Verificacao/Elevador/build/_deps/googletest-src/googlemock/src/gmock/gmock.h
+/home/v0id/Faculdade/Testes/Elevador/build/_deps/googletest-src/googlemock/src/gmock/gmock.h
 gtest/gtest.h
-/home/eryk/Workspace/Testes_e_Verificacao/Elevador/build/_deps/googletest-src/googlemock/src/gtest/gtest.h
+/home/v0id/Faculdade/Testes/Elevador/build/_deps/googletest-src/googlemock/src/gtest/gtest.h
 tchar.h
 -
 

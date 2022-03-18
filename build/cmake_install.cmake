@@ -1,4 +1,4 @@
-# Install script for directory: /home/eryk/Workspace/Testes_e_Verificacao/Elevador/build
+# Install script for directory: /home/v0id/Faculdade/Testes/Elevador
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/eryk/Workspace/Testes_e_Verificacao/Elevador/build/_deps/googletest-build/cmake_install.cmake")
+  include("/home/v0id/Faculdade/Testes/Elevador/build/_deps/googletest-build/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/eryk/Workspace/Testes_e_Verificacao/Elevador/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/v0id/Faculdade/Testes/Elevador/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

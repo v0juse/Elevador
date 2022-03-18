@@ -1,9 +1,11 @@
-#include "../inc/Andar.hpp"
+#include "Andar.hpp"
 
 int Andar::_num_andares = 0;
 std::mutex Andar::mutexAndares;
 
 Andar vetorAndares[numAndares];
+//std::vector<std::unique_ptr<Andar*>> vetorAndares;
+
 
 /*=================================================================//
  * CONSTRUTOR                                         

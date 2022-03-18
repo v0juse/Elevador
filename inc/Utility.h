@@ -49,7 +49,7 @@ extern bool botaoEmergenciaPressionado;
 /*---------------------------------------------------------//
  * metodo que faz a blindagem para as entradas do usuario
 //---------------------------------------------------------*/
-int blindagem(std::string s);
+// int blindagem(std::string s);
 
 //=======================================================================================//
 

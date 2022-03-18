@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/v0id/Faculdade/Testes/Elevador/inc/Utility.h
+queue
+-
+mutex
+-
+condition_variable
+-
+
+/home/v0id/Faculdade/Testes/Elevador/src/Utility.cpp
+../inc/Utility.h
+/home/v0id/Faculdade/Testes/Elevador/inc/Utility.h
+
